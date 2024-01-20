@@ -1,15 +1,18 @@
 # abc
 
-frontend
+### frontend
 
 clients 
-- next (deploy to vercel)
+- next (vercel)
 
 mobile
 - react native expo
 
-backend
-- express (deploy to railway)
+---
+
+#### backend
+
+- express (railway)
 
 database
-- postgres (deploy to railway)
+- postgres (railway)
