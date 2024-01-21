@@ -1,11 +1,13 @@
+import type { Expense } from "@prisma/client";
 import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
+
 import prisma from "../db";
 
 export const getExpenses = async (
   req: WithAuthProp<Request>,
   res: Response
-) => {
+): Promise<Expense[] | void> => {
 
   // console.log(req.auth)
   if (!req.auth.userId) {
@@ -22,7 +24,7 @@ export const getExpenses = async (
   }
 };
 
-export const upsertExpense = async (req: Request, res: Response) => {
+export const upsertExpense = async (req: Request, res: Response): Promise<Expense | void> => {
   try {
     const { description, amount, date, id } = req.body;
 
@@ -43,6 +45,7 @@ export const upsertExpense = async (req: Request, res: Response) => {
           date,
         },
       });
+
       res.send(updatedExpense);
       return;
     } else {
@@ -53,6 +56,7 @@ export const upsertExpense = async (req: Request, res: Response) => {
           date,
         },
       });
+
       res.send(newExpense);
     }
   } catch (error) {
@@ -61,7 +65,7 @@ export const upsertExpense = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteExpense = async (req: Request, res: Response) => {
+export const deleteExpense = async (req: Request, res: Response): Promise<Expense | void> => {
   try {
     const { id } = req.params;
     const deletedExpense = await prisma.expense.delete({
@@ -69,6 +73,7 @@ export const deleteExpense = async (req: Request, res: Response) => {
         id: Number(id),
       },
     });
+
     res.send(deletedExpense);
   } catch (error) {
     console.error("Error:", error);
