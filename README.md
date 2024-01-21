@@ -2,10 +2,7 @@
 
 ### frontend
 
-clients 
 - next (vercel)
-
-mobile
 - react native expo
 
 ### middleware
