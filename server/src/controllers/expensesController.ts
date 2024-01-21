@@ -1,7 +1,18 @@
 import { Request, Response } from "express";
+import { WithAuthProp } from "@clerk/clerk-sdk-node";
 import prisma from "../db";
 
-export const getExpenses = async (req: Request, res: Response) => {
+export const getExpenses = async (
+  req: WithAuthProp<Request>,
+  res: Response
+) => {
+
+  // console.log(req.auth)
+  if (!req.auth.userId) {
+    res.json(req.auth);
+    return;
+  }
+
   try {
     const expenses = await prisma.expense.findMany();
     res.send(expenses);

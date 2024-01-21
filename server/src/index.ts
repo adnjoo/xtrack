@@ -1,14 +1,27 @@
-import express from "express";
+import express, { Application } from "express";
 import dotenv from "dotenv";
+import "dotenv/config";
 import cors from "cors";
-import { getExpenses, upsertExpense, deleteExpense } from "./controllers/expensesController";
+import { ClerkExpressWithAuth, LooseAuthProp } from "@clerk/clerk-sdk-node";
+
+import {
+  getExpenses,
+  upsertExpense,
+  deleteExpense,
+} from "./controllers/expensesController";
 
 dotenv.config();
 
-const app = express();
+const app: Application = express();
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT || 4000;
+
+declare global {
+  namespace Express {
+    interface Request extends LooseAuthProp {}
+  }
+}
 
 app.get("/", (req, res) => {
   res.send({
@@ -16,7 +29,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/expenses", getExpenses);
+
+app.get("/expenses", ClerkExpressWithAuth({}), getExpenses);
 app.post("/expenses/upsert", upsertExpense);
 app.delete("/expenses/delete/:id", deleteExpense);
 
