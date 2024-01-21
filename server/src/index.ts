@@ -21,10 +21,7 @@ app.get("/", (req, res) => {
 app.get("/expenses", async (req, res) => {
   try {
     const expenses = await prisma.expense.findMany();
-    res.send({
-      message: "List of Expenses",
-      data: expenses,
-    });
+    res.send(expenses);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
@@ -43,10 +40,7 @@ app.post("/expenses/new", async (req, res) => {
       },
     });
 
-    res.status(201).send({
-      message: "Expense created successfully",
-      data: newExpense,
-    });
+    res.status(201).send(newExpense);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
