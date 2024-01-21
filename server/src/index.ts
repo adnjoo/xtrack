@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
 
 
 app.get("/expenses", ClerkExpressWithAuth({}), getExpenses);
-app.post("/expenses/upsert", upsertExpense);
-app.delete("/expenses/delete/:id", deleteExpense);
+app.post("/expenses/upsert", ClerkExpressWithAuth({}), upsertExpense);
+app.delete("/expenses/delete/:id", ClerkExpressWithAuth({}), deleteExpense);
 
 // CORS
 app.use((req, res, next) => {
