@@ -8,7 +8,9 @@ clients
 mobile
 - react native expo
 
----
+### middleware
+
+- clerkjs
 
 #### backend
 
