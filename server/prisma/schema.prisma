@@ -9,11 +9,12 @@ datasource db {
 
 model Expense {
   id          Int       @id @default(autoincrement())
-  description String
+  title       String
   amount      Decimal
+  description String
   date        DateTime
-  clerkUserId String?    @unique
-  user        ClerkUser? @relation(fields: [clerkUserId], references: [id])
+  clerkUserId String?    
+  user        ClerkUser? @relation(fields: [clerkUserId], references: [id], onDelete: Cascade)
 }
 
 model ClerkUser {
