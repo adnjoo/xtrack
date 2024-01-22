@@ -3,7 +3,6 @@
 import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { UserButton } from "@clerk/clerk-react";
 
 import OutlinedCard from "@/app/components/OutlinedCard";
 
@@ -34,10 +33,10 @@ export default function Home() {
       {data &&
         data.map((data: any) => (
           <div key={data.id}>
-            {data.title} {data.amount} {data.description} {new Date(data.date).toLocaleDateString()}
+            {data.title} {data.amount} {data.description}{" "}
+            {new Date(data.date).toLocaleDateString()}
           </div>
         ))}
-      <UserButton />
     </main>
   );
 }
