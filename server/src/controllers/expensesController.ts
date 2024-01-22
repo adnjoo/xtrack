@@ -9,11 +9,11 @@ export const getExpenses = async (
   res: Response
 ): Promise<Expense[] | void> => {
 
-  // console.log(req.auth)
   if (!req.auth.userId) {
     res.json(req.auth);
     return;
   }
+
 
   try {
     const expenses = await prisma.expense.findMany({
@@ -21,7 +21,7 @@ export const getExpenses = async (
         clerkUserId: req.auth.userId,
       },
     });
-    
+
     res.send(expenses);
   } catch (error) {
     console.error("Error:", error);
@@ -29,30 +29,48 @@ export const getExpenses = async (
   }
 };
 
-export const upsertExpense = async (req: WithAuthProp<Request>, res: Response): Promise<Expense | void> => {
+export const upsertExpense = async (
+  req: WithAuthProp<Request>,
+  res: Response
+): Promise<Expense | void> => {
 
-    if (!req.auth.userId) {
-      res.json(req.auth);
-      return;
-    }
+  if (!req.auth.userId) {
+    res.status(401).send("Unauthorized: no user ID provided");
+    return;
+  }
+
   try {
-    const { description, amount, date, id } = req.body;
+    const { title, amount, description, date } = req.body;
 
-    const existingExpense = await prisma.expense.findUnique({
-      where: {
-        id: Number(id),
-        clerkUserId: req.auth.userId,
-      },
+    // Check if the user exists
+    const existingUser = await prisma.clerkUser.findUnique({
+      where: { id: req.auth.userId },
     });
 
-    if (existingExpense) {
+    if (!existingUser) {
+      // If the user doesn't exist, create a new user
+      const newUser = await prisma.clerkUser.create({
+        data: { id: req.auth.userId },
+      });
+    }
+    
+
+    if (req?.body?.id) {
+      const existingExpense = await prisma.expense.findUnique({
+        where: {
+          id: Number(req.body.id),
+          clerkUserId: req.auth.userId as string,
+        },
+      });
+
       const updatedExpense = await prisma.expense.update({
         where: {
-          id: Number(id),
+          id: Number(req.body.id),
         },
         data: {
-          description,
+          title,
           amount,
+          description,
           date,
           clerkUserId: req.auth.userId,
         },
@@ -63,22 +81,28 @@ export const upsertExpense = async (req: WithAuthProp<Request>, res: Response): 
     } else {
       const newExpense = await prisma.expense.create({
         data: {
-          description,
+          title,
           amount,
+          description,
           date,
           clerkUserId: req.auth.userId,
         },
       });
 
       res.send(newExpense);
+      return;
     }
+
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
-export const deleteExpense = async (req: Request, res: Response): Promise<Expense | void> => {
+export const deleteExpense = async (
+  req: Request,
+  res: Response
+): Promise<Expense | void> => {
   try {
     const { id } = req.params;
     const deletedExpense = await prisma.expense.delete({

@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { UserButton } from "@clerk/clerk-react";
 
 import OutlinedCard from "@/app/components/OutlinedCard";
-import Card from "@/app/components/Card";
 
 export default function Home() {
   const [data, setData] = useState<any>("");
@@ -14,7 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = axios
+      const res = await axios
         .get(`${process.env.NEXT_PUBLIC_API_URL}/expenses` as string, {
           headers: { Authorization: `Bearer ${await getToken()}` },
         })
@@ -29,19 +28,13 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const dateConversion = (date: string) => {
-    const newDate = new Date(date);
-    return newDate.toLocaleDateString();
-  };
-
   return (
     <main className="flex flex-col items-center justify-between p-24 gap-10">
-      <Card />
       <OutlinedCard />
       {data &&
         data.map((data: any) => (
           <div key={data.id}>
-            {data.description} {data.amount} {dateConversion(data.date)}
+            {data.title} {data.amount} {data.description} {new Date(data.date).toLocaleDateString()}
           </div>
         ))}
       <UserButton />
