@@ -26,6 +26,10 @@ export const PAGES = {
     href: "/blog",
     label: "Blog",
   },
+  ABOUT: {
+    href: "/about",
+    label: "About",
+  },
 };
 
 export const appName = "XpenseTrackr";
@@ -51,7 +55,7 @@ function MyAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href={PAGES.HOME.href}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -92,7 +96,12 @@ function MyAppBar() {
               }}
             >
               {Object.values(PAGES).map((page) => (
-                <MenuItem key={page.label} onClick={handleNavMenu}>
+                <MenuItem
+                  key={page.label}
+                  component="a"
+                  href={page.href}
+                  onClick={handleNavMenu}
+                >
                   <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
               ))}
@@ -102,7 +111,7 @@ function MyAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href={PAGES.HOME.href}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
