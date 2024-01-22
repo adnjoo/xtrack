@@ -12,4 +12,11 @@ model Expense {
   description String
   amount      Decimal
   date        DateTime
+  clerkUserId String?    @unique
+  user        ClerkUser? @relation(fields: [clerkUserId], references: [id])
+}
+
+model ClerkUser {
+  id       String    @id
+  expenses Expense[]
 }

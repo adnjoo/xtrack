@@ -16,7 +16,12 @@ export const getExpenses = async (
   }
 
   try {
-    const expenses = await prisma.expense.findMany();
+    const expenses = await prisma.expense.findMany({
+      where: {
+        clerkUserId: req.auth.userId,
+      },
+    });
+    
     res.send(expenses);
   } catch (error) {
     console.error("Error:", error);
@@ -24,13 +29,19 @@ export const getExpenses = async (
   }
 };
 
-export const upsertExpense = async (req: Request, res: Response): Promise<Expense | void> => {
+export const upsertExpense = async (req: WithAuthProp<Request>, res: Response): Promise<Expense | void> => {
+
+    if (!req.auth.userId) {
+      res.json(req.auth);
+      return;
+    }
   try {
     const { description, amount, date, id } = req.body;
 
     const existingExpense = await prisma.expense.findUnique({
       where: {
         id: Number(id),
+        clerkUserId: req.auth.userId,
       },
     });
 
@@ -43,6 +54,7 @@ export const upsertExpense = async (req: Request, res: Response): Promise<Expens
           description,
           amount,
           date,
+          clerkUserId: req.auth.userId,
         },
       });
 
@@ -54,6 +66,7 @@ export const upsertExpense = async (req: Request, res: Response): Promise<Expens
           description,
           amount,
           date,
+          clerkUserId: req.auth.userId,
         },
       });
 
