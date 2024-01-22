@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import NextLink from "next/link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,8 +10,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import Link from "@mui/material/Link";
 import { UserButton } from "@clerk/nextjs";
 
 export const PAGES = {
@@ -66,6 +67,7 @@ function MyAppBar() {
             {appName}
           </Typography>
 
+          {/* Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -97,10 +99,9 @@ function MyAppBar() {
             >
               {Object.values(PAGES).map((page) => (
                 <MenuItem
+                  component={NextLink}
                   key={page.label}
-                  component="a"
                   href={page.href}
-                  onClick={handleNavMenu}
                 >
                   <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
@@ -122,16 +123,18 @@ function MyAppBar() {
           >
             {appName}
           </Typography>
+
+          {/* Desktop Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {Object.values(PAGES).map((page) => (
-              <Button
+              <Link
+                component={NextLink}
                 key={page.label}
                 href={page.href}
-                onClick={handleNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ mx: 1, color: "white", display: "block" }}
               >
                 {page.label}
-              </Button>
+              </Link>
             ))}
           </Box>
 
