@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from "react";
+import React from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -8,41 +8,93 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useAuth } from "@clerk/nextjs";
 
 export default function OutlinedCard() {
-  const [counter, setCounter] = React.useState(1);
-  const [data, setData] = React.useState<any>([]);
+  const { getToken } = useAuth();
+  const [expense, setExpense] = React.useState({
+    title: "",
+    amount: 0,
+    description: "",
+    date: new Date().toISOString().split('T')[0],
+  });
 
-  React.useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${counter}`)
-      .then((response) => {
-        console.log(response.data);
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [counter]);
+  const handleSubmit = async () => {
+    const token = await getToken();
+    console.log`token is ${token}`;
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
+        {
+          title: expense.title,
+          description: expense.description,
+          amount: expense.amount,
+          date: new Date(expense.date),
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log("Expense submitted successfully", response.data);
+    } catch (error) {
+      console.error("Error submitting expense:", error);
+    }
+  };
 
-  const handleClick = () => {
-    setCounter(counter + 1);
-  }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setExpense((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">
         <CardContent>
-          <Typography variant="h5" component="div">
-            {data.title}
+          <Typography variant="body2" color="text.secondary">
+            Title:
+            <input
+              type="text"
+              name="title"
+              value={expense.title}
+              onChange={handleInputChange}
+              placeholder=""
+            />
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {data.body}
+          <Typography variant="body2" color="text.secondary">
+            Amount:
+            <input
+              type="number"
+              name="amount"
+              value={expense.amount}
+              onChange={handleInputChange}
+            />
           </Typography>
-
+          <Typography variant="body2" color="text.secondary">
+            Description:
+            <input
+              type="text"
+              name="description"
+              value={expense.description}
+              onChange={handleInputChange}
+            />
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Date:
+            <input
+              type="date"
+              name="date"
+              value={expense.date}
+              onChange={handleInputChange}
+            />
+          </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleClick}>Get Next</Button>
+          <Button size="small" onClick={handleSubmit}>
+            Submit
+          </Button>
         </CardActions>
       </Card>
     </Box>
