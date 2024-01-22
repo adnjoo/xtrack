@@ -41,7 +41,7 @@ export default function OutlinedCard() {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setExpense((prevData) => ({
       ...prevData,
