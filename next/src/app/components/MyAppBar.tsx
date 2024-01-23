@@ -55,7 +55,7 @@ function MyAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
+            component={NextLink}
             href={PAGES.HOME.href}
             sx={{
               mr: 2,
@@ -111,7 +111,7 @@ function MyAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            component={NextLink}
             href={PAGES.HOME.href}
             sx={{
               mr: 2,
