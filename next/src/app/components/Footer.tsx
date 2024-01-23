@@ -5,19 +5,8 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import { appName } from "@/app/components/MyAppBar";
 
-// TODO: reconcile with PAGES in MyAppBar
-export const FOOTER: any = {
-  PRIVACY: {
-    href: "/privacy",
-    label: "Privacy",
-  },
-  TERMS: {
-    href: "/tos",
-    label: "Terms of Service",
-  },
-};
+import { APP_NAME, FOOTER } from "@/app/lib/constants";
 
 function Footer() {
   return (
@@ -33,7 +22,7 @@ function Footer() {
       }}
     >
       <Typography variant="body2" color="text.secondary" align="center">
-        &copy; {new Date().getFullYear()} {appName}. All rights reserved.
+        &copy; {new Date().getFullYear()} {APP_NAME}. All rights reserved.
       </Typography>
       <Typography variant="body2" color="text.secondary" align="center">
         {Object.keys(FOOTER).map((key) => (
