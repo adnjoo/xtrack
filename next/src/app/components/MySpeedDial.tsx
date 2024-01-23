@@ -1,28 +1,21 @@
-import * as React from "react";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
+import React from "react";
+import { Button, Tooltip } from "flowbite-react";
+import { BsPlusCircleFill } from "react-icons/bs";
 
-import { MyModal } from "@/app/components/MyModal";
+import MyModal from "@/app/components/MyModal";
 import ExpenseForm from "@/app/components/ExpenseForm";
 
-export default function BasicSpeedDial() {
+export default function MySpeedDial() {
   const [modalOpen, setModalOpen] = React.useState(false);
-  const style = {
-    position: "fixed",
-    bottom: 16,
-    right: 16,
-    background: "#1776d2 !important",
-  };
 
   return (
     <>
       {/* Speed dial */}
-      <Tooltip placement="left-start" title="Add expense">
-        <IconButton onClick={() => setModalOpen(true)} sx={style}>
-          <AddIcon sx={{ fill: "#fff", fontSize: 30 }} />
-        </IconButton>
-      </Tooltip>
+      <Button className="fixed bottom-4 right-4" onClick={() => setModalOpen(true)}>
+        <Tooltip content="Add Expense" placement="left">
+          <BsPlusCircleFill className="h-6 w-6" />
+        </Tooltip>
+      </Button>
 
       {/* Modal */}
       <MyModal isOpen={modalOpen} setIsOpen={setModalOpen}>

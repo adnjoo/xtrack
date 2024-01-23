@@ -1,32 +1,18 @@
 "use client";
 
-import React from "react";
 import axios from "axios";
+import React from "react";
 import { useAuth } from "@clerk/nextjs";
-import dayjs from "dayjs";
-import Card from "@mui/material/Card";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
-const style = {
-  marginY: 2,
-};
+import { Button, Textarea, Label, TextInput, Datepicker } from "flowbite-react";
 
 export default function ExpenseForm({ setIsOpen }: any) {
-
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: "",
-    amount: null,
+    amount: 0,
     description: "",
-    date: dayjs(Date.now()),
+    date: new Date(),
   });
-
   const handleSubmit = async () => {
     const token = await getToken();
 
@@ -51,7 +37,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: any) => {
     const { id, value } = e.target;
     setExpense((prevData) => ({
       ...prevData,
@@ -60,60 +46,59 @@ export default function ExpenseForm({ setIsOpen }: any) {
   };
 
   return (
-    <Card variant="outlined" sx={{ p: 2 }}>
-      <Stack>
-        <TextField
+    <form className="flex max-w-md flex-col gap-4">
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="title" value="Title" />
+        </div>
+        <TextInput
           id="title"
-          label="Title"
-          variant="outlined"
+          type="text"
+          placeholder="Title"
+          required
           value={expense.title}
           onChange={handleInputChange}
-          sx={style}
-          InputLabelProps={{ shrink: true }}
         />
-        <TextField
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="amount" value="Amount" />
+        </div>
+        <TextInput
           id="amount"
-          label="Amount"
-          variant="outlined"
-          value={expense.amount}
+          type="number"
           placeholder="0.00"
+          required
+          value={expense.amount}
           onChange={handleInputChange}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
-          sx={style}
         />
-        <TextField
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="description" value="Description" />
+        </div>
+        <Textarea
           id="description"
-          label="Description"
-          variant="outlined"
+          placeholder="Description"
+          required
+          rows={2}
           value={expense.description}
           onChange={handleInputChange}
-          sx={style}
-          InputLabelProps={{ shrink: true }}
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label="Date"
-            value={expense.date}
-            onChange={(newValue) => {
-              setExpense((prevData: any) => ({
-                ...prevData,
-                date: newValue,
-              }));
-            }}
-            sx={style}
-          />
-        </LocalizationProvider>
-        <Button
-          size='large'
-          variant='contained'
-          onClick={handleSubmit}
-          sx={style}
-        >
-          Submit
-        </Button>
-      </Stack>
-    </Card>
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="date" value="Date" />
+        </div>
+        <Datepicker
+          id="date"
+          placeholder="Select date"
+          required
+          value={expense.date}
+          onChange={handleInputChange}
+        />
+      </div>
+      <Button onClick={handleSubmit}>Submit</Button>
+    </form>
   );
 }
