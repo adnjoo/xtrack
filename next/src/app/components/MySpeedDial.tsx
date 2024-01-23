@@ -1,37 +1,29 @@
 import * as React from "react";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import PaymentIcon from "@mui/icons-material/Payment";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
 
 import { MyModal } from "@/app/components/MyModal";
 import ExpenseForm from "@/app/components/ExpenseForm";
 
 export default function BasicSpeedDial() {
   const [modalOpen, setModalOpen] = React.useState(false);
-
-  const actions = [
-    { icon: <PaymentIcon />, name: "Expense", onClick: () => setModalOpen(true) },
-  ];
+  const style = {
+    position: "fixed",
+    bottom: 16,
+    right: 16,
+    background: "#1776d2 !important",
+    fill: "#fff",
+  };
 
   return (
     <>
       {/* Speed dial */}
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "fixed", bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            tooltipOpen
-            onClick={action.onClick}
-          />
-        ))}
-      </SpeedDial>
+      <Tooltip placement="left-start" title="Add expense">
+        <IconButton onClick={() => setModalOpen(true)} sx={style}>
+          <AddIcon sx={{ fill: "#fff", fontSize: 30 }} />
+        </IconButton>
+      </Tooltip>
 
       {/* Modal */}
       <MyModal isOpen={modalOpen} setIsOpen={setModalOpen}>
