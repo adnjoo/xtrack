@@ -4,7 +4,6 @@ import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 
-import OutlinedCard from "@/app/components/OutlinedCard";
 import MySpeedDial from "@/app/components/MySpeedDial";
 
 export default function Home() {
@@ -31,7 +30,6 @@ export default function Home() {
   return (
     <>
       <section className="flex flex-col items-center justify-between p-24 gap-10">
-        <OutlinedCard />
         {data?.length > 0 &&
           data?.map((data: any) => (
             <div key={data.id}>

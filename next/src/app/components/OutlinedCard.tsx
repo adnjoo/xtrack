@@ -2,21 +2,25 @@
 
 import React from "react";
 import axios from "axios";
-import Box from "@mui/material/Box";
+import { useAuth } from "@clerk/nextjs";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { useAuth } from "@clerk/nextjs";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
-export default function ExpenseForm() {
+export default function ExpenseForm({ setIsOpen }: any) {
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: "",
     amount: 0,
     description: "",
-    date: new Date().toISOString().split('T')[0],
+    date: dayjs(Date.now()),
   });
 
   const handleSubmit = async () => {
@@ -29,7 +33,7 @@ export default function ExpenseForm() {
           title: expense.title,
           description: expense.description,
           amount: expense.amount,
-          date: new Date(expense.date),
+          date: expense.date,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -38,66 +42,64 @@ export default function ExpenseForm() {
       console.log("Expense submitted successfully", response.data);
     } catch (error) {
       console.error("Error submitting expense:", error);
+    } finally {
+      setIsOpen(false);
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
     setExpense((prevData) => ({
       ...prevData,
-      [name]: value,
+      [id]: value,
     }));
   };
 
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined">
-        <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            Expense Title:
-            <input
-              type="text"
-              name="title"
-              value={expense.title}
-              onChange={handleInputChange}
-              placeholder="Enter a captivating title"
-            />
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Amount Spent:
-            <input
-              type="number"
-              name="amount"
-              value={expense.amount}
-              onChange={handleInputChange}
-            />
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Description:
-            <input
-              type="text"
-              name="description"
-              value={expense.description}
-              onChange={handleInputChange}
-              placeholder="Briefly describe your expense"
-            />
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Expense Date:
-            <input
-              type="date"
-              name="date"
-              value={expense.date}
-              onChange={handleInputChange}
-            />
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" onClick={handleSubmit}>
-            Record Expense
-          </Button>
-        </CardActions>
-      </Card>
-    </Box>
+    <Card variant="outlined">
+      <CardContent>
+        <TextField
+          id="amount"
+          label="Amount"
+          variant="outlined"
+          value={expense.amount}
+          onChange={handleInputChange}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+        />
+        <TextField
+          id="title"
+          label="Title"
+          variant="outlined"
+          value={expense.title}
+          onChange={handleInputChange}
+        />
+        <TextField
+          id="description"
+          label="Description"
+          variant="outlined"
+          value={expense.description}
+          onChange={handleInputChange}
+        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Controlled picker"
+            value={expense.date}
+            onChange={(newValue) => {
+              setExpense((prevData) => ({
+                ...prevData,
+                date: newValue,
+              }));
+            }}
+          />
+        </LocalizationProvider>
+      </CardContent>
+      <CardActions>
+        <Button size="small" onClick={handleSubmit}>
+          Record Expense
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
