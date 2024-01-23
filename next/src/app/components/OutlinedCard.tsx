@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useAuth } from "@clerk/nextjs";
 
-export default function OutlinedCard() {
+export default function ExpenseForm() {
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: "",
@@ -21,7 +21,7 @@ export default function OutlinedCard() {
 
   const handleSubmit = async () => {
     const token = await getToken();
-    console.log`token is ${token}`;
+
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
@@ -54,17 +54,17 @@ export default function OutlinedCard() {
       <Card variant="outlined">
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            Title:
+            Expense Title:
             <input
               type="text"
               name="title"
               value={expense.title}
               onChange={handleInputChange}
-              placeholder=""
+              placeholder="Enter a captivating title"
             />
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Amount:
+            Amount Spent:
             <input
               type="number"
               name="amount"
@@ -79,10 +79,11 @@ export default function OutlinedCard() {
               name="description"
               value={expense.description}
               onChange={handleInputChange}
+              placeholder="Briefly describe your expense"
             />
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Date:
+            Expense Date:
             <input
               type="date"
               name="date"
@@ -93,7 +94,7 @@ export default function OutlinedCard() {
         </CardContent>
         <CardActions>
           <Button size="small" onClick={handleSubmit}>
-            Submit
+            Record Expense
           </Button>
         </CardActions>
       </Card>
