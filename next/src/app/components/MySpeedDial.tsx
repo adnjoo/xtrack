@@ -8,10 +8,10 @@ import { MyModal } from "@/app/components/MyModal";
 import ExpenseForm from "@/app/components/ExpenseForm";
 
 export default function BasicSpeedDial() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   const actions = [
-    { icon: <PaymentIcon />, name: "Expense", onClick: () => setIsOpen(true) },
+    { icon: <PaymentIcon />, name: "Expense", onClick: () => setModalOpen(true) },
   ];
 
   return (
@@ -27,14 +27,15 @@ export default function BasicSpeedDial() {
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
+            tooltipOpen
             onClick={action.onClick}
           />
         ))}
       </SpeedDial>
 
       {/* Modal */}
-      <MyModal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <ExpenseForm setIsOpen={setIsOpen} />
+      <MyModal isOpen={modalOpen} setIsOpen={setModalOpen}>
+        <ExpenseForm setIsOpen={setModalOpen} />
       </MyModal>
     </>
   );
