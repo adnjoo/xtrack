@@ -12,28 +12,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
-export const PAGES = {
-  HOME: {
-    href: "/",
-    label: "Home",
-  },
-  PRICING: {
-    href: "/pricing",
-    label: "Pricing",
-  },
-  BLOG: {
-    href: "/blog",
-    label: "Blog",
-  },
-  ABOUT: {
-    href: "/about",
-    label: "About",
-  },
-};
-
-export const appName = "XpenseTrackr";
+import { APP_NAME, PAGES } from "@/app/lib/constants";
 
 function MyAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -64,7 +45,7 @@ function MyAppBar() {
               textDecoration: "none",
             }}
           >
-            {appName}
+            {APP_NAME}
           </Typography>
 
           {/* Mobile Menu */}
@@ -121,7 +102,7 @@ function MyAppBar() {
               textDecoration: "none",
             }}
           >
-            {appName}
+            {APP_NAME}
           </Typography>
 
           {/* Desktop Menu */}
@@ -139,7 +120,12 @@ function MyAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <UserButton afterSignOutUrl="/" />
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
           </Box>
         </Toolbar>
       </Container>
