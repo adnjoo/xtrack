@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 
-import OutlinedCard from "@/app/components/OutlinedCard";
+import MySpeedDial from "@/app/components/MySpeedDial";
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
@@ -28,15 +28,17 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-between p-24 gap-10">
-      <OutlinedCard />
-      {data?.length > 0 &&
-        data?.map((data: any) => (
-          <div key={data.id}>
-            {data.title} {data.amount} {data.description}{" "}
-            {new Date(data.date).toLocaleDateString()}
-          </div>
-        ))}
-    </main>
+    <>
+      <section className="flex flex-col items-center justify-between p-24 gap-10">
+        {data?.length > 0 &&
+          data?.map((data: any) => (
+            <div key={data.id}>
+              {data.title} {data.amount} {data.description}{" "}
+              {new Date(data.date).toLocaleDateString()}
+            </div>
+          ))}
+      </section>
+      <MySpeedDial />
+    </>
   );
 }
