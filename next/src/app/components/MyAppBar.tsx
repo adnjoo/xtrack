@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 import { APP_NAME, PAGES } from "@/app/lib/constants";
 
@@ -120,7 +120,12 @@ function MyAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <UserButton afterSignOutUrl="/" />
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
           </Box>
         </Toolbar>
       </Container>

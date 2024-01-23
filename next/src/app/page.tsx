@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import OutlinedCard from "@/app/components/OutlinedCard";
 
 export default function Home() {
-  const [data, setData] = useState<any>("");
+  const [data, setData] = useState<any>([]);
   const { getToken } = useAuth();
 
   useEffect(() => {
@@ -30,8 +30,8 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between p-24 gap-10">
       <OutlinedCard />
-      {data &&
-        data.map((data: any) => (
+      {data?.length > 0 &&
+        data?.map((data: any) => (
           <div key={data.id}>
             {data.title} {data.amount} {data.description}{" "}
             {new Date(data.date).toLocaleDateString()}
