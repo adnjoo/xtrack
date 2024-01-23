@@ -8,7 +8,7 @@ import MySpeedDial from "@/app/components/MySpeedDial";
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
-  const { getToken } = useAuth();
+  const { getToken, isSignedIn } = useAuth();
 
   useEffect(() => {
     async function fetchData() {
@@ -38,7 +38,7 @@ export default function Home() {
             </div>
           ))}
       </section>
-      <MySpeedDial />
+      {isSignedIn && <MySpeedDial />}
     </>
   );
 }
