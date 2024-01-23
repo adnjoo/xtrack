@@ -13,7 +13,6 @@ export default function BasicSpeedDial() {
     bottom: 16,
     right: 16,
     background: "#1776d2 !important",
-    fill: "#fff",
   };
 
   return (

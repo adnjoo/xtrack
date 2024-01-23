@@ -9,7 +9,6 @@ export const MyModal = ({ isOpen, setIsOpen, children }: any) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
     bgcolor: "background.paper",
     borderRadius: 4,
     boxShadow: 24,
@@ -31,7 +30,9 @@ export const MyModal = ({ isOpen, setIsOpen, children }: any) => {
         }}
       >
         <Fade in={isOpen}>
-          <Box sx={style}>{children}</Box>
+          <Box className="w-[300px] sm:w-[400px]" sx={style}>
+            {children}
+          </Box>
         </Fade>
       </Modal>
     </div>

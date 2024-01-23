@@ -3,21 +3,22 @@
 import React from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
+import dayjs from "dayjs";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
-import SendIcon from "@mui/icons-material/Send";
+
+const style = {
+  marginY: 2,
+};
 
 export default function ExpenseForm({ setIsOpen }: any) {
-  const style = {
-    marginY: 2,
-  };
+
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: "",
@@ -59,8 +60,8 @@ export default function ExpenseForm({ setIsOpen }: any) {
   };
 
   return (
-    <Card variant="outlined">
-      <CardContent>
+    <Card variant="outlined" sx={{ p: 2 }}>
+      <Stack>
         <TextField
           id="title"
           label="Title"
@@ -93,7 +94,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="Controlled picker"
+            label="Date"
             value={expense.date}
             onChange={(newValue) => {
               setExpense((prevData: any) => ({
@@ -105,15 +106,14 @@ export default function ExpenseForm({ setIsOpen }: any) {
           />
         </LocalizationProvider>
         <Button
-          size="large"
-          variant="outlined"
+          size='large'
+          variant='contained'
           onClick={handleSubmit}
-          endIcon={<SendIcon />}
           sx={style}
         >
-          Record Expense
+          Submit
         </Button>
-      </CardContent>
+      </Stack>
     </Card>
   );
 }
