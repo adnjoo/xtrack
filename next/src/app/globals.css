@@ -6,6 +6,7 @@ body {
   margin: 0;
 }
 
+/* Hide clerk */
 .cl-userButtonPopoverFooter {
   display: none !important;
 }

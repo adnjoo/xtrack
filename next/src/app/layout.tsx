@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import MyNavbar from "@/app/components/MyNavbar";
-import Footer from "@/app/components/Footer";
+import MyFooter from "@/app/components/MyFooter";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +20,7 @@ export default function RootLayout({
         <body>
           <MyNavbar />
           <main className="min-h-screen">{children}</main>
-          {/* <Footer /> */}
+          <MyFooter />
         </body>
       </html>
     </ClerkProvider>

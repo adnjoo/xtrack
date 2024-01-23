@@ -1,3 +1,5 @@
+import { BsGithub, BsTwitter } from "react-icons/bs";
+
 export const APP_NAME = "XpenseTrackr";
 
 export const PAGES = {

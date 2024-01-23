@@ -10,7 +10,7 @@ export default function MyNavbar() {
   return (
     <Navbar fluid rounded>
       <Navbar.Brand as={Link} href={PAGES.HOME.href}>
-        <img src="/logo.png" className="mr-3 h-9" alt="Flowbite React Logo" />
+        <img src="/logo.svg" className="mr-3 h-9" alt="XT Logo" />
         <span className="hidden sm:block whitespace-nowrap text-xl font-semibold dark:text-white">
           {APP_NAME}
         </span>
