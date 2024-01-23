@@ -4,7 +4,6 @@ import React from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/nextjs";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,12 +12,16 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import SendIcon from "@mui/icons-material/Send";
 
 export default function ExpenseForm({ setIsOpen }: any) {
+  const style = {
+    marginY: 2,
+  };
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: "",
-    amount: 0,
+    amount: null,
     description: "",
     date: dayjs(Date.now()),
   });
@@ -59,21 +62,25 @@ export default function ExpenseForm({ setIsOpen }: any) {
     <Card variant="outlined">
       <CardContent>
         <TextField
-          id="amount"
-          label="Amount"
-          variant="outlined"
-          value={expense.amount}
-          onChange={handleInputChange}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-          }}
-        />
-        <TextField
           id="title"
           label="Title"
           variant="outlined"
           value={expense.title}
           onChange={handleInputChange}
+          sx={style}
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          id="amount"
+          label="Amount"
+          variant="outlined"
+          value={expense.amount}
+          placeholder="0.00"
+          onChange={handleInputChange}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+          sx={style}
         />
         <TextField
           id="description"
@@ -81,25 +88,32 @@ export default function ExpenseForm({ setIsOpen }: any) {
           variant="outlined"
           value={expense.description}
           onChange={handleInputChange}
+          sx={style}
+          InputLabelProps={{ shrink: true }}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             label="Controlled picker"
             value={expense.date}
             onChange={(newValue) => {
-              setExpense((prevData) => ({
+              setExpense((prevData: any) => ({
                 ...prevData,
                 date: newValue,
               }));
             }}
+            sx={style}
           />
         </LocalizationProvider>
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={handleSubmit}>
+        <Button
+          size="large"
+          variant="outlined"
+          onClick={handleSubmit}
+          endIcon={<SendIcon />}
+          sx={style}
+        >
           Record Expense
         </Button>
-      </CardActions>
+      </CardContent>
     </Card>
   );
 }

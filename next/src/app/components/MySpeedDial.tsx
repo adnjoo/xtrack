@@ -5,7 +5,7 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import PaymentIcon from "@mui/icons-material/Payment";
 
 import { MyModal } from "@/app/components/MyModal";
-import ExpenseForm from "@/app/components/OutlinedCard";
+import ExpenseForm from "@/app/components/ExpenseForm";
 
 export default function BasicSpeedDial() {
   const [isOpen, setIsOpen] = React.useState(false);
