@@ -94,7 +94,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
           id="date"
           placeholder="Select date"
           required
-          value={expense.date}
+          value={expense.date as any}
           onChange={handleInputChange}
         />
       </div>
