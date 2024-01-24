@@ -1,71 +1,96 @@
-export default function ExpenseTable({ data }: any) {
+'use client';
+
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useAuth } from '@clerk/nextjs';
+import { Table, Button } from 'flowbite-react';
+import { FaArrowUp } from 'react-icons/fa';
+
+import { classNames } from '@/app/lib/utils';
+
+export default function Component() {
+  const [data, setData] = useState<any>([]);
+  const [sortOrder, setSortOrder] = useState('asc');
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/expenses` as string, {
+          headers: { Authorization: `Bearer ${await getToken()}` },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+
+  const sortByDate = () => {
+    if (sortOrder === 'asc') {
+      setSortOrder('desc');
+      setData(
+        data.sort((a: any, b: any) => +new Date(b.date) - +new Date(a.date))
+      );
+    } else {
+      setSortOrder('asc');
+      setData(
+        data.sort((a: any, b: any) => +new Date(a.date) - +new Date(b.date))
+      );
+    }
+  };
+
   return (
-    <div className='flex max-w-6xl px-4 sm:px-6 lg:px-8'>
-      <div className='mt-8 flow-root'>
-        <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-          <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
-            <table className='min-w-full divide-y divide-gray-300'>
-              <thead>
-                <tr>
-                  <th
-                    scope='col'
-                    className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3'
-                  >
-                    Title
-                  </th>
-                  <th
-                    scope='col'
-                    className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                  >
-                    Amount
-                  </th>
-                  <th
-                    scope='col'
-                    className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                  >
-                    Description
-                  </th>
-                  <th
-                    scope='col'
-                    className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                  >
-                    Date
-                  </th>
-                  <th scope='col' className='relative py-3.5 pl-3 pr-4 sm:pr-3'>
-                    <span className='sr-only'>Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className='bg-white'>
-                {data.map((expense: any) => (
-                  <tr key={expense.date} className='even:bg-gray-50'>
-                    <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3'>
-                      {expense.title}
-                    </td>
-                    <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                      {expense.amount}
-                    </td>
-                    <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                      {expense.description}
-                    </td>
-                    <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                      {new Date(expense.date).toLocaleDateString()}
-                    </td>
-                    <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3'>
-                      <a
-                        href='#'
-                        className='text-indigo-600 hover:text-indigo-900'
-                      >
-                        Edit<span className='sr-only'>, {expense.title}</span>
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div className='overflow-x-auto'>
+      <Button onClick={sortByDate} className='mb-4'>
+        Sort by Date
+      </Button>
+      <Table hoverable>
+        <Table.Head>
+          <Table.HeadCell>Title</Table.HeadCell>
+          <Table.HeadCell>Amount</Table.HeadCell>
+          <Table.HeadCell>Description</Table.HeadCell>
+          <Table.HeadCell className='items-center flex justify-between'>
+            Date
+            <button onClick={sortByDate}>
+              <FaArrowUp className={classNames('h-4 w-4 origin-center transition-all duration-100 ease-in-out',
+                sortOrder === 'asc' ? 'rotate-180' : '')} />
+            </button>
+          </Table.HeadCell>
+          <Table.HeadCell>
+            <span className='sr-only'>Edit</span>
+          </Table.HeadCell>
+        </Table.Head>
+        <Table.Body className='divide-y'>
+          {data.map((expense: any) => (
+            <Table.Row
+              className='bg-white dark:border-gray-700 dark:bg-gray-800'
+              key={expense.id}
+            >
+              <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                {expense.title}
+              </Table.Cell>
+              <Table.Cell>{expense.amount}</Table.Cell>
+              <Table.Cell>{expense.description}</Table.Cell>
+              <Table.Cell>
+                {new Date(expense.date).toLocaleDateString()}
+              </Table.Cell>
+              <Table.Cell>
+                <a
+                  href='#'
+                  className='font-medium text-cyan-600 hover:underline dark:text-cyan-500'
+                >
+                  Edit
+                </a>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
     </div>
   );
 }
