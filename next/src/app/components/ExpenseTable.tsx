@@ -59,13 +59,19 @@ export default function Component() {
   };
 
   return (
-    <div className='overflow-x-auto'>
-      <Table hoverable>
-        <Table.Head>
-          <Table.HeadCell>Title</Table.HeadCell>
-          <Table.HeadCell>Amount</Table.HeadCell>
-          <Table.HeadCell>Description</Table.HeadCell>
-          <Table.HeadCell className='flex items-center justify-between'>
+    <Table hoverable striped>
+      <Table.Head>
+        <Table.HeadCell className='sticky top-0' scope='col'>
+          Title
+        </Table.HeadCell>
+        <Table.HeadCell className='sticky top-0' scope='col'>
+          Amount
+        </Table.HeadCell>
+        <Table.HeadCell className='sticky top-0' scope='col'>
+          Description
+        </Table.HeadCell>
+        <Table.HeadCell className='sticky top-0' scope='col'>
+          <div className='flex items-center justify-between'>
             Date
             <button onClick={handleSortByDate}>
               <FaArrowUp
@@ -75,37 +81,37 @@ export default function Component() {
                 )}
               />
             </button>
-          </Table.HeadCell>
-          <Table.HeadCell>
-            <span className='sr-only'>Edit</span>
-          </Table.HeadCell>
-        </Table.Head>
-        <Table.Body className='divide-y'>
-          {data.map((expense: any) => (
-            <Table.Row
-              className='bg-white dark:border-gray-700 dark:bg-gray-800'
-              key={expense.id}
-            >
-              <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                {expense.title}
-              </Table.Cell>
-              <Table.Cell>{expense.amount}</Table.Cell>
-              <Table.Cell>{expense.description}</Table.Cell>
-              <Table.Cell>
-                {new Date(expense.date).toLocaleDateString()}
-              </Table.Cell>
-              <Table.Cell>
-                <a
-                  href='#'
-                  className='font-medium text-cyan-600 hover:underline dark:text-cyan-500'
-                >
-                  Edit
-                </a>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </div>
+          </div>
+        </Table.HeadCell>
+        <Table.HeadCell className='sticky top-0' scope='col'>
+          <span className='sr-only'>Edit</span>
+        </Table.HeadCell>
+      </Table.Head>
+      <Table.Body className='divide-y'>
+        {data.map((expense: any) => (
+          <Table.Row
+            className='bg-white dark:border-gray-700 dark:bg-gray-800'
+            key={expense.id}
+          >
+            <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+              {expense.title}
+            </Table.Cell>
+            <Table.Cell>{expense.amount}</Table.Cell>
+            <Table.Cell>{expense.description}</Table.Cell>
+            <Table.Cell>
+              {new Date(expense.date).toLocaleDateString()}
+            </Table.Cell>
+            <Table.Cell>
+              <a
+                href='#'
+                className='font-medium text-cyan-600 hover:underline dark:text-cyan-500'
+              >
+                Edit
+              </a>
+            </Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   );
 }
