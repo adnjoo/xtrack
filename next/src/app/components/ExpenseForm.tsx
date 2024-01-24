@@ -4,6 +4,8 @@ import axios from "axios";
 import React from "react";
 import { useAuth } from "@clerk/nextjs";
 import { Button, Textarea, Label, TextInput, Datepicker } from "flowbite-react";
+import { BsX } from "react-icons/bs";
+import { FaSave } from "react-icons/fa";
 
 export default function ExpenseForm({ setIsOpen }: any) {
   const { getToken } = useAuth();
@@ -46,7 +48,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
   };
 
   return (
-    <form className="flex max-w-md flex-col gap-4">
+    <form className="flex max-w-md flex-col gap-4 mx-auto">
       <div>
         <div className="mb-2 block">
           <Label htmlFor="title" value="Title" />
@@ -98,7 +100,14 @@ export default function ExpenseForm({ setIsOpen }: any) {
           onChange={handleInputChange}
         />
       </div>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit}>
+        Submit
+        <FaSave className="ml-2 h-6 w-6" />
+      </Button>
+      <Button color="light" onClick={() => setIsOpen(false)}>
+        Cancel
+        <BsX className="ml-2 h-6 w-6" />
+      </Button>
     </form>
   );
 }
