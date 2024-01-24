@@ -3,49 +3,64 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
-import { Table, Button } from 'flowbite-react';
+import { Table } from 'flowbite-react';
 import { FaArrowUp } from 'react-icons/fa';
 
 import { classNames } from '@/app/lib/utils';
 
+enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
+export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
+  if (sortOrder === SortOrder.DESC) {
+    return expenses.sort(
+      (a: any, b: any) => +new Date(b.date) - +new Date(a.date)
+    );
+  } else {
+    return expenses.sort(
+      (a: any, b: any) => +new Date(a.date) - +new Date(b.date)
+    );
+  }
+};
+
 export default function Component() {
   const [data, setData] = useState<any>([]);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const { getToken } = useAuth();
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/expenses` as string, {
-          headers: { Authorization: `Bearer ${await getToken()}` },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
+          {
+            headers: { Authorization: `Bearer ${await getToken()}` },
+          }
+        );
+        console.log(res.data);
+        const sortedData = sortExpensesByDate(res.data, SortOrder.DESC);
+        setData(sortedData);
+      } catch (error) {
+        console.error(error);
+      }
     }
     fetchData();
   }, []);
 
-  const sortByDate = () => {
-    if (sortOrder === 'asc') {
-      setSortOrder('desc');
-      setData(
-        data.sort((a: any, b: any) => +new Date(b.date) - +new Date(a.date))
-      );
+  const handleSortByDate = () => {
+    if (sortOrder === SortOrder.DESC) {
+      setData(sortExpensesByDate(data, SortOrder.ASC));
     } else {
-      setSortOrder('asc');
-      setData(
-        data.sort((a: any, b: any) => +new Date(a.date) - +new Date(b.date))
-      );
+      setData(sortExpensesByDate(data, SortOrder.DESC));
     }
+    setSortOrder(sortOrder === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC);
   };
 
   return (
     <div className='overflow-x-auto'>
+      {sortOrder}
       <Table hoverable>
         <Table.Head>
           <Table.HeadCell>Title</Table.HeadCell>
@@ -53,11 +68,11 @@ export default function Component() {
           <Table.HeadCell>Description</Table.HeadCell>
           <Table.HeadCell className='flex items-center justify-between'>
             Date
-            <button onClick={sortByDate}>
+            <button onClick={handleSortByDate}>
               <FaArrowUp
                 className={classNames(
                   'h-4 w-4 origin-center transition-all duration-100 ease-in-out',
-                  sortOrder === 'asc' ? 'rotate-180' : ''
+                  sortOrder === 'desc' ? 'rotate-180' : ''
                 )}
               />
             </button>
