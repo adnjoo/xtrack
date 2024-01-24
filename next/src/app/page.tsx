@@ -1,42 +1,16 @@
-"use client";
+'use client';
+import { useAuth } from '@clerk/nextjs';
 
-import axios from "axios";
-import { useAuth } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
-
-import MySpeedDial from "@/app/components/MySpeedDial";
+import MySpeedDial from '@/app/components/MySpeedDial';
+import ExpenseTable from '@/app/components/ExpenseTable';
 
 export default function Home() {
-  const [data, setData] = useState<any>([]);
-  const { getToken, isSignedIn } = useAuth();
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await axios
-        .get(`${process.env.NEXT_PUBLIC_API_URL}/expenses` as string, {
-          headers: { Authorization: `Bearer ${await getToken()}` },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchData();
-  }, []);
-
+  const { isSignedIn } = useAuth();
+  
   return (
     <>
-      <section className="flex flex-col items-center justify-between p-24 gap-10">
-        {data?.length > 0 &&
-          data?.map((data: any) => (
-            <div key={data.id}>
-              {data.title} {data.amount} {data.description}{" "}
-              {new Date(data.date).toLocaleDateString()}
-            </div>
-          ))}
+      <section className='mx-auto mt-12 max-w-3xl p-4'>
+        <ExpenseTable />
       </section>
       {isSignedIn && <MySpeedDial />}
     </>
