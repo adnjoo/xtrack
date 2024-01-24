@@ -46,19 +46,20 @@ export default function Component() {
 
   return (
     <div className='overflow-x-auto'>
-      <Button onClick={sortByDate} className='mb-4'>
-        Sort by Date
-      </Button>
       <Table hoverable>
         <Table.Head>
           <Table.HeadCell>Title</Table.HeadCell>
           <Table.HeadCell>Amount</Table.HeadCell>
           <Table.HeadCell>Description</Table.HeadCell>
-          <Table.HeadCell className='items-center flex justify-between'>
+          <Table.HeadCell className='flex items-center justify-between'>
             Date
             <button onClick={sortByDate}>
-              <FaArrowUp className={classNames('h-4 w-4 origin-center transition-all duration-100 ease-in-out',
-                sortOrder === 'asc' ? 'rotate-180' : '')} />
+              <FaArrowUp
+                className={classNames(
+                  'h-4 w-4 origin-center transition-all duration-100 ease-in-out',
+                  sortOrder === 'asc' ? 'rotate-180' : ''
+                )}
+              />
             </button>
           </Table.HeadCell>
           <Table.HeadCell>
