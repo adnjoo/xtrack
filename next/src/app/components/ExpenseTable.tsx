@@ -60,7 +60,6 @@ export default function Component() {
 
   return (
     <div className='overflow-x-auto'>
-      {sortOrder}
       <Table hoverable>
         <Table.Head>
           <Table.HeadCell>Title</Table.HeadCell>
