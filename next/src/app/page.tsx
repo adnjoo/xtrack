@@ -5,6 +5,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 
 import MySpeedDial from "@/app/components/MySpeedDial";
+import ExpenseTable from "@/app/components/ExpenseTable";
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
@@ -29,14 +30,8 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex flex-col items-center justify-between p-24 gap-10">
-        {data?.length > 0 &&
-          data?.map((data: any) => (
-            <div key={data.id}>
-              {data.title} {data.amount} {data.description}{" "}
-              {new Date(data.date).toLocaleDateString()}
-            </div>
-          ))}
+      <section className="">
+        <ExpenseTable data={data} />
       </section>
       {isSignedIn && <MySpeedDial />}
     </>

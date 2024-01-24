@@ -1,13 +1,3 @@
-const expenses = [
-  {
-    title: 'Expense 1',
-    amount: '$100',
-    description: 'Description 1',
-    date: '2024-01-24',
-  },
-  // Add more expenses...
-];
-
 export default function ExpenseTable({ data }: any) {
   return (
     <div className='flex max-w-6xl px-4 sm:px-6 lg:px-8'>
