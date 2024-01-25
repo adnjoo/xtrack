@@ -91,6 +91,9 @@ export default function Component() {
           Amount
         </Table.HeadCell>
         <Table.HeadCell className='sticky top-0' scope='col'>
+          Category
+        </Table.HeadCell>
+        <Table.HeadCell className='sticky top-0' scope='col'>
           Description
         </Table.HeadCell>
         <Table.HeadCell className='sticky top-0' scope='col'>
@@ -119,6 +122,7 @@ export default function Component() {
           >
             <Table.Cell>{expense.title}</Table.Cell>
             <Table.Cell>{expense.amount}</Table.Cell>
+            <Table.Cell>{expense.category}</Table.Cell>
             <Table.Cell>{expense.description}</Table.Cell>
             <Table.Cell>
               {new Date(expense.date).toLocaleDateString()}

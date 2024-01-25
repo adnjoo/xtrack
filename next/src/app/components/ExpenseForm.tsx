@@ -7,7 +7,13 @@ import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
 import { BsX } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
 
-const expenseCategories = ['Groceries', 'Eating out', 'Entertainment', 'Other'];
+const expenseCategories = [
+  '',
+  'Other',
+  'Groceries',
+  'Eating out',
+  'Entertainment',
+];
 
 export default function ExpenseForm({ setIsOpen }: any) {
   const { getToken } = useAuth();
@@ -85,6 +91,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
           id='category'
           className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
           onChange={handleInputChange}
+          value={expense.category}
         >
           {expenseCategories.map((category) => (
             <option key={category} value={category}>
