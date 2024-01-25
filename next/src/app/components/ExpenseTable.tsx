@@ -84,19 +84,19 @@ export default function Component() {
   return (
     <Table hoverable striped>
       <Table.Head>
-        <Table.HeadCell className='sticky top-0' scope='col'>
+        <Table.HeadCell>
           Title
         </Table.HeadCell>
-        <Table.HeadCell className='sticky top-0' scope='col'>
+        <Table.HeadCell>
           Amount
         </Table.HeadCell>
-        <Table.HeadCell className='sticky top-0' scope='col'>
+        <Table.HeadCell>
           Category
         </Table.HeadCell>
-        <Table.HeadCell className='sticky top-0' scope='col'>
+        <Table.HeadCell>
           Description
         </Table.HeadCell>
-        <Table.HeadCell className='sticky top-0' scope='col'>
+        <Table.HeadCell>
           <div className='flex items-center justify-between'>
             Date
             <button onClick={handleSortByDate}>
@@ -109,7 +109,7 @@ export default function Component() {
             </button>
           </div>
         </Table.HeadCell>
-        <Table.HeadCell className='sticky top-0' scope='col'>
+        <Table.HeadCell>
           <span className='sr-only'>Actions</span>
           Actions
         </Table.HeadCell>
@@ -145,6 +145,7 @@ export default function Component() {
               0
             )}
           </Table.Cell>
+          <Table.Cell></Table.Cell>
           <Table.Cell></Table.Cell>
           <Table.Cell></Table.Cell>
           <Table.Cell></Table.Cell>
