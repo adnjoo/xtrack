@@ -40,7 +40,7 @@ export const upsertExpense = async (
   }
 
   try {
-    const { title, amount, description, date } = req.body;
+    const { title, amount, category, description, date } = req.body;
 
     // Check if the user exists
     const existingUser = await prisma.clerkUser.findUnique({
@@ -70,6 +70,7 @@ export const upsertExpense = async (
         data: {
           title,
           amount,
+          category,
           description,
           date,
           clerkUserId: req.auth.userId,
@@ -83,6 +84,7 @@ export const upsertExpense = async (
         data: {
           title,
           amount,
+          category,
           description,
           date,
           clerkUserId: req.auth.userId,
