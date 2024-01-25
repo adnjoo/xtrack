@@ -1,6 +1,5 @@
 import { auth } from '@clerk/nextjs';
 
-
 import MySpeedDial from '@/app/components/MySpeedDial';
 import ExpenseTable from '@/app/components/ExpenseTable';
 
