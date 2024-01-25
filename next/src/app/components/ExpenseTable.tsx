@@ -61,7 +61,9 @@ export default function Component() {
   };
 
   const handleDelete = async (id: number) => {
-    if (window.confirm('Are you sure you want to delete this expense?') === false) {
+    if (
+      window.confirm('Are you sure you want to delete this expense?') === false
+    ) {
       return;
     }
     const token = await getToken();
@@ -115,9 +117,7 @@ export default function Component() {
             className='bg-white dark:border-gray-700 dark:bg-gray-800'
             key={expense.id}
           >
-            <Table.Cell>
-              {expense.title}
-            </Table.Cell>
+            <Table.Cell>{expense.title}</Table.Cell>
             <Table.Cell>{expense.amount}</Table.Cell>
             <Table.Cell>{expense.description}</Table.Cell>
             <Table.Cell>
@@ -133,6 +133,18 @@ export default function Component() {
             </Table.Cell>
           </Table.Row>
         ))}
+        <Table.Row>
+          <Table.Cell>Total:</Table.Cell>
+          <Table.Cell>
+            {data.reduce(
+              (acc: number, expense: any) => acc + +expense.amount,
+              0
+            )}
+          </Table.Cell>
+          <Table.Cell></Table.Cell>
+          <Table.Cell></Table.Cell>
+          <Table.Cell></Table.Cell>
+        </Table.Row>
       </Table.Body>
     </Table>
   );
