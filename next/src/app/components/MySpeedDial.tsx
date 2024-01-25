@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { Button, Tooltip } from "flowbite-react";
 import { BsPlusCircleFill } from "react-icons/bs";
