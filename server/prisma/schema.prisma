@@ -11,6 +11,7 @@ model Expense {
   id          Int       @id @default(autoincrement())
   title       String
   amount      Decimal
+  category    String
   description String
   date        DateTime
   clerkUserId String?    
