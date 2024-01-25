@@ -39,7 +39,7 @@ export default function Component() {
           headers: { Authorization: `Bearer ${await getToken()}` },
         }
       );
-      console.log(res.data);
+      // console.log(res.data);
       const sortedData = sortExpensesByDate(res.data, SortOrder.DESC);
       setData(sortedData);
     } catch (error) {
@@ -115,7 +115,7 @@ export default function Component() {
             className='bg-white dark:border-gray-700 dark:bg-gray-800'
             key={expense.id}
           >
-            <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+            <Table.Cell>
               {expense.title}
             </Table.Cell>
             <Table.Cell>{expense.amount}</Table.Cell>
