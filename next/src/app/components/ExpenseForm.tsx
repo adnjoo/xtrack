@@ -14,6 +14,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
   const [expense, setExpense] = React.useState({
     title: '',
     amount: 0,
+    category: '',
     description: '',
     date: new Date(),
   });
@@ -24,12 +25,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
-        {
-          title: expense.title,
-          description: expense.description,
-          amount: expense.amount,
-          date: expense.date,
-        },
+        expense,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
