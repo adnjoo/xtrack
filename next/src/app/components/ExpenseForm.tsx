@@ -18,7 +18,7 @@ const expenseCategories = [
 
 export type ExpenseFormProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  propExpense: {
+  propExpense?: {
     title: string;
     amount: number;
     category: string;
@@ -34,12 +34,12 @@ export default function ExpenseForm({
 }: ExpenseFormProps) {
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
-    title: propExpense.title || '',
-    amount: propExpense.amount || 0,
-    category: propExpense.category || '',
-    description: propExpense.description || '',
-    date: propExpense.date || new Date(),
-    id: propExpense.id || null,
+    title: propExpense?.title || '',
+    amount: propExpense?.amount || 0,
+    category: propExpense?.category || '',
+    description: propExpense?.description || '',
+    date: propExpense?.date || new Date(),
+    id: propExpense?.id || null,
   });
   const { refetch } = useQuery({
     queryKey: ['expenses'],
