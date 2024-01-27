@@ -15,7 +15,14 @@ export default function MyNavbar() {
           {APP_NAME}
         </span>
       </Navbar.Brand>
-      <div className='flex md:order-2'>
+      <Navbar.Collapse>
+        {Object.values(PAGES).map((page) => (
+          <Navbar.Link key={page.label} as={Link} href={page.href}>
+            {page.label}
+          </Navbar.Link>
+        ))}
+      </Navbar.Collapse>
+      <div className=''>
         <SignedIn>
           <UserButton afterSignOutUrl='/' />
         </SignedIn>
@@ -24,13 +31,6 @@ export default function MyNavbar() {
         </SignedOut>
         <Navbar.Toggle className='ml-2' />
       </div>
-      <Navbar.Collapse>
-        {Object.values(PAGES).map((page) => (
-          <Navbar.Link key={page.label} as={Link} href={page.href}>
-            {page.label}
-          </Navbar.Link>
-        ))}
-      </Navbar.Collapse>
     </Navbar>
   );
 }
