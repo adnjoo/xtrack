@@ -6,6 +6,7 @@ import { useAuth } from '@clerk/nextjs';
 import { Table } from 'flowbite-react';
 import { FaArrowUp } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { useQuery } from '@tanstack/react-query';
 
 import { classNames } from '@/app/lib/utils';
 
@@ -30,26 +31,30 @@ export default function Component() {
   const [data, setData] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const { getToken } = useAuth();
-
-  async function fetchData() {
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
-        {
-          headers: { Authorization: `Bearer ${await getToken()}` },
-        }
-      );
-      // console.log(res.data);
-      const sortedData = sortExpensesByDate(res.data, SortOrder.DESC);
-      setData(sortedData);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const { status, data: sortedData, refetch } = useQuery({
+    queryKey: ['expenses'],
+    queryFn: async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
+          {
+            headers: { Authorization: `Bearer ${await getToken()}` },
+          }
+        );
+        // console.log(res.data);
+        const sortedData = sortExpensesByDate(res.data, SortOrder.DESC);
+        return sortedData;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  })
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (status === 'success') {
+      setData(sortedData);
+    }
+  }, [status, sortedData]);
 
   const handleSortByDate = () => {
     if (sortOrder === SortOrder.DESC) {
@@ -75,7 +80,7 @@ export default function Component() {
         }
       );
       console.log('Expense deleted successfully', response.data);
-      fetchData();
+      refetch();
     } catch (error) {
       console.error('Error deleting expense:', error);
     }

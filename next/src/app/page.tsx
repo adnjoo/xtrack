@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <>
-      <section className='mx-auto mt-12 max-w-3xl p-1 sm:p-4 overflow-x-auto'>
+      <section className='mx-auto mt-12 max-w-3xl overflow-x-auto p-1 sm:p-4'>
         <ExpenseTable />
       </section>
       {userId && <MySpeedDial />}
