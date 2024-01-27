@@ -9,6 +9,7 @@ import { FaArrowUp } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 import { classNames } from '@/app/lib/utils';
+import MyModal from '@/app/components/MyModal';
 
 enum SortOrder {
   ASC = 'asc',
@@ -30,6 +31,8 @@ export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
 export default function Component() {
   const [data, setData] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [editId, setEditId] = useState<number | null>(null);
   const { getToken } = useAuth();
   const {
     status,
@@ -91,73 +94,85 @@ export default function Component() {
     }
   };
 
+  const handleEditModal = (id: number) => {
+    setOpenEditModal(true);
+    setEditId(id);
+  };
+
   if (isLoading) {
     return <SkeletonTable />;
   }
 
   return (
-    <Table hoverable striped>
-      <Table.Head>
-        <Table.HeadCell>Title</Table.HeadCell>
-        <Table.HeadCell>Amount</Table.HeadCell>
-        <Table.HeadCell>Category</Table.HeadCell>
-        <Table.HeadCell>Description</Table.HeadCell>
-        <Table.HeadCell>
-          <div className='flex items-center justify-between'>
-            Date
-            <button onClick={handleSortByDate}>
-              <FaArrowUp
-                className={classNames(
-                  'h-4 w-4 origin-center transition-all duration-100 ease-in-out',
-                  sortOrder === 'desc' ? 'rotate-180' : ''
-                )}
-              />
-            </button>
-          </div>
-        </Table.HeadCell>
-        <Table.HeadCell>
-          <span className='sr-only'>Actions</span>
-          Actions
-        </Table.HeadCell>
-      </Table.Head>
-      <Table.Body className='divide-y'>
-        {data.map((expense: any) => (
-          <Table.Row
-            className='bg-white dark:border-gray-700 dark:bg-gray-800'
-            key={expense.id}
-          >
-            <Table.Cell>{expense.title}</Table.Cell>
-            <Table.Cell>{expense.amount}</Table.Cell>
-            <Table.Cell>{expense.category}</Table.Cell>
-            <Table.Cell>{expense.description}</Table.Cell>
-            <Table.Cell>
-              {new Date(expense.date).toLocaleDateString()}
-            </Table.Cell>
-            <Table.Cell>
-              {/* <button>
-                <MdEdit className='h-4 w-4' />
-              </button> */}
-              <button onClick={() => handleDelete(expense.id)}>
-                <MdDelete className='h-4 w-4' />
+    <>
+      <Table hoverable striped>
+        <Table.Head>
+          <Table.HeadCell>Title</Table.HeadCell>
+          <Table.HeadCell>Amount</Table.HeadCell>
+          <Table.HeadCell>Category</Table.HeadCell>
+          <Table.HeadCell>Description</Table.HeadCell>
+          <Table.HeadCell>
+            <div className='flex items-center justify-between'>
+              Date
+              <button onClick={handleSortByDate}>
+                <FaArrowUp
+                  className={classNames(
+                    'h-4 w-4 origin-center transition-all duration-100 ease-in-out',
+                    sortOrder === 'desc' ? 'rotate-180' : ''
+                  )}
+                />
               </button>
+            </div>
+          </Table.HeadCell>
+          <Table.HeadCell>
+            <span className='sr-only'>Actions</span>
+            Actions
+          </Table.HeadCell>
+        </Table.Head>
+        <Table.Body className='divide-y'>
+          {data.map((expense: any) => (
+            <Table.Row
+              className='bg-white dark:border-gray-700 dark:bg-gray-800'
+              key={expense.id}
+            >
+              <Table.Cell>{expense.title}</Table.Cell>
+              <Table.Cell>{expense.amount}</Table.Cell>
+              <Table.Cell>{expense.category}</Table.Cell>
+              <Table.Cell>{expense.description}</Table.Cell>
+              <Table.Cell>
+                {new Date(expense.date).toLocaleDateString()}
+              </Table.Cell>
+              <Table.Cell>
+                <button onClick={() => handleEditModal(expense.id)}>
+                  <MdEdit className='mr-1 h-4 w-4' />
+                </button>
+                <button onClick={() => handleDelete(expense.id)}>
+                  <MdDelete className='h-4 w-4' />
+                </button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+          <Table.Row>
+            <Table.Cell>Total:</Table.Cell>
+            <Table.Cell>
+              {data.reduce(
+                (acc: number, expense: any) => acc + +expense.amount,
+                0
+              )}
             </Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell></Table.Cell>
+            <Table.Cell></Table.Cell>
           </Table.Row>
-        ))}
-        <Table.Row>
-          <Table.Cell>Total:</Table.Cell>
-          <Table.Cell>
-            {data.reduce(
-              (acc: number, expense: any) => acc + +expense.amount,
-              0
-            )}
-          </Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-          <Table.Cell></Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
+        </Table.Body>
+      </Table>
+
+      {/* Edit Modal */}
+      <MyModal isOpen={openEditModal} setIsOpen={setOpenEditModal}>
+        <div>{editId}</div>
+      </MyModal>
+    </>
   );
 }
 
