@@ -27,10 +27,14 @@ export default function Example() {
                 </Disclosure.Button>
               </div>
               <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
-                <div className='flex flex-shrink-0 items-center text-white'>
+                <Link
+                  href={PAGES.HOME.href}
+                  passHref
+                  className='flex flex-shrink-0 items-center text-white'
+                >
                   <img src='/logo.svg' className='mr-3 h-9' alt='XT Logo' />
                   <span className='hidden sm:flex'>{APP_NAME}</span>
-                </div>
+                </Link>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
                     {Object.values(PAGES).map((item) => (
