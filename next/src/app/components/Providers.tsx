@@ -13,7 +13,7 @@ const Providers = ({ children }: any) => {
     <QueryClientProvider client={queryClient}>
       {children}
 
-      <ReactQueryDevtools />
+      <ReactQueryDevtools buttonPosition='bottom-left' />
     </QueryClientProvider>
   );
 };
