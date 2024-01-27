@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 
 import MyNavbar from '@/app/components/MyNavbar';
 import MyFooter from '@/app/components/MyFooter';
+import Providers from '@/app/components/Providers';
 import { APP_NAME } from '@/app/lib/constants';
 
 export const metadata: Metadata = {
@@ -20,9 +21,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang='en'>
         <body>
-          <MyNavbar />
-          <main className='min-h-screen'>{children}</main>
-          <MyFooter />
+          <Providers>
+            <MyNavbar />
+            <main className='min-h-screen'>{children}</main>
+            <MyFooter />
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
