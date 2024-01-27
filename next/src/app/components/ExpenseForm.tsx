@@ -16,14 +16,30 @@ const expenseCategories = [
   'Entertainment',
 ];
 
-export default function ExpenseForm({ setIsOpen }: any) {
+export type ExpenseFormProps = {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  propExpense: {
+    title: string;
+    amount: number;
+    category: string;
+    description: string;
+    date: Date;
+    id: number | null;
+  };
+};
+
+export default function ExpenseForm({
+  setIsOpen,
+  propExpense,
+}: ExpenseFormProps) {
   const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
-    title: '',
-    amount: 0,
-    category: '',
-    description: '',
-    date: new Date(),
+    title: propExpense.title || '',
+    amount: propExpense.amount || 0,
+    category: propExpense.category || '',
+    description: propExpense.description || '',
+    date: propExpense.date || new Date(),
+    id: propExpense.id || null,
   });
   const { refetch } = useQuery({
     queryKey: ['expenses'],

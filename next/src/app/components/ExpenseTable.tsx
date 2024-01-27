@@ -10,6 +10,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 
 import { classNames } from '@/app/lib/utils';
 import MyModal from '@/app/components/MyModal';
+import ExpenseForm from '@/app/components/ExpenseForm';
 
 enum SortOrder {
   ASC = 'asc',
@@ -32,7 +33,7 @@ export default function Component() {
   const [data, setData] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [editId, setEditId] = useState<number | null>(null);
+  const [propExpense, setPropExpense] = useState<any>(null);
   const { getToken } = useAuth();
   const {
     status,
@@ -95,8 +96,8 @@ export default function Component() {
   };
 
   const handleEditModal = (id: number) => {
+    setPropExpense(data.find((expense: any) => expense.id === id));
     setOpenEditModal(true);
-    setEditId(id);
   };
 
   if (isLoading) {
@@ -170,7 +171,7 @@ export default function Component() {
 
       {/* Edit Modal */}
       <MyModal isOpen={openEditModal} setIsOpen={setOpenEditModal}>
-        <div>{editId}</div>
+        <ExpenseForm setIsOpen={setOpenEditModal} propExpense={propExpense} />
       </MyModal>
     </>
   );
