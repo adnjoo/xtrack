@@ -3,6 +3,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useAuth } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
 import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
 import { BsX } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
@@ -24,6 +25,9 @@ export default function ExpenseForm({ setIsOpen }: any) {
     description: '',
     date: new Date(),
   });
+  const { refetch } = useQuery({
+    queryKey: ['expenses'],
+  });
 
   const handleSubmit = async () => {
     const token = await getToken();
@@ -41,6 +45,7 @@ export default function ExpenseForm({ setIsOpen }: any) {
       console.error('Error submitting expense:', error);
     } finally {
       setIsOpen(false);
+      refetch();
     }
   };
 

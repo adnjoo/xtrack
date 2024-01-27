@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import { FaArrowUp } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
-import { useQuery } from '@tanstack/react-query';
 
 import { classNames } from '@/app/lib/utils';
 
@@ -31,7 +31,11 @@ export default function Component() {
   const [data, setData] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const { getToken } = useAuth();
-  const { status, data: sortedData, refetch } = useQuery({
+  const {
+    status,
+    data: sortedData,
+    refetch,
+  } = useQuery({
     queryKey: ['expenses'],
     queryFn: async () => {
       try {
@@ -48,7 +52,7 @@ export default function Component() {
         console.error(error);
       }
     },
-  })
+  });
 
   useEffect(() => {
     if (status === 'success') {
@@ -89,18 +93,10 @@ export default function Component() {
   return (
     <Table hoverable striped>
       <Table.Head>
-        <Table.HeadCell>
-          Title
-        </Table.HeadCell>
-        <Table.HeadCell>
-          Amount
-        </Table.HeadCell>
-        <Table.HeadCell>
-          Category
-        </Table.HeadCell>
-        <Table.HeadCell>
-          Description
-        </Table.HeadCell>
+        <Table.HeadCell>Title</Table.HeadCell>
+        <Table.HeadCell>Amount</Table.HeadCell>
+        <Table.HeadCell>Category</Table.HeadCell>
+        <Table.HeadCell>Description</Table.HeadCell>
         <Table.HeadCell>
           <div className='flex items-center justify-between'>
             Date
