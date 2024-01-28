@@ -1,10 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Button } from "react-native";
 import axios from "axios";
 import React from "react";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
-import { Test } from "@/components/Test";
+import AuthExample from "@/components/AuthExample";
+import SignInWithOAuth from "@/components/SignInWithOAuth";
+import { SignOut } from "@/components/SignOut";
+import { tokenCache } from "@/lib/clerk";
+import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
 
 export default function App() {
   const [counter, setCounter] = React.useState(1);
@@ -22,13 +27,27 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>{data.title}</Text>
-      <Text>{data.body}</Text>
-      <Test />
-      <StatusBar style="auto" />
-      <Button title="Click" onPress={handleClick} />
-    </View>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={CLERK_PUBLISHABLE_KEY as string}
+    >
+      <SafeAreaView style={styles.container}>
+        <SignedIn>
+          <Text>You are Signed in</Text>
+          <SignOut />
+        </SignedIn>
+        <SignedOut>
+          <SignInWithOAuth />
+        </SignedOut>
+
+        <AuthExample />
+
+        <Text>{data.title}</Text>
+        <Text>{data.body}</Text>
+        <StatusBar style="auto" />
+        <Button title="Click" onPress={handleClick} />
+      </SafeAreaView>
+    </ClerkProvider>
   );
 }
 
