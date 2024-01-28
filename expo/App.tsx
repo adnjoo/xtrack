@@ -1,18 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text } from "react-native";
 import { Button } from "react-native";
 import axios from "axios";
 import React from "react";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
-import SignInWithOAuth from "./components/SignInWithOAuth";
+import SignInWithOAuth from "@/components/SignInWithOAuth";
 
 const PK = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+import { Test } from "@/components/Test";
 
 export default function App() {
   const [counter, setCounter] = React.useState(1);
   const [data, setData] = React.useState<any>("");
-
   React.useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts/${counter}`)
@@ -35,7 +36,7 @@ export default function App() {
           <SignInWithOAuth />
         </SignedOut>
 
-
+        <Test />
         <Text>{data.title}</Text>
         <Text>{data.body}</Text>
         <StatusBar style="auto" />
