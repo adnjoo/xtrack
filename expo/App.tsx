@@ -5,13 +5,11 @@ import axios from "axios";
 import React from "react";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
+import AuthExample from "@/components/AuthExample";
 import SignInWithOAuth from "@/components/SignInWithOAuth";
 import { SignOut } from "@/components/SignOut";
 import { tokenCache } from "@/lib/clerk";
-
-const PK = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-import { Test } from "@/components/Test";
+import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
 
 export default function App() {
   const [counter, setCounter] = React.useState(1);
@@ -29,9 +27,10 @@ export default function App() {
   };
 
   return (
-    <ClerkProvider 
-    tokenCache={tokenCache}
-    publishableKey={PK as string}>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={CLERK_PUBLISHABLE_KEY as string}
+    >
       <SafeAreaView style={styles.container}>
         <SignedIn>
           <Text>You are Signed in</Text>
@@ -41,7 +40,8 @@ export default function App() {
           <SignInWithOAuth />
         </SignedOut>
 
-        <Test />
+        <AuthExample />
+
         <Text>{data.title}</Text>
         <Text>{data.body}</Text>
         <StatusBar style="auto" />
