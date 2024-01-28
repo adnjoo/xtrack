@@ -141,7 +141,12 @@ export default function Component() {
               <Table.Cell>{expense.category}</Table.Cell>
               <Table.Cell>{expense.description}</Table.Cell>
               <Table.Cell>
-                {new Date(expense.date).toLocaleDateString()}
+                {new Date(expense.date).toLocaleDateString(undefined, {
+                  weekday: 'short',
+                  year: 'numeric',
+                  month: 'numeric',
+                  day: 'numeric',
+                })}
               </Table.Cell>
               <Table.Cell>
                 <button onClick={() => handleEditModal(expense.id)}>
