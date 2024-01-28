@@ -6,6 +6,8 @@ import React from "react";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
 import SignInWithOAuth from "@/components/SignInWithOAuth";
+import { SignOut } from "@/components/SignOut";
+import { tokenCache } from "@/lib/clerk";
 
 const PK = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -27,10 +29,13 @@ export default function App() {
   };
 
   return (
-    <ClerkProvider publishableKey={PK as string}>
+    <ClerkProvider 
+    tokenCache={tokenCache}
+    publishableKey={PK as string}>
       <SafeAreaView style={styles.container}>
         <SignedIn>
           <Text>You are Signed in</Text>
+          <SignOut />
         </SignedIn>
         <SignedOut>
           <SignInWithOAuth />
