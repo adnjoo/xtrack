@@ -55,7 +55,9 @@ export default function Example() {
                   <UserButton afterSignOutUrl='/' />
                 </SignedIn>
                 <SignedOut>
-                  <SignInButton />
+                  <SignInButton>
+                    <button className='text-white'>Sign in</button>
+                  </SignInButton>
                 </SignedOut>
               </div>
             </div>
