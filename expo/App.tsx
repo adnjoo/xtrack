@@ -3,10 +3,11 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native";
 import axios from "axios";
 import React from "react";
-import { ClerkProvider } from "@clerk/clerk-expo";
-import Constants from "expo-constants";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
-const pk = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+import SignInWithOAuth from "./components/SignInWithOAuth";
+
+const PK = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 export default function App() {
   const [counter, setCounter] = React.useState(1);
@@ -25,8 +26,16 @@ export default function App() {
   };
 
   return (
-    <ClerkProvider publishableKey={pk as string}>
+    <ClerkProvider publishableKey={PK as string}>
       <SafeAreaView style={styles.container}>
+        <SignedIn>
+          <Text>You are Signed in</Text>
+        </SignedIn>
+        <SignedOut>
+          <SignInWithOAuth />
+        </SignedOut>
+
+
         <Text>{data.title}</Text>
         <Text>{data.body}</Text>
         <StatusBar style="auto" />
