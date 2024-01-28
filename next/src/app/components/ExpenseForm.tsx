@@ -66,11 +66,20 @@ export default function ExpenseForm({
   };
 
   const handleInputChange = (e: any) => {
-    const { id, value } = e.target;
-    setExpense((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+    setExpense((prevData) => {
+      if (e instanceof Date) {
+        return {
+          ...prevData,
+          date: e,
+        };
+      } else {
+        const { id, value } = e.target;
+        return {
+          ...prevData,
+          [id]: value,
+        };
+      }
+    });
   };
 
   return (
@@ -143,7 +152,7 @@ export default function ExpenseForm({
           placeholder='Select date'
           required
           value={expense.date as any}
-          onChange={handleInputChange}
+          onSelectedDateChanged={handleInputChange}
         />
       </div>
       <Button onClick={handleSubmit}>
