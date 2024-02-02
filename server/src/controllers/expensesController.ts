@@ -16,9 +16,18 @@ export const getExpenses = async (
   try {
     const { startDate, endDate } = req.query;
 
+    const startDateValue = startDate
+      ? new Date(startDate as string)
+      : new Date(0);
+    const endDateValue = endDate ? new Date(endDate as string) : new Date();
+
     const expenses = await prisma.expense.findMany({
       where: {
         clerkUserId: req.auth.userId,
+        date: {
+          gte: startDateValue,
+          lte: endDateValue,
+        },
       },
     });
 
