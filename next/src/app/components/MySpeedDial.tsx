@@ -9,13 +9,27 @@ import MyModal from '@/app/components/MyModal';
 import ExpenseForm from '@/app/components/ExpenseForm';
 import { useCheckMobileScreen } from '@/app/lib/hooks';
 
-const AddExpenseButton = ({ setModalOpen }: { setModalOpen: any }) => {
+const AddExpenseButton = ({
+  setModalOpen,
+  isMobile = false,
+}: {
+  setModalOpen: any;
+  isMobile?: boolean;
+}) => {
   return (
-    <Button onClick={() => setModalOpen(true)} className='rounded-t-none'>
-      <Tooltip content='Add Expense' placement='left'>
-        <BsPlusCircleFill className='h-6 w-6' />
-      </Tooltip>
-    </Button>
+    <div className='fixed bottom-4 right-4'>
+      {!isMobile && (
+        <div className='max-h-[10px] rounded-t-lg bg-gray-800'>&nbsp;</div>
+      )}
+      <Button
+        onClick={() => setModalOpen(true)}
+        className={!isMobile ? 'rounded-t-none' : ''}
+      >
+        <Tooltip content='Add Expense' placement='left'>
+          <BsPlusCircleFill className='h-6 w-6' />
+        </Tooltip>
+      </Button>
+    </div>
   );
 };
 
@@ -27,15 +41,10 @@ export default function MySpeedDial() {
     <>
       {/* Speed dial */}
       {isMobile ? (
-        <div className='fixed bottom-4 right-4'>
-          <AddExpenseButton setModalOpen={setModalOpen} />
-        </div>
+        <AddExpenseButton setModalOpen={setModalOpen} isMobile />
       ) : (
         <Draggable>
-          <div className='fixed bottom-4 right-4'>
-            <div className='max-h-[10px] rounded-t-lg bg-gray-800'>&nbsp;</div>
-            <AddExpenseButton setModalOpen={setModalOpen} />
-          </div>
+          <AddExpenseButton setModalOpen={setModalOpen} />
         </Draggable>
       )}
 
