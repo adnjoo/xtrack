@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
-import { Button } from "react-native";
+import { Button, Image } from "react-native";
 import axios from "axios";
 import React from "react";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
@@ -35,17 +35,20 @@ export default function App() {
         <SignedIn>
           <Text>You are Signed in</Text>
           <SignOut />
+          <Text>{data.title}</Text>
+          <Text>{data.body}</Text>
+          <StatusBar style="auto" />
+          <Button title="Click" onPress={handleClick} />
         </SignedIn>
+
         <SignedOut>
+          {/* TODO: find out how to share code between repos */}
+          <Text>XpenseTrackr</Text>
+          <Image style={{ width: 100, height: 100 }} source={require("./assets/logo.png")} />
           <SignInWithOAuth />
         </SignedOut>
 
         <AuthExample />
-
-        <Text>{data.title}</Text>
-        <Text>{data.body}</Text>
-        <StatusBar style="auto" />
-        <Button title="Click" onPress={handleClick} />
       </SafeAreaView>
     </ClerkProvider>
   );
