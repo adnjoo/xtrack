@@ -8,14 +8,14 @@ export const getExpenses = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<Expense[] | void> => {
-
   if (!req.auth.userId) {
     res.json(req.auth);
     return;
   }
 
-
   try {
+    const { startDate, endDate } = req.query;
+
     const expenses = await prisma.expense.findMany({
       where: {
         clerkUserId: req.auth.userId,
@@ -33,7 +33,6 @@ export const upsertExpense = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<Expense | void> => {
-
   if (!req.auth.userId) {
     res.status(401).send("Unauthorized: no user ID provided");
     return;
@@ -53,7 +52,6 @@ export const upsertExpense = async (
         data: { id: req.auth.userId },
       });
     }
-    
 
     if (req?.body?.id) {
       const existingExpense = await prisma.expense.findUnique({
@@ -94,7 +92,6 @@ export const upsertExpense = async (
       res.send(newExpense);
       return;
     }
-
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
