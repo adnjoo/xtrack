@@ -17,19 +17,21 @@ const AddExpenseButton = ({
   isMobile?: boolean;
 }) => {
   return (
-    <div className='fixed bottom-4 right-4'>
-      {!isMobile && (
-        <div className='max-h-[10px] rounded-t-lg bg-gray-800'>&nbsp;</div>
-      )}
-      <Button
-        onClick={() => setModalOpen(true)}
-        className={!isMobile ? 'rounded-t-none' : ''}
-      >
-        <Tooltip content='Add Expense' placement='left'>
-          <BsPlusCircleFill className='h-6 w-6' />
-        </Tooltip>
-      </Button>
-    </div>
+    <Draggable disabled={isMobile}>
+      <div className='fixed bottom-4 right-4'>
+        {!isMobile && (
+          <div className='max-h-[10px] rounded-t-lg bg-gray-800'>&nbsp;</div>
+        )}
+        <Button
+          onClick={() => setModalOpen(true)}
+          className={!isMobile ? 'rounded-t-none' : ''}
+        >
+          <Tooltip content='Add Expense' placement='left'>
+            <BsPlusCircleFill className='h-6 w-6' />
+          </Tooltip>
+        </Button>
+      </div>
+    </Draggable>
   );
 };
 
@@ -40,13 +42,7 @@ export default function MySpeedDial() {
   return (
     <>
       {/* Speed dial */}
-      {isMobile ? (
-        <AddExpenseButton setModalOpen={setModalOpen} isMobile />
-      ) : (
-        <Draggable>
-          <AddExpenseButton setModalOpen={setModalOpen} />
-        </Draggable>
-      )}
+      <AddExpenseButton setModalOpen={setModalOpen} isMobile={isMobile} />
 
       {/* Modal */}
       <MyModal isOpen={modalOpen} setIsOpen={setModalOpen}>
