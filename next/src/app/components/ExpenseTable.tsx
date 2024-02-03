@@ -50,7 +50,7 @@ export default function ExpenseTable() {
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ['expenses', value?.startDate, value?.endDate],
+    queryKey: ['expenses'],
     queryFn: async () => {
       try {
         const res = await axios.get(
