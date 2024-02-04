@@ -31,6 +31,29 @@ export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
   }
 };
 
+// TODO: move to utils, unit test
+async function calculateTZOffset(newValue: DateValueType) {
+  // Get the time zone offset in minutes
+  const tzOffsetInMinutes = new Date().getTimezoneOffset();
+
+  // Apply the offset to startDate and endDate
+  const adjustedStartDate = new Date(newValue?.startDate as string);
+  adjustedStartDate.setMinutes(
+    adjustedStartDate.getMinutes() + tzOffsetInMinutes
+  );
+
+  const adjustedEndDate = new Date(newValue?.endDate as string);
+  adjustedEndDate.setMinutes(adjustedEndDate.getMinutes() + tzOffsetInMinutes);
+
+  // convert back to ISO format
+  adjustedStartDate.setHours(0, 0, 0, 0);
+  adjustedEndDate.setHours(23, 59, 59, 999);
+
+  console.log(adjustedStartDate, adjustedEndDate);
+
+  return { adjustedStartDate, adjustedEndDate };
+}
+
 export default function ExpenseTable() {
   const today = useMemo(() => new Date(), []);
 
@@ -38,9 +61,14 @@ export default function ExpenseTable() {
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [propExpense, setPropExpense] = useState<any>(null);
-  const [value, setValue] = useState<DateValueType>({
+  // TODO: rename value to e.g. dateValue
+  const [dateValue, setDateValue] = useState<DateValueType>({
     startDate: new Date(today.getFullYear(), today.getMonth(), 1).toISOString(),
-    endDate: new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString(),
+    endDate: new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).toISOString(),
   });
 
   const { getToken } = useAuth();
@@ -53,14 +81,16 @@ export default function ExpenseTable() {
     queryKey: ['expenses'],
     queryFn: async () => {
       try {
+        const { adjustedStartDate, adjustedEndDate } =
+          await calculateTZOffset(dateValue);
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
           {
             headers: { Authorization: `Bearer ${await getToken()}` },
             params: {
-              startDate: value?.startDate,
-              endDate: value?.endDate,
-            }
+              startDate: adjustedStartDate,
+              endDate: adjustedEndDate,
+            },
           }
         );
         // console.log(res.data);
@@ -77,6 +107,10 @@ export default function ExpenseTable() {
       setData(sortedData);
     }
   }, [status, sortedData]);
+
+  useEffect(() => {
+    refetch();
+  }, [dateValue, refetch]);
 
   const handleSortByDate = () => {
     if (sortOrder === SortOrder.DESC) {
@@ -115,8 +149,7 @@ export default function ExpenseTable() {
 
   const handleValueChange = (newValue: DateValueType) => {
     // console.log('newValue:', newValue);
-    setValue(newValue);
-    refetch();
+    setDateValue(newValue);
   };
 
   if (isLoading) {
@@ -125,9 +158,10 @@ export default function ExpenseTable() {
 
   return (
     <div className='min-h-[450px]'>
+      {/* TODO: should move datepicker outside of h-scrolling container */}
       <Datepicker
         containerClassName='relative mb-8 max-w-[300px]'
-        value={value}
+        value={dateValue}
         onChange={handleValueChange}
         showShortcuts
       />
