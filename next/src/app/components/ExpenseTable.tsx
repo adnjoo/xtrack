@@ -9,7 +9,7 @@ import { FaArrowUp } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Datepicker, { DateValueType } from 'react-tailwindcss-datepicker';
 
-import { classNames } from '@/app/lib/utils';
+import { classNames, calculateTZOffset } from '@/app/lib/utils';
 import MyModal from '@/app/components/MyModal';
 import ExpenseForm from '@/app/components/ExpenseForm';
 import { SkeletonTable } from '@/app/components/SkeletonTable';
@@ -38,9 +38,13 @@ export default function ExpenseTable() {
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [propExpense, setPropExpense] = useState<any>(null);
-  const [value, setValue] = useState<DateValueType>({
+  const [dateValue, setDateValue] = useState<DateValueType>({
     startDate: new Date(today.getFullYear(), today.getMonth(), 1).toISOString(),
-    endDate: new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString(),
+    endDate: new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).toISOString(),
   });
 
   const { getToken } = useAuth();
@@ -53,14 +57,16 @@ export default function ExpenseTable() {
     queryKey: ['expenses'],
     queryFn: async () => {
       try {
+        const { adjustedStartDate, adjustedEndDate } =
+          await calculateTZOffset(dateValue);
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
           {
             headers: { Authorization: `Bearer ${await getToken()}` },
             params: {
-              startDate: value?.startDate,
-              endDate: value?.endDate,
-            }
+              startDate: adjustedStartDate,
+              endDate: adjustedEndDate,
+            },
           }
         );
         // console.log(res.data);
@@ -77,6 +83,10 @@ export default function ExpenseTable() {
       setData(sortedData);
     }
   }, [status, sortedData]);
+
+  useEffect(() => {
+    refetch();
+  }, [dateValue, refetch]);
 
   const handleSortByDate = () => {
     if (sortOrder === SortOrder.DESC) {
@@ -115,8 +125,7 @@ export default function ExpenseTable() {
 
   const handleValueChange = (newValue: DateValueType) => {
     // console.log('newValue:', newValue);
-    setValue(newValue);
-    refetch();
+    setDateValue(newValue);
   };
 
   if (isLoading) {
@@ -125,9 +134,10 @@ export default function ExpenseTable() {
 
   return (
     <div className='min-h-[450px]'>
+      {/* TODO: should move datepicker outside of h-scrolling container */}
       <Datepicker
         containerClassName='relative mb-8 max-w-[300px]'
-        value={value}
+        value={dateValue}
         onChange={handleValueChange}
         showShortcuts
       />

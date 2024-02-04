@@ -19,7 +19,14 @@ export const getExpenses = async (
     const startDateValue = startDate
       ? new Date(startDate as string)
       : new Date(0);
-    const endDateValue = endDate ? new Date(endDate as string) : new Date();
+
+    const endDateValue = endDate
+      ? endDate === startDate
+        ? new Date(endDate as string).setHours(23, 59, 59) as any
+        : new Date(endDate as string)
+      : new Date();
+
+    // console.log(startDateValue, endDateValue);
 
     const expenses = await prisma.expense.findMany({
       where: {
