@@ -9,7 +9,7 @@ import { FaArrowUp } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Datepicker, { DateValueType } from 'react-tailwindcss-datepicker';
 
-import { classNames } from '@/app/lib/utils';
+import { classNames, calculateTZOffset } from '@/app/lib/utils';
 import MyModal from '@/app/components/MyModal';
 import ExpenseForm from '@/app/components/ExpenseForm';
 import { SkeletonTable } from '@/app/components/SkeletonTable';
@@ -31,29 +31,6 @@ export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
   }
 };
 
-// TODO: move to utils, unit test
-async function calculateTZOffset(newValue: DateValueType) {
-  // Get the time zone offset in minutes
-  const tzOffsetInMinutes = new Date().getTimezoneOffset();
-
-  // Apply the offset to startDate and endDate
-  const adjustedStartDate = new Date(newValue?.startDate as string);
-  adjustedStartDate.setMinutes(
-    adjustedStartDate.getMinutes() + tzOffsetInMinutes
-  );
-
-  const adjustedEndDate = new Date(newValue?.endDate as string);
-  adjustedEndDate.setMinutes(adjustedEndDate.getMinutes() + tzOffsetInMinutes);
-
-  // convert back to ISO format
-  adjustedStartDate.setHours(0, 0, 0, 0);
-  adjustedEndDate.setHours(23, 59, 59, 999);
-
-  console.log(adjustedStartDate, adjustedEndDate);
-
-  return { adjustedStartDate, adjustedEndDate };
-}
-
 export default function ExpenseTable() {
   const today = useMemo(() => new Date(), []);
 
@@ -61,7 +38,6 @@ export default function ExpenseTable() {
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [propExpense, setPropExpense] = useState<any>(null);
-  // TODO: rename value to e.g. dateValue
   const [dateValue, setDateValue] = useState<DateValueType>({
     startDate: new Date(today.getFullYear(), today.getMonth(), 1).toISOString(),
     endDate: new Date(
