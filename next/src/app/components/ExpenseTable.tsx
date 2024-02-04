@@ -1,16 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import { Table } from 'flowbite-react';
 import { FaArrowUp } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import Datepicker, { DateValueType } from 'react-tailwindcss-datepicker';
 
-import { classNames } from '@/app/lib/utils';
+import { classNames, calculateTZOffset } from '@/app/lib/utils';
 import MyModal from '@/app/components/MyModal';
 import ExpenseForm from '@/app/components/ExpenseForm';
+import { SkeletonTable } from '@/app/components/SkeletonTable';
 
 enum SortOrder {
   ASC = 'asc',
@@ -29,11 +31,22 @@ export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
   }
 };
 
-export default function Component() {
+export default function ExpenseTable() {
+  const today = useMemo(() => new Date(), []);
+
   const [data, setData] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState(SortOrder.DESC);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [propExpense, setPropExpense] = useState<any>(null);
+  const [dateValue, setDateValue] = useState<DateValueType>({
+    startDate: new Date(today.getFullYear(), today.getMonth(), 1).toISOString(),
+    endDate: new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).toISOString(),
+  });
+
   const { getToken } = useAuth();
   const {
     status,
@@ -44,10 +57,16 @@ export default function Component() {
     queryKey: ['expenses'],
     queryFn: async () => {
       try {
+        const { adjustedStartDate, adjustedEndDate } =
+          await calculateTZOffset(dateValue);
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
           {
             headers: { Authorization: `Bearer ${await getToken()}` },
+            params: {
+              startDate: adjustedStartDate,
+              endDate: adjustedEndDate,
+            },
           }
         );
         // console.log(res.data);
@@ -64,6 +83,10 @@ export default function Component() {
       setData(sortedData);
     }
   }, [status, sortedData]);
+
+  useEffect(() => {
+    refetch();
+  }, [dateValue, refetch]);
 
   const handleSortByDate = () => {
     if (sortOrder === SortOrder.DESC) {
@@ -100,12 +123,25 @@ export default function Component() {
     setOpenEditModal(true);
   };
 
+  const handleValueChange = (newValue: DateValueType) => {
+    // console.log('newValue:', newValue);
+    setDateValue(newValue);
+  };
+
   if (isLoading) {
     return <SkeletonTable />;
   }
 
   return (
-    <>
+    <div className='min-h-[450px]'>
+      {/* TODO: should move datepicker outside of h-scrolling container */}
+      <Datepicker
+        containerClassName='relative mb-8 max-w-[300px]'
+        value={dateValue}
+        onChange={handleValueChange}
+        showShortcuts
+      />
+
       <Table hoverable striped>
         <Table.Head>
           <Table.HeadCell>Title</Table.HeadCell>
@@ -178,47 +214,6 @@ export default function Component() {
       <MyModal isOpen={openEditModal} setIsOpen={setOpenEditModal}>
         <ExpenseForm setIsOpen={setOpenEditModal} propExpense={propExpense} />
       </MyModal>
-    </>
+    </div>
   );
 }
-
-const SkeletonTable = () => {
-  return (
-    <Table hoverable striped>
-      <Table.Head className='animate-pulse'>
-        {[...Array(6)].map((_, i) => (
-          <Table.HeadCell key={i}>
-            <div className='h-4 w-40 rounded bg-gray-300 dark:bg-gray-400'></div>
-          </Table.HeadCell>
-        ))}
-      </Table.Head>
-      <Table.Body>
-        {[...Array(10)].map((_, i) => (
-          <Table.Row
-            className='animate-pulse bg-white dark:border-gray-700 dark:bg-gray-800'
-            key={i}
-          >
-            <Table.Cell>
-              <div className='h-4 w-40 rounded bg-gray-300 dark:bg-gray-400'></div>
-            </Table.Cell>
-            <Table.Cell>
-              <div className='h-4 w-20 rounded bg-gray-300 dark:bg-gray-400'></div>
-            </Table.Cell>
-            <Table.Cell>
-              <div className='h-4 w-20 rounded bg-gray-300 dark:bg-gray-400'></div>
-            </Table.Cell>
-            <Table.Cell>
-              <div className='h-4 w-20 rounded bg-gray-300 dark:bg-gray-400'></div>
-            </Table.Cell>
-            <Table.Cell>
-              <div className='h-4 w-20 rounded bg-gray-300 dark:bg-gray-400'></div>
-            </Table.Cell>
-            <Table.Cell>
-              <div className='h-4 w-20 rounded bg-gray-300 dark:bg-gray-400'></div>
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
-  );
-};
