@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { Tabs, TabsRef } from 'flowbite-react';
 import { HiCurrencyDollar, HiChartBar } from 'react-icons/hi';
+import { useQuery } from '@tanstack/react-query';
 
 export type MyTabsProps = {
   tab1: React.ReactNode;
@@ -12,6 +13,12 @@ export type MyTabsProps = {
 export const MyTabs: React.FC<MyTabsProps> = ({ tab1, tab2 }) => {
   const tabsRef = useRef<TabsRef>(null);
   const [activeTab, setActiveTab] = useState(0);
+
+  const { data} = useQuery({
+    queryKey: ['expenses'],
+  })
+
+  console.log('tabs data', data)
 
   return (
     <Tabs
