@@ -30,7 +30,7 @@ export type TabsHeroProps = {
 
 export default function TabsHero() {
   return (
-    <div className='mx-auto max-w-lg space-y-12'>
+    <div className='mx-auto max-w-lg sm:max-w-3xl space-y-12'>
       <TabGroup>
         <TabList variant='line' defaultValue='1'>
           {tabs.map((tab) => (
