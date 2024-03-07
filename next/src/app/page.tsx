@@ -2,13 +2,14 @@ import { auth } from '@clerk/nextjs';
 
 import MySpeedDial from '@/app/components/MySpeedDial';
 import TabsHero from '@/app/components/TabsHero';
+import Testimonials from '@/app/components/Testimonials';
 
 export default function Home() {
   const { userId } = auth();
 
   if (!userId) {
     return (
-      <div className='relative isolate px-6 pt-14 lg:px-8'>
+      <section className='relative isolate px-6 pt-14 lg:px-8'>
         <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
           <div className='text-center'>
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
@@ -33,7 +34,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+
+        <Testimonials />
+      </section>
     );
   }
 
