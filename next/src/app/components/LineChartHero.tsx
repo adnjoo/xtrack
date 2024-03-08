@@ -3,6 +3,21 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { LineChart } from '@tremor/react';
+import axios from 'axios';
+
+function convertToQueryParam(data) {
+  return data.map((entry, index) => {
+    const params = Object.entries(entry).map(([key, value]) => {
+      // Encode key and value for URL
+      key = encodeURIComponent(key);
+      value = encodeURIComponent(value);
+
+      return `entries[${index}][${key}]=${value}`;
+    });
+
+    return params.join('&');
+  }).join('&');
+}
 
 const dataFormatter = (number: number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
@@ -13,6 +28,19 @@ export default function LineChartHero() {
   const { data } = useQuery<any>({
     queryKey: ['expenses'],
   });
+  const [aiText, setAItext] = React.useState<string>('');
+
+  const fetchAI = async () => {
+    // convert to something like Mar 01 Entertainment xx Eating out xx, Mar 02 Eating out xx, etc.
+  };
+
+  React.useEffect(() => {
+    if (!mappedData) {
+      return;
+    }
+
+    // fetchAI();
+  }, [mappedData]);
 
   React.useEffect(() => {
     if (data) {
@@ -25,7 +53,7 @@ export default function LineChartHero() {
         );
       setCategories(categories);
 
-      data.forEach(({date, category, amount}: any) => {
+      data.forEach(({ date, category, amount }: any) => {
         const formattedDate = new Date(date).toLocaleString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -54,16 +82,20 @@ export default function LineChartHero() {
   }, [data]);
 
   return (
-    <LineChart
-      className='h-80'
-      data={mappedData}
-      index='date'
-      categories={categories}
-      colors={['indigo', 'rose', 'yellow', 'red', 'orange', 'amber']}
-      valueFormatter={dataFormatter}
-      yAxisWidth={60}
-      onValueChange={(v) => console.log(v)}
-      connectNulls
-    />
+    <>
+      <LineChart
+        className='h-80'
+        data={mappedData}
+        index='date'
+        categories={categories}
+        colors={['indigo', 'rose', 'yellow', 'red', 'orange', 'amber']}
+        valueFormatter={dataFormatter}
+        yAxisWidth={60}
+        onValueChange={(v) => console.log(v)}
+        connectNulls
+      />
+
+      {aiText && <p>{aiText}</p>}
+    </>
   );
 }
