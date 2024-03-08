@@ -23,12 +23,14 @@ export default function MyFooter() {
                 <Link href='/'>Home</Link>
                 <Link href='/pricing'>Pricing</Link>
                 <Link href='/about'>About</Link>
+                <Link href='/contact'>Contact</Link>
               </Footer.LinkGroup>
             </div>
             <div>
               <Footer.Title title='learn' />
               <Footer.LinkGroup col>
                 <Link href='/blog'>Blog</Link>
+                <Link href='/faq'>FAQ</Link>
               </Footer.LinkGroup>
             </div>
             <div>
