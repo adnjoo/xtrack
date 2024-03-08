@@ -7,10 +7,12 @@ import { PAGES, FOOTER } from '@/app/lib/constants';
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
   publicRoutes: [
+    PAGES.ABOUT.href,
+    PAGES.BLOG.href,
+    PAGES.CONTACT.href,
+    PAGES.FAQ.href,
     PAGES.HOME.href,
     PAGES.PRICING.href,
-    PAGES.BLOG.href,
-    PAGES.ABOUT.href,
     FOOTER.PRIVACY.href,
     FOOTER.TERMS.href,
   ],

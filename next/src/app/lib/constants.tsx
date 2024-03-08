@@ -3,6 +3,23 @@ import { BsGithub, BsTwitter } from 'react-icons/bs';
 export const APP_NAME = 'XpenseTrackr';
 
 export const PAGES = {
+  ABOUT: {
+    href: '/about',
+    label: 'About',
+  },
+  BLOG: {
+    href: '/blog',
+    label: 'Blog',
+  },
+
+  CONTACT: {
+    href: '/contact',
+    label: 'Contact',
+  },
+  FAQ: {
+    href: '/faq',
+    label: 'FAQ',
+  },
   HOME: {
     href: '/',
     label: 'Home',
@@ -10,14 +27,6 @@ export const PAGES = {
   PRICING: {
     href: '/pricing',
     label: 'Pricing',
-  },
-  BLOG: {
-    href: '/blog',
-    label: 'Blog',
-  },
-  ABOUT: {
-    href: '/about',
-    label: 'About',
   },
 };
 
