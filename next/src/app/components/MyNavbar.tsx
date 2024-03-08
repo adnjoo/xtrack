@@ -8,6 +8,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { APP_NAME, PAGES } from '@/app/lib/constants';
 
 export default function Example() {
+  const showPages = Object.values(PAGES).filter((page) => page.menu);
   return (
     <Disclosure as='nav' className='bg-gray-800'>
       {({ open }) => (
@@ -37,7 +38,7 @@ export default function Example() {
                 </Link>
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
-                    {Object.values(PAGES).map((item) => (
+                    {Object.values(showPages).map((item) => (
                       <Link
                         key={item.label}
                         href={item.href}
