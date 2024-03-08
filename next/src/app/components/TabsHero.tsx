@@ -5,7 +5,7 @@ import { WalletIcon } from '@heroicons/react/24/outline';
 import { BsGraphUp } from 'react-icons/bs';
 
 import ExpenseTable from '@/app/components/ExpenseTable';
-import Tremor from '@/app/components/Tremor';
+import LineChartHero from '@/app/components/LineChartHero';
 
 const tabs = [
   {
@@ -15,7 +15,7 @@ const tabs = [
   },
   {
     label: 'Analytics',
-    component: <Tremor />,
+    component: <LineChartHero />,
     icon: () => <BsGraphUp className='h-6 w-6' />,
   },
 ];

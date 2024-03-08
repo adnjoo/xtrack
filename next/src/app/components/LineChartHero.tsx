@@ -14,16 +14,10 @@ export default function LineChartHero() {
     queryKey: ['expenses'],
   });
 
-  // console.log('data', data);
-  // console.log('mappedData', mappedData);
-  // console.log('categories', categories);
-
   React.useEffect(() => {
     if (data) {
-      // Transform data
       const transformedData: any = {};
 
-      // get categories
       const categories = data
         .map((item: any) => item.category)
         .filter(
@@ -31,30 +25,28 @@ export default function LineChartHero() {
         );
       setCategories(categories);
 
-      data.forEach((item: any) => {
-        // Transform date into 'Mar 3' format
-        const date = new Date(item.date); // Assuming 'date' is available in your data
-        const formattedDate = date.toLocaleString('en-US', {
+      data.forEach(({date, category, amount}: any) => {
+        const formattedDate = new Date(date).toLocaleString('en-US', {
           month: 'short',
           day: 'numeric',
         });
 
         if (!transformedData[formattedDate]) {
-          transformedData[formattedDate] = {};
+          transformedData[formattedDate] = {
+            date: formattedDate,
+            [category]: 0,
+          };
         }
 
-        transformedData[formattedDate][item.category || ''] = parseInt(
-          item.amount
-        );
+        if (typeof transformedData[formattedDate][category] !== 'number') {
+          transformedData[formattedDate][category] = 0;
+        }
+
+        transformedData[formattedDate][category] += parseInt(amount);
       });
 
-      // Convert transformedData object into an array
-      const finalData = Object.keys(transformedData).map((date) => ({
-        date,
-        ...transformedData[date],
-      }));
+      const finalData = Object.values(transformedData);
 
-      // reverse date
       finalData.reverse();
 
       setMappedData(finalData);
@@ -64,7 +56,7 @@ export default function LineChartHero() {
   return (
     <LineChart
       className='h-80'
-      data={mappedData} // Use the transformed data
+      data={mappedData}
       index='date'
       categories={categories}
       colors={['indigo', 'rose', 'yellow', 'red', 'orange', 'amber']}
