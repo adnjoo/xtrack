@@ -20,7 +20,7 @@ export default function Testimonials() {
               </svg>
               <blockquote className="text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
                 <p>
-                    XpenseTrackr helps me track my spending and stay on top of my finances. Thanks XpenseTrackr!
+                    XTrack helps me track my spending and stay on top of my finances. Thanks XTrack!
                 </p>
               </blockquote>
             </div>

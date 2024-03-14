@@ -1,26 +1,22 @@
 const faqs = [
   {
-    question: 'What is XpenseTrackr?',
-    answer: 'XpenseTrackr is an app designed to help you track and manage your expenses on the go. It provides a user-friendly interface for recording, and analyzing your spending.',
+    question: 'What is XTrack?',
+    answer: 'XTrack is an app designed to help you track and manage your expenses on the go. It provides a user-friendly interface for recording, and analyzing your spending.',
   },
   {
-    question: 'Is XpenseTrackr free to use?',
-    answer: 'Yes, XpenseTrackr offers a free version with basic features. However, there may be premium or subscription options available for additional features and benefits.',
+    question: 'Is XTrack free to use?',
+    answer: 'Yes, XTrack offers a free version with basic features. However, there may be premium or subscription options available for additional features and benefits.',
   },
   {
-    question: 'How do I add an expense in XpenseTrackr?',
+    question: 'How do I add an expense in XTrack?',
     answer: 'To add an expense, open the app, and click on the Plus icon on the bottom right of your screen, and enter the necessary details such as amount, category, and description.',
   },
-  // {
-  //   question: 'Can I import expenses from my bank or credit card?',
-  //   answer: 'Yes, XpenseTrackr supports importing transactions from linked bank accounts or credit cards. This feature helps you save time and ensures accurate expense tracking.',
-  // },
   {
-    question: 'Is my financial data secure with XpenseTrackr?',
-    answer: 'XpenseTrackr takes user security seriously. The app uses encryption and follows industry-standard practices to safeguard your financial information.',
+    question: 'Is my financial data secure with XTrack?',
+    answer: 'XTrack takes user security seriously. The app uses encryption and follows industry-standard practices to safeguard your financial information.',
   },
   {
-    question: 'Can I download my expense reports with XpenseTrackr?',
+    question: 'Can I download my expense reports with XTrack?',
     answer: 'This feature will be available in the near future. Stay tuned!',
   },
   // Add more questions as needed...

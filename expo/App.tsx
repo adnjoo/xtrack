@@ -43,7 +43,7 @@ export default function App() {
 
         <SignedOut>
           {/* TODO: find out how to share code between repos */}
-          <Text>XpenseTrackr</Text>
+          <Text>XTrack</Text>
           <Image style={{ width: 100, height: 100 }} source={require("./assets/logo.png")} />
           <SignInWithOAuth />
         </SignedOut>
