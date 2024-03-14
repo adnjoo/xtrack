@@ -17,7 +17,36 @@ export default function LineChartHero() {
   const [aiText, setAItext] = React.useState<string>('');
 
   const fetchAI = async () => {
-    // convert to something like Mar 01 Entertainment xx Eating out xx, Mar 02 Eating out xx, etc.
+    if (!mappedData || mappedData.length === 0) {
+      return;
+    }
+
+    let queryString = '';
+
+    mappedData.forEach((item: any, index: number) => {
+      const { date, ...categories } = item;
+
+      Object.keys(categories).forEach((category) => {
+        if (categories[category] > 0) {
+          queryString += `${date} ${category} ${categories[category]}, `;
+        }
+      });
+    });
+
+    // Remove the trailing comma and space
+    queryString = queryString.slice(0, -2);
+
+    // Send the query to the API
+    try {
+      const query =
+        'total expenses by category, and suggest how to improve: ' +
+        queryString;
+      const response = await axios.get(`/api?query=${query}`);
+      setAItext(response.data);
+    } catch (error) {
+      console.error('Error fetching AI data:', error);
+      setAItext('Error fetching AI data');
+    }
   };
 
   React.useEffect(() => {
@@ -25,7 +54,9 @@ export default function LineChartHero() {
       return;
     }
 
-    // fetchAI();
+    console.log('mappedData', mappedData);
+
+    fetchAI();
   }, [mappedData]);
 
   React.useEffect(() => {
@@ -81,7 +112,8 @@ export default function LineChartHero() {
         connectNulls
       />
 
-      {aiText && <p>{aiText}</p>}
+      {aiText === '' && <p>Loading...</p>}
+      {aiText && <div className='mt-4'>{aiText}</div>}
     </>
   );
 }
