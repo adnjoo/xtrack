@@ -18,7 +18,7 @@ export default function About() {
             About
           </h2>
           <p className='mt-6 text-lg leading-8 text-gray-600'>
-            XpenseTrackr was created out of a need to better track finances, by
+            XTrack was created out of a need to better track finances, by
             team{' '}
             <a
               href='https://bamboostud.io'

@@ -8,7 +8,7 @@ export default function PrivacyPage() {
       <p className='mb-2'>
         Your privacy is important to us. This Privacy Policy explains how we
         collect, use, disclose, and safeguard your information when you use our
-        XpenseTrackr app.
+        XTrack app.
       </p>
 
       {/* Add more content as needed */}
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
       </h2>
       <p className='mb-2'>
         We use the information we collect to provide, maintain, and improve the
-        XpenseTrackr app, as well as to communicate with you.
+        XTrack app, as well as to communicate with you.
       </p>
 
       {/* Add more content as needed */}

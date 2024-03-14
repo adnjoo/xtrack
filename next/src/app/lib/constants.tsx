@@ -1,6 +1,4 @@
-import { BsGithub, BsTwitter } from 'react-icons/bs';
-
-export const APP_NAME = 'XpenseTrackr';
+export const APP_NAME = 'XTrack';
 
 export type Page = {
   href: string;

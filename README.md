@@ -2,7 +2,7 @@
 
 <img src='./expo/assets/logo.png' width='50'>
 
-XpenseTrackr gives you wings!
+XTrack gives you wings!
 
 ### frontend
 

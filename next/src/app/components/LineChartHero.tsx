@@ -3,6 +3,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { LineChart } from '@tremor/react';
+import axios from 'axios';
 
 const dataFormatter = (number: number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
@@ -13,6 +14,50 @@ export default function LineChartHero() {
   const { data } = useQuery<any>({
     queryKey: ['expenses'],
   });
+  const [aiText, setAItext] = React.useState<string>('');
+
+  const fetchAI = async () => {
+    if (!mappedData || mappedData.length === 0) {
+      return;
+    }
+
+    let queryString = '';
+
+    mappedData.forEach((item: any, index: number) => {
+      const { date, ...categories } = item;
+
+      Object.keys(categories).forEach((category) => {
+        if (categories[category] > 0) {
+          queryString += `${date} ${category} ${categories[category]}, `;
+        }
+      });
+    });
+
+    // Remove the trailing comma and space
+    queryString = queryString.slice(0, -2);
+
+    // Send the query to the API
+    try {
+      const query =
+        'total expenses by category, and suggest how to improve: ' +
+        queryString;
+      const response = await axios.get(`/api?query=${query}`);
+      setAItext(response.data);
+    } catch (error) {
+      console.error('Error fetching AI data:', error);
+      setAItext('Error fetching AI data');
+    }
+  };
+
+  React.useEffect(() => {
+    if (!mappedData) {
+      return;
+    }
+
+    console.log('mappedData', mappedData);
+
+    fetchAI();
+  }, [mappedData]);
 
   React.useEffect(() => {
     if (data) {
@@ -25,7 +70,7 @@ export default function LineChartHero() {
         );
       setCategories(categories);
 
-      data.forEach(({date, category, amount}: any) => {
+      data.forEach(({ date, category, amount }: any) => {
         const formattedDate = new Date(date).toLocaleString('en-US', {
           month: 'short',
           day: 'numeric',
@@ -54,16 +99,21 @@ export default function LineChartHero() {
   }, [data]);
 
   return (
-    <LineChart
-      className='h-80'
-      data={mappedData}
-      index='date'
-      categories={categories}
-      colors={['indigo', 'rose', 'yellow', 'red', 'orange', 'amber']}
-      valueFormatter={dataFormatter}
-      yAxisWidth={60}
-      onValueChange={(v) => console.log(v)}
-      connectNulls
-    />
+    <>
+      <LineChart
+        className='h-80'
+        data={mappedData}
+        index='date'
+        categories={categories}
+        colors={['indigo', 'rose', 'yellow', 'red', 'orange', 'amber']}
+        valueFormatter={dataFormatter}
+        yAxisWidth={60}
+        onValueChange={(v) => console.log(v)}
+        connectNulls
+      />
+
+      {aiText === '' && <p>Loading...</p>}
+      {aiText && <div className='mt-4'>{aiText}</div>}
+    </>
   );
 }
