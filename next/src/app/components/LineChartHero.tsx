@@ -5,20 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { LineChart } from '@tremor/react';
 import axios from 'axios';
 
-function convertToQueryParam(data) {
-  return data.map((entry, index) => {
-    const params = Object.entries(entry).map(([key, value]) => {
-      // Encode key and value for URL
-      key = encodeURIComponent(key);
-      value = encodeURIComponent(value);
-
-      return `entries[${index}][${key}]=${value}`;
-    });
-
-    return params.join('&');
-  }).join('&');
-}
-
 const dataFormatter = (number: number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
 
