@@ -8,7 +8,8 @@ import {
   getExpenses,
   upsertExpense,
   deleteExpense,
-} from "./controllers/expensesController";
+  getSubscriptions,
+} from "./controllers/";
 
 dotenv.config();
 
@@ -29,17 +30,21 @@ app.get("/", (req, res) => {
   });
 });
 
-
 app.get("/expenses", ClerkExpressWithAuth({}), getExpenses);
 app.post("/expenses/upsert", ClerkExpressWithAuth({}), upsertExpense);
 app.delete("/expenses/delete/:id", ClerkExpressWithAuth({}), deleteExpense);
 
+app.get("/subscriptions", ClerkExpressWithAuth({}), getSubscriptions);
+
 // CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
-})
+});
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

@@ -9,7 +9,7 @@ export const getExpenses = async (
   res: Response
 ): Promise<Expense[] | void> => {
   if (!req.auth.userId) {
-    res.json(req.auth);
+    res.status(401).send("Unauthorized: no user ID provided");
     return;
   }
 
