@@ -74,7 +74,7 @@ export const upsertSubscription = async (
   }
 };
 
-export const deleteExpense = async (
+export const deleteSubscription = async (
   req: Request,
   res: Response
 ): Promise<Subscription | void> => {
@@ -82,13 +82,14 @@ export const deleteExpense = async (
 
   try {
     const { id } = req.params;
-    const deletedExpense = await prisma.expense.delete({
+
+    const deletedSubscription = await prisma.subscription.delete({
       where: {
         id: Number(id),
       },
     });
 
-    res.send(deletedExpense);
+    res.send(deletedSubscription);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");

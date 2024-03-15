@@ -9,7 +9,8 @@ import {
   upsertExpense,
   deleteExpense,
   getSubscriptions,
-  upsertSubscription
+  upsertSubscription,
+  deleteSubscription,
 } from "./controllers/";
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.delete("/expenses/delete/:id", ClerkExpressWithAuth({}), deleteExpense);
 
 app.get("/subscriptions", ClerkExpressWithAuth({}), getSubscriptions);
 app.post('/subscriptions/upsert', ClerkExpressWithAuth({}), upsertSubscription);
+app.delete('/subscriptions/delete/:id', ClerkExpressWithAuth({}), deleteSubscription);
 
 // CORS
 app.use((req, res, next) => {

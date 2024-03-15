@@ -1,3 +1,10 @@
+'use client';
+
+import axios from 'axios';
+import { useAuth } from '@clerk/nextjs';
+
+import { API_URL } from '@/app/lib/utils';
+
 export type SubscriptionViewProps = {
   id: number;
   title: string;
@@ -13,11 +20,35 @@ export default function SubscriptionView({
 }: {
   item: SubscriptionViewProps;
 }) {
+  const { getToken } = useAuth();
+  const handleDelete = async () => {
+    const token = await getToken();
+
+    try {
+      await axios.delete(`${API_URL}/subscriptions/delete/${item.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      // Display an alert upon successful deletion
+      alert('Subscription deleted successfully');
+      // You can handle additional actions after successful deletion
+      console.log('Subscription deleted successfully');
+    } catch (error) {
+      console.error('Error deleting subscription:', error);
+      // Handle error gracefully
+    }
+  };
+
   return (
     <div key={item.id} className='mb-4 border p-4'>
       <p className='mb-2 text-xl font-bold'>{item.title}</p>
       <p className='mb-2 text-gray-700'>${item.amount}</p>
       <p className='text-gray-800'>{item.description}</p>
+      <button
+        onClick={handleDelete}
+        className='mt-2 rounded-xl bg-red-500 p-2 text-white'
+      >
+        Delete
+      </button>
     </div>
   );
 }
