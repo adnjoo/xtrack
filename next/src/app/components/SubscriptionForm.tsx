@@ -6,7 +6,7 @@ import { API_URL } from '@/app/lib/utils';
 
 
 
-export default function Subscription() {
+export default function SubscriptionForm() {
   const [formData, setFormData] = useState({
     title: '',
     amount: '',

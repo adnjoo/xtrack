@@ -3,16 +3,13 @@ import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
 
 import prisma from "../db";
-import { checkOrCreateUser } from "../utils";
+import { checkOrCreateUser, checkUserId } from "../utils";
 
 export const getSubscriptions = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<Subscription[] | void> => {
-  if (!req.auth.userId) {
-    res.status(401).send("Unauthorized: no user ID provided");
-    return;
-  }
+  checkUserId(req.auth.userId, res);
 
   try {
     const subscriptions = await prisma.subscription.findMany({
@@ -32,16 +29,13 @@ export const upsertSubscription = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<void> => {
-  if (!req.auth.userId) {
-    res.status(401).send("Unauthorized: no user ID provided");
-    return;
-  }
+  checkUserId(req.auth.userId, res);
 
   try {
     const { title, amount, category, description, dateStarted, dateEnded } =
       req.body;
 
-    checkOrCreateUser(req.auth.userId);
+    checkOrCreateUser(req.auth.userId as string);
 
     if (req?.body?.id) {
       const existingSubscription = await prisma.subscription.update({
@@ -74,6 +68,27 @@ export const upsertSubscription = async (
       });
       res.send(newSubscription);
     }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const deleteExpense = async (
+  req: Request,
+  res: Response
+): Promise<Subscription | void> => {
+  checkUserId(req.auth.userId, res);
+
+  try {
+    const { id } = req.params;
+    const deletedExpense = await prisma.expense.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    res.send(deletedExpense);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");

@@ -3,8 +3,10 @@
 import React from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
+
 import { API_URL } from '@/app/lib/utils';
-import Subscription from '@/app/components/Subscription';
+import SubscriptionForm from '@/app/components/SubscriptionForm';
+import SubscriptionView from '@/app/components/SubscriptionView';
 
 export default function Page() {
   const [data, setData] = React.useState<any>([]);
@@ -25,16 +27,15 @@ export default function Page() {
 
   return (
     <div>
-      <h1>Test Page</h1>
-      {data &&
-        data.map((item: any) => (
-          <p key={item.id}>
-            <p>{item.title}</p>
-            <p>{item.amount}</p>
-            {item.description}
-          </p>
-        ))}
-      <Subscription />
+      <h1>Subscriptions</h1>
+      {data && (
+        <div className='mx-4 my-4 max-w-3xl'>
+          {data.map((item: any) => (
+            <SubscriptionView key={item.id} item={item} />
+          ))}
+        </div>
+      )}
+      <SubscriptionForm />
     </div>
   );
 }
