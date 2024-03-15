@@ -15,8 +15,11 @@ export default function LineChartHero() {
     queryKey: ['expenses'],
   });
   const [aiText, setAItext] = React.useState<string>('');
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const fetchAI = async () => {
+    setIsLoading(true);
+
     if (!mappedData || mappedData.length === 0) {
       return;
     }
@@ -46,18 +49,10 @@ export default function LineChartHero() {
     } catch (error) {
       console.error('Error fetching AI data:', error);
       setAItext('Error fetching AI data');
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  React.useEffect(() => {
-    if (!mappedData) {
-      return;
-    }
-
-    console.log('mappedData', mappedData);
-
-    fetchAI();
-  }, [mappedData]);
 
   React.useEffect(() => {
     if (data) {
@@ -112,8 +107,14 @@ export default function LineChartHero() {
         connectNulls
       />
 
-      {aiText === '' && <p>Loading...</p>}
-      {aiText && <div className='mt-4'>{aiText}</div>}
+      <button
+        className='rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
+        onClick={() => fetchAI()}
+      >
+        Get AI
+      </button>
+      {isLoading && <div>Loading...</div>}
+      {aiText && <div className='rounded-lg bg-gray-100 p-4'>{aiText}</div>}
     </>
   );
 }
