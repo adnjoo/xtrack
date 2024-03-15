@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
 
 import prisma from "../db";
+import { checkOrCreateUser } from "../utils";
 
 export const getSubscriptions = async (
   req: WithAuthProp<Request>,
@@ -21,6 +22,58 @@ export const getSubscriptions = async (
     });
 
     res.send(subscriptions);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const upsertSubscription = async (
+  req: WithAuthProp<Request>,
+  res: Response
+): Promise<void> => {
+  if (!req.auth.userId) {
+    res.status(401).send("Unauthorized: no user ID provided");
+    return;
+  }
+
+  try {
+    const { title, amount, category, description, dateStarted, dateEnded } =
+      req.body;
+
+    checkOrCreateUser(req.auth.userId);
+
+    if (req?.body?.id) {
+      const existingSubscription = await prisma.subscription.update({
+        where: {
+          id: Number(req.body.id),
+        },
+        data: {
+          title,
+          amount,
+          category,
+          description,
+          dateStarted,
+          dateEnded,
+        },
+      });
+
+      res.send(existingSubscription);
+    } else {
+      const newSubscription = await prisma.subscription.create({
+        data: {
+          title,
+          amount,
+          category,
+          description,
+          dateAdded: new Date().toISOString(),
+          dateStarted: dateStarted ? new Date(dateStarted).toISOString() : null,
+          dateEnded: dateEnded ? new Date(dateEnded).toISOString() : null,
+          clerkUserId: req.auth.userId as string,
+        },
+      });
+      res.send(newSubscription);
+    }
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");

@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
 
 import prisma from "../db";
+import { checkOrCreateUser } from "../utils";
 
 export const getExpenses = async (
   req: WithAuthProp<Request>,
@@ -57,27 +58,10 @@ export const upsertExpense = async (
   try {
     const { title, amount, category, description, date } = req.body;
 
-    // Check if the user exists
-    const existingUser = await prisma.clerkUser.findUnique({
-      where: { id: req.auth.userId },
-    });
-
-    if (!existingUser) {
-      // If the user doesn't exist, create a new user
-      const newUser = await prisma.clerkUser.create({
-        data: { id: req.auth.userId },
-      });
-    }
+    checkOrCreateUser(req.auth.userId);
 
     if (req?.body?.id) {
-      const existingExpense = await prisma.expense.findUnique({
-        where: {
-          id: Number(req.body.id),
-          clerkUserId: req.auth.userId as string,
-        },
-      });
-
-      const updatedExpense = await prisma.expense.update({
+      const existingExpense = await prisma.expense.update({
         where: {
           id: Number(req.body.id),
         },
@@ -91,10 +75,9 @@ export const upsertExpense = async (
         },
       });
 
-      res.send(updatedExpense);
-      return;
+      res.send(existingExpense);
     } else {
-      const newExpense = await prisma.expense.create({
+      const newExpense: Expense = await prisma.expense.create({
         data: {
           title,
           amount,
@@ -106,7 +89,6 @@ export const upsertExpense = async (
       });
 
       res.send(newExpense);
-      return;
     }
   } catch (error) {
     console.error("Error:", error);
