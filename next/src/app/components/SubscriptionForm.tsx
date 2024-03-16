@@ -82,6 +82,7 @@ export default function SubscriptionForm() {
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
         </div>
+
         <div className='mb-4'>
           <label htmlFor='amount' className='block font-medium'>
             Amount
@@ -95,7 +96,8 @@ export default function SubscriptionForm() {
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
         </div>
-        <div className='mb-4'>
+
+        {/* <div className='mb-4'>
           <label htmlFor='category' className='block font-medium'>
             Category
           </label>
@@ -107,7 +109,8 @@ export default function SubscriptionForm() {
             onChange={handleChange}
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
-        </div>
+        </div> */}
+
         <div className='mb-4'>
           <label htmlFor='description' className='block font-medium'>
             Description
@@ -121,7 +124,8 @@ export default function SubscriptionForm() {
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
         </div>
-        <div className='mb-4'>
+
+        {/* <div className='mb-4'>
           <label htmlFor='dateStarted' className='block font-medium'>
             Start Date
           </label>
@@ -134,6 +138,7 @@ export default function SubscriptionForm() {
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
         </div>
+
         <div className='mb-4'>
           <label htmlFor='dateEnded' className='block font-medium'>
             End Date
@@ -146,7 +151,8 @@ export default function SubscriptionForm() {
             onChange={handleChange}
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
-        </div>
+        </div> */}
+
         <button
           type='submit'
           className='rounded bg-blue-500 px-4 py-2 text-white'
