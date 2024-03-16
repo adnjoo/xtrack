@@ -17,7 +17,7 @@ export default function SubscriptionForm() {
   });
   const { getToken } = useAuth();
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -25,7 +25,7 @@ export default function SubscriptionForm() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       await createSubscription(formData);
@@ -45,7 +45,7 @@ export default function SubscriptionForm() {
     }
   };
 
-  const createSubscription = async (formData) => {
+  const createSubscription = async (formData: any) => {
     const token = await getToken();
     try {
       // Make a POST request to the /subscriptions/upsert endpoint
@@ -97,20 +97,6 @@ export default function SubscriptionForm() {
           />
         </div>
 
-        {/* <div className='mb-4'>
-          <label htmlFor='category' className='block font-medium'>
-            Category
-          </label>
-          <input
-            type='text'
-            id='category'
-            name='category'
-            value={formData.category}
-            onChange={handleChange}
-            className='w-full rounded border border-solid border-gray-300 px-3 py-2'
-          />
-        </div> */}
-
         <div className='mb-4'>
           <label htmlFor='description' className='block font-medium'>
             Description
@@ -124,34 +110,6 @@ export default function SubscriptionForm() {
             className='w-full rounded border border-solid border-gray-300 px-3 py-2'
           />
         </div>
-
-        {/* <div className='mb-4'>
-          <label htmlFor='dateStarted' className='block font-medium'>
-            Start Date
-          </label>
-          <input
-            type='date'
-            id='dateStarted'
-            name='dateStarted'
-            value={formData.dateStarted}
-            onChange={handleChange}
-            className='w-full rounded border border-solid border-gray-300 px-3 py-2'
-          />
-        </div>
-
-        <div className='mb-4'>
-          <label htmlFor='dateEnded' className='block font-medium'>
-            End Date
-          </label>
-          <input
-            type='date'
-            id='dateEnded'
-            name='dateEnded'
-            value={formData.dateEnded}
-            onChange={handleChange}
-            className='w-full rounded border border-solid border-gray-300 px-3 py-2'
-          />
-        </div> */}
 
         <button
           type='submit'
