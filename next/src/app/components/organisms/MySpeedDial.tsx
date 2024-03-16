@@ -5,8 +5,8 @@ import { Button, Tooltip } from 'flowbite-react';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import Draggable from 'react-draggable';
 
-import MyModal from '@/app/components/MyModal';
-import ExpenseForm from '@/app/components/ExpenseForm';
+import MyModal from '@/app/components/atoms/MyModal';
+import ExpenseForm from '@/app/components/organisms/ExpenseForm';
 import { useCheckMobileScreen } from '@/app/lib/hooks';
 
 const AddExpenseButton = ({
