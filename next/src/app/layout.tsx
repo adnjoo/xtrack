@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ClerkProvider } from '@clerk/nextjs';
 
-import MyNavbar from '@/app/components/MyNavbar';
-import MyFooter from '@/app/components/MyFooter';
+import MyNavbar from '@/app/components/organisms/MyNavbar';
+import MyFooter from '@/app/components/molecules/MyFooter';
 import Providers from '@/app/components/Providers';
 import { APP_NAME } from '@/app/lib/constants';
 
