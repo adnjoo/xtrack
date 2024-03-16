@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
 
 import { API_URL } from '@/app/lib/utils';
 
@@ -21,6 +22,10 @@ export default function SubscriptionView({
   item: SubscriptionViewProps;
 }) {
   const { getToken } = useAuth();
+  const { refetch } = useQuery({
+    queryKey: ['subscriptions'],
+  });
+
   const handleDelete = async () => {
     const token = await getToken();
 
@@ -28,10 +33,8 @@ export default function SubscriptionView({
       await axios.delete(`${API_URL}/subscriptions/delete/${item.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // Display an alert upon successful deletion
       alert('Subscription deleted successfully');
-      // You can handle additional actions after successful deletion
-      console.log('Subscription deleted successfully');
+      refetch();
     } catch (error) {
       console.error('Error deleting subscription:', error);
       // Handle error gracefully

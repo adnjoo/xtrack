@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
 
 import { API_URL } from '@/app/lib/utils';
 
-
-
-export default function SubscriptionForm() {
+export default function SubscriptionForm({refetch}: any) {
   const [formData, setFormData] = useState({
     title: '',
     amount: '',
@@ -29,7 +28,6 @@ export default function SubscriptionForm() {
     e.preventDefault();
     try {
       await createSubscription(formData);
-      // Optionally, you can reset the form after submission
       setFormData({
         title: '',
         amount: '',
@@ -39,6 +37,7 @@ export default function SubscriptionForm() {
         dateEnded: '',
       });
       alert('Subscription created successfully!');
+      refetch();
     } catch (error) {
       console.error('Error:', error);
       alert('Failed to create subscription');
@@ -51,13 +50,13 @@ export default function SubscriptionForm() {
       // Make a POST request to the /subscriptions/upsert endpoint
       const response = await axios.post(
         `${API_URL}/subscriptions/upsert`,
-        formData, {
+        formData,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
-          }
+          },
         }
       );
-      // Return the response data if needed
       return response.data;
     } catch (error) {
       // Handle errors here
