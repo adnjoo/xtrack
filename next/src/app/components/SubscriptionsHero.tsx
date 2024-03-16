@@ -8,7 +8,7 @@ import { API_URL } from '@/app/lib/utils';
 import SubscriptionForm from '@/app/components/SubscriptionForm';
 import SubscriptionView from '@/app/components/SubscriptionView';
 
-export default function Page() {
+export default function SubscriptionsHero() {
   const [data, setData] = React.useState<any>([]);
   const { getToken } = useAuth();
 
@@ -27,7 +27,6 @@ export default function Page() {
 
   return (
     <div>
-      <h1>Subscriptions</h1>
       {data && (
         <div className='mx-4 my-4 max-w-3xl'>
           {data.map((item: any) => (
