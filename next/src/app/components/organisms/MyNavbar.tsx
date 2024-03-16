@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { APP_NAME, PAGES } from '@/app/lib/constants';
 
-export default function Example() {
+export default function MyNavbar() {
   const showPages = Object.values(PAGES).filter((page) => page.menu);
   return (
     <Disclosure as='nav' className='bg-gray-800'>

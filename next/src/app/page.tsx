@@ -1,8 +1,8 @@
 import { auth } from '@clerk/nextjs';
 
-import MySpeedDial from '@/app/components/MySpeedDial';
-import TabsHero from '@/app/components/TabsHero';
-import Testimonials from '@/app/components/Testimonials';
+import MySpeedDial from '@/app/components/organisms/MySpeedDial';
+import TabsHero from '@/app/components/organisms/TabsHero';
+import Testimonials from '@/app/components/molecules/Testimonials';
 
 export default function Home() {
   const { userId } = auth();

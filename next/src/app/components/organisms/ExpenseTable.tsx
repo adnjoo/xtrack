@@ -10,9 +10,9 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import Datepicker, { DateValueType } from 'react-tailwindcss-datepicker';
 
 import { classNames, calculateTZOffset } from '@/app/lib/utils';
-import MyModal from '@/app/components/MyModal';
-import ExpenseForm from '@/app/components/ExpenseForm';
-import { SkeletonTable } from '@/app/components/SkeletonTable';
+import MyModal from '@/app/components/atoms/MyModal';
+import ExpenseForm from '@/app/components/organisms/ExpenseForm';
+import { SkeletonTable } from '@/app/components/molecules/SkeletonTable';
 
 enum SortOrder {
   ASC = 'asc',
