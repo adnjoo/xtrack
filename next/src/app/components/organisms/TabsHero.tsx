@@ -1,11 +1,12 @@
 'use client';
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@tremor/react';
-import { WalletIcon } from '@heroicons/react/24/outline';
+import { WalletIcon, CreditCardIcon } from '@heroicons/react/24/outline';
 import { BsGraphUp } from 'react-icons/bs';
 
 import ExpenseTable from '@/app/components/organisms/ExpenseTable';
 import LineChartHero from '@/app/components/organisms/LineChartHero';
+import SubscriptionsHero from '@/app/components/organisms/SubscriptionsHero';
 
 const tabs = [
   {
@@ -18,6 +19,11 @@ const tabs = [
     component: <LineChartHero />,
     icon: () => <BsGraphUp className='h-6 w-6' />,
   },
+  {
+    label: 'Subscriptions',
+    component: <SubscriptionsHero />,
+    icon: () => <CreditCardIcon className='h-6 w-6' />,
+  }
 ];
 
 export type TabsHeroProps = {
