@@ -2,7 +2,7 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import "dotenv/config";
 import cors from "cors";
-import { ClerkExpressWithAuth, LooseAuthProp } from "@clerk/clerk-sdk-node";
+import { ClerkExpressRequireAuth, LooseAuthProp } from "@clerk/clerk-sdk-node";
 
 import {
   getExpenses,
@@ -32,13 +32,13 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/expenses", ClerkExpressWithAuth({}), getExpenses);
-app.post("/expenses/upsert", ClerkExpressWithAuth({}), upsertExpense);
-app.delete("/expenses/delete/:id", ClerkExpressWithAuth({}), deleteExpense);
+app.get("/expenses", ClerkExpressRequireAuth({}), getExpenses);
+app.post("/expenses/upsert", ClerkExpressRequireAuth({}), upsertExpense);
+app.delete("/expenses/delete/:id", ClerkExpressRequireAuth({}), deleteExpense);
 
-app.get("/subscriptions", ClerkExpressWithAuth({}), getSubscriptions);
-app.post('/subscriptions/upsert', ClerkExpressWithAuth({}), upsertSubscription);
-app.delete('/subscriptions/delete/:id', ClerkExpressWithAuth({}), deleteSubscription);
+app.get("/subscriptions", ClerkExpressRequireAuth({}), getSubscriptions);
+app.post('/subscriptions/upsert', ClerkExpressRequireAuth({}), upsertSubscription);
+app.delete('/subscriptions/delete/:id', ClerkExpressRequireAuth({}), deleteSubscription);
 
 // CORS
 app.use((req, res, next) => {
