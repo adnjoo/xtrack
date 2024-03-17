@@ -3,14 +3,12 @@ import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
 
 import prisma from "../db";
-import { checkOrCreateUser, checkUserId } from "../utils";
+import { checkOrCreateUser } from "../utils";
 
 export const getExpenses = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<Expense[] | void> => {
-  checkUserId(req.auth.userId, res);
-
   try {
     const { startDate, endDate } = req.query;
 
@@ -47,8 +45,6 @@ export const upsertExpense = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<Expense | void> => {
-  checkUserId(req.auth.userId, res);
-
   try {
     const { title, amount, category, description, date } = req.body;
 
@@ -94,9 +90,6 @@ export const deleteExpense = async (
   req: Request,
   res: Response
 ): Promise<Expense | void> => {
-  // TODO: check user auth status
-  // checkUserId(req.auth.userId, res);
-
   try {
     const { id } = req.params;
     const deletedExpense = await prisma.expense.delete({

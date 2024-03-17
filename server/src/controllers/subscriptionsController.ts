@@ -3,14 +3,12 @@ import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
 
 import prisma from "../db";
-import { checkOrCreateUser, checkUserId } from "../utils";
+import { checkOrCreateUser } from "../utils";
 
 export const getSubscriptions = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<Subscription[] | void> => {
-  checkUserId(req.auth.userId, res);
-
   try {
     const subscriptions = await prisma.subscription.findMany({
       where: {
@@ -29,8 +27,6 @@ export const upsertSubscription = async (
   req: WithAuthProp<Request>,
   res: Response
 ): Promise<void> => {
-  checkUserId(req.auth.userId, res);
-
   try {
     const { title, amount, category, description, dateStarted, dateEnded } =
       req.body;
@@ -78,8 +74,6 @@ export const deleteSubscription = async (
   req: Request,
   res: Response
 ): Promise<Subscription | void> => {
-  checkUserId(req.auth.userId, res);
-
   try {
     const { id } = req.params;
 
