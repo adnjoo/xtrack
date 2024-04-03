@@ -23,7 +23,7 @@ const tabs = [
     label: 'Subscriptions',
     component: <SubscriptionsHero />,
     icon: () => <CreditCardIcon className='h-6 w-6' />,
-  }
+  },
 ];
 
 export type TabsHeroProps = {
@@ -36,7 +36,7 @@ export type TabsHeroProps = {
 
 export default function TabsHero() {
   return (
-    <div className='mx-auto max-w-lg sm:max-w-3xl space-y-12'>
+    <div className='mx-auto max-w-lg space-y-12 sm:max-w-3xl'>
       <TabGroup>
         <TabList variant='line' defaultValue='1'>
           {tabs.map((tab) => (
@@ -44,6 +44,7 @@ export default function TabsHero() {
               key={tab.label}
               value={tab.label}
               icon={tab.icon}
+              className='focus:ring'
             >
               {tab.label}
             </Tab>
