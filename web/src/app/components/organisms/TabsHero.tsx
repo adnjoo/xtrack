@@ -44,7 +44,7 @@ export default function TabsHero() {
               key={tab.label}
               value={tab.label}
               icon={tab.icon}
-              className='focus:ring'
+              className='focus:ring-1 rounded-t'
             >
               {tab.label}
             </Tab>
