@@ -11,7 +11,7 @@ export default function Home() {
   if (!userId) {
     return (
       <section className='relative isolate px-6 pt-14 '>
-        <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 flex flex-row lg:max-w-4xl'>
+        <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 flex flex-col sm:flex-row lg:max-w-4xl'>
           <div className='text-center'>
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
               Track your expenses
