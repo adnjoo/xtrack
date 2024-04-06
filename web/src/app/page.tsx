@@ -1,6 +1,7 @@
 import { SignInButton, auth } from '@clerk/nextjs';
 
 import MySpeedDial from '@/app/components/organisms/MySpeedDial';
+import MyLottie from '@/app/components/atoms/MyLottie';
 import TabsHero from '@/app/components/organisms/TabsHero';
 import Testimonials from '@/app/components/molecules/Testimonials';
 
@@ -9,8 +10,8 @@ export default function Home() {
 
   if (!userId) {
     return (
-      <section className='relative isolate px-6 pt-14 lg:px-8'>
-        <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
+      <section className='relative isolate px-6 pt-14 '>
+        <div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 flex flex-row lg:max-w-4xl'>
           <div className='text-center'>
             <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
               Track your expenses
@@ -32,6 +33,7 @@ export default function Home() {
               </a>
             </div>
           </div>
+          <MyLottie />
         </div>
 
         <Testimonials />
