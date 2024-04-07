@@ -1,17 +1,9 @@
-const posts = [
-  {
-    id: 1,
-    title: 'Why track expenses',
-    href: '#',
-    description:
-      'Get a better understanding of where your money is being spent.',
-    date: 'Mar 8, 2024',
-    datetime: '2024-03-08',
-  },
-  // More posts...
-];
+import Link from 'next/link';
+import { getPosts } from './functions';
 
-export default function Blog() {
+export default async function Blog() {
+  const posts = await getPosts();
+
   return (
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -36,10 +28,10 @@ export default function Blog() {
               </div>
               <div className='group relative'>
                 <h3 className='mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>
-                  <a href={post.href}>
+                  <Link href={`/blog/${post.id}`}>
                     <span className='absolute inset-0' />
                     {post.title}
-                  </a>
+                  </Link>
                 </h3>
                 <p className='mt-5 line-clamp-3 text-sm leading-6 text-gray-600'>
                   {post.description}
