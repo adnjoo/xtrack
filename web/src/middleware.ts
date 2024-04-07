@@ -8,7 +8,7 @@ import { PAGES, FOOTER } from '@/app/lib/constants';
 export default authMiddleware({
   publicRoutes: [
     PAGES.ABOUT.href,
-    PAGES.BLOG.href,
+    `${PAGES.BLOG.href}/:path*`,
     PAGES.CONTACT.href,
     PAGES.FAQ.href,
     PAGES.HOME.href,
