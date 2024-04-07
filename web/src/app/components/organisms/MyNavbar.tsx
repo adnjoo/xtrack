@@ -59,7 +59,7 @@ export default function MyNavbar() {
                 </SignedIn>
                 <SignedOut>
                   <SignInButton>
-                    <button className='h-[42px] w-[100px] rounded-lg bg-[#3758F9] text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg'>
+                    <button className='h-[42px] w-[100px] rounded-lg bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-800 hover:shadow-lg'>
                       Sign In
                     </button>
                   </SignInButton>
