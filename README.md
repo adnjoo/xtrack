@@ -4,6 +4,8 @@
 
 XTrack gives you wings!
 
+<img src='./web/public/screenshot.png' width='400' style='border-radius: 25px;'>
+
 ### frontend
 
 - next (vercel)
