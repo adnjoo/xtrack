@@ -45,6 +45,9 @@ export default function LineChartHero() {
         'total expenses by category, and suggest how to improve: ' +
         queryString;
       const response = await axios.get(`/api?query=${query}`);
+
+      // console.log('AI response:', typeof response.data);
+
       setAItext(response.data);
     } catch (error) {
       console.error('Error fetching AI data:', error);
@@ -108,13 +111,13 @@ export default function LineChartHero() {
       />
 
       <button
-        className='rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
+        className='mt-4 rounded bg-slate-600 px-4 py-2 font-bold text-white hover:bg-slate-800'
         onClick={() => fetchAI()}
       >
-        Get AI
+        ✨ Get AI
       </button>
       {isLoading && <div>Loading...</div>}
-      {aiText && <div className='rounded-lg bg-gray-100 p-4'>{aiText}</div>}
+      {aiText && <pre className='mt-4 rounded-lg bg-gray-100 p-4 overflow-auto whitespace-pre-wrap'>{aiText}</pre>}
     </>
   );
 }
