@@ -5,7 +5,7 @@ const tiers = [
   {
     name: 'Personal',
     id: 'tier-personal',
-    href: '#',
+    href: '/signin',
     priceMonthly: '$0',
     description:
       "The perfect plan if you're just getting started with our product.",
@@ -15,7 +15,7 @@ const tiers = [
   {
     name: 'Pro',
     id: 'tier-pro',
-    href: '#',
+    href: '/signin',
     priceMonthly: '$9',
     description: 'A plan that scales with your rapidly growing needs.',
     features: [
