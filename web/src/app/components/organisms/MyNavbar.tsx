@@ -70,7 +70,7 @@ export default function MyNavbar() {
 
           <Disclosure.Panel className='sm:hidden'>
             <div className='space-y-1 px-2 pb-3 pt-2'>
-              {Object.values(PAGES).map((item) => (
+              {Object.values(PAGES).filter((page) => page.menu).map((item) => (
                 <Disclosure.Button
                   key={item.label}
                   as={Link}

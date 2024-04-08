@@ -4,6 +4,7 @@ import MySpeedDial from '@/app/components/organisms/MySpeedDial';
 import MyLottie from '@/app/components/atoms/MyLottie';
 import TabsHero from '@/app/components/organisms/TabsHero';
 import Testimonials from '@/app/components/molecules/Testimonials';
+import { PAGES } from '@/app/lib/constants';
 
 export default function Home() {
   const { userId } = auth();
@@ -26,7 +27,7 @@ export default function Home() {
                 </button>
               </SignInButton>
               <a
-                href='/about'
+                href={PAGES.BLOG.href}
                 className='text-sm font-semibold leading-6 text-gray-900'
               >
                 Learn more <span aria-hidden='true'>→</span>

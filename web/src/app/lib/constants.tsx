@@ -39,6 +39,11 @@ export const PAGES: Pages = {
     label: 'FAQ',
     menu: false,
   },
+  SIGN_IN: {
+    href: '/signin',
+    label: 'Sign In',
+    menu: false,
+  },
 };
 
 // TODO: reconcile with PAGES in MyAppBar
