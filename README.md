@@ -1,10 +1,10 @@
-# abc
+# xtrack
 
 <img src='./expo/assets/logo.png' width='50'>
 
 XTrack gives you wings!
 
-<img src='./web/public/screenshot.png' width='400' style='border-radius: 25px;'>
+<img src='./web/public/screenshot.png' width='300'>
 
 ### frontend
 
