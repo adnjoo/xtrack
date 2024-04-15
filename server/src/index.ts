@@ -8,6 +8,7 @@ import {
   getExpenses,
   upsertExpense,
   deleteExpense,
+  exportExpensesToCSV,
   getSubscriptions,
   upsertSubscription,
   deleteSubscription,
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 app.get("/expenses", ClerkExpressRequireAuth({}), getExpenses);
 app.post("/expenses/upsert", ClerkExpressRequireAuth({}), upsertExpense);
 app.delete("/expenses/delete/:id", ClerkExpressRequireAuth({}), deleteExpense);
+app.get("/expenses/export", ClerkExpressRequireAuth({}), exportExpensesToCSV);
 
 app.get("/subscriptions", ClerkExpressRequireAuth({}), getSubscriptions);
 app.post('/subscriptions/upsert', ClerkExpressRequireAuth({}), upsertSubscription);

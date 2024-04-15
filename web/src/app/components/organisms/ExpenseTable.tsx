@@ -4,8 +4,10 @@ import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
+import { Tooltip } from 'react-tooltip';
 import { Table } from 'flowbite-react';
 import { FaArrowUp } from 'react-icons/fa';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Datepicker, { DateValueType } from 'react-tailwindcss-datepicker';
 
@@ -128,19 +130,54 @@ export default function ExpenseTable() {
     setDateValue(newValue);
   };
 
+  const handleDownload = async () => {
+    try {
+      const token = await getToken();
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/expenses/export`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          responseType: 'blob', // Set response type to blob to handle file download
+        }
+      );
+
+      // Create a temporary URL for the blob object and trigger download
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'expenses.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading expenses:', error);
+    }
+  };
+
   if (isLoading) {
     return <SkeletonTable />;
   }
 
   return (
     <div className='min-h-[450px] overflow-x-scroll'>
-      {/* TODO: should move datepicker outside of h-scrolling container */}
-      <Datepicker
-        containerClassName='relative mb-8 max-w-[300px]'
-        value={dateValue}
-        onChange={handleValueChange}
-        showShortcuts
-      />
+      <div className='my-4 flex flex-row items-center justify-between'>
+        {/* TODO: should move datepicker outside of h-scrolling container */}
+        <Datepicker
+          containerClassName='relative max-w-[300px]'
+          value={dateValue}
+          onChange={handleValueChange}
+          showShortcuts
+        />
+
+        <button
+          onClick={handleDownload}
+          className='hidden flex-row sm:flex text-red fill-red'
+          data-tooltip-id='download'
+        >
+          <ArrowDownTrayIcon className='mr-2 h-6 w-6 fill-gray' />
+        </button>
+        <Tooltip id='download' content='Download as .csv' place='right' />
+      </div>
 
       <Table hoverable striped>
         <Table.Head>
