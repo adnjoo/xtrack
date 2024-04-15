@@ -133,7 +133,7 @@ export default function ExpenseTable() {
   }
 
   return (
-    <div className='min-h-[450px]'>
+    <div className='min-h-[450px] overflow-x-scroll'>
       {/* TODO: should move datepicker outside of h-scrolling container */}
       <Datepicker
         containerClassName='relative mb-8 max-w-[300px]'
