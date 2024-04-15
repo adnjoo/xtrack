@@ -2,12 +2,12 @@
 
 import Lottie from 'lottie-react';
 
-import financeAnalyst from '@/app/lib/animations/financeAnalyst.json';
+import groovyWalk from '@/app/lib/animations/groovyWalk.json';
 
 export default function MyLottie() {
   return (
     <div className='max-w-sm'>
-      <Lottie animationData={financeAnalyst} />
+      <Lottie animationData={groovyWalk} />
     </div>
   );
 }
