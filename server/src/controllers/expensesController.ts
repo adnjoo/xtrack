@@ -1,4 +1,6 @@
 import type { Expense } from "@prisma/client";
+import { parse } from "json2csv";
+
 import { Request, Response } from "express";
 import { WithAuthProp } from "@clerk/clerk-sdk-node";
 
@@ -18,7 +20,7 @@ export const getExpenses = async (
 
     const endDateValue = endDate
       ? endDate === startDate
-        ? new Date(endDate as string).setHours(23, 59, 59) as any
+        ? (new Date(endDate as string).setHours(23, 59, 59) as any)
         : new Date(endDate as string)
       : new Date();
 
@@ -99,6 +101,50 @@ export const deleteExpense = async (
     });
 
     res.send(deletedExpense);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const exportExpensesToCSV = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { startDate, endDate } = req.query;
+
+    const startDateValue = startDate
+      ? new Date(startDate as string)
+      : new Date(0);
+
+    const endDateValue = endDate
+      ? endDate === startDate
+        ? (new Date(endDate as string).setHours(23, 59, 59) as any)
+        : new Date(endDate as string)
+      : new Date();
+
+    const expenses: Expense[] = await prisma.expense.findMany({
+      where: {
+        clerkUserId: req.auth.userId,
+        date: {
+          gte: startDateValue,
+          lte: endDateValue,
+        },
+      },
+    });
+
+    // Convert expenses array to CSV format
+    const csv = parse(expenses, {
+      fields: ["id", "title", "amount", "category", "description", "date"],
+    });
+
+    // Set response headers
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=expenses.csv");
+
+    // Send CSV as response
+    res.status(200).send(csv);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
