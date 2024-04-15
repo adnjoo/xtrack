@@ -107,6 +107,13 @@ export const deleteExpense = async (
   }
 };
 
+/**
+ * Export expenses to CSV format based on the specified date range.
+ * 
+ * @param req - The request object containing query parameters.
+ * @param res - The response object to send the CSV data.
+ * @returns A Promise that resolves when the CSV export is completed.
+ */
 export const exportExpensesToCSV = async (
   req: Request,
   res: Response
