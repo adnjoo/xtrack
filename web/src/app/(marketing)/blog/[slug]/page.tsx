@@ -8,7 +8,7 @@ export default async function PostPage({
 }) {
   let post = null;
   try {
-    post = await getPost(params.slug, true);
+    post = await getPost(params.slug);
   } catch (error) {
     console.error('Error fetching post:', error);
   }

@@ -43,7 +43,7 @@ export default function MyNavbar() {
                       <Link
                         key={item.label}
                         href={item.href}
-                        className='rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-700 hover:text-white transition-all duration-300'
+                        className='rounded-md px-3 py-2 text-sm font-medium text-black hover:underline'
                       >
                         {item.label}
                       </Link>
@@ -75,7 +75,7 @@ export default function MyNavbar() {
                   key={item.label}
                   as={Link}
                   href={item.href}
-                  className='block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-gray-700 hover:text-white transition-all duration-300'
+                  className='block rounded-md px-3 py-2 text-base font-medium text-black hover:underline'
                 >
                   {item.label}
                 </Disclosure.Button>
