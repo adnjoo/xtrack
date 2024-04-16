@@ -21,18 +21,25 @@ export default async function Blog() {
               key={post.id}
               className='flex max-w-xl flex-col items-start justify-between'
             >
-              <div className='flex items-center gap-x-4 text-xs'>
-                <time dateTime={post.datetime} className='text-gray-500'>
-                  {post.date}
-                </time>
-              </div>
               <div className='group relative'>
+                <img
+                  src={post.image}
+                  alt=''
+                  className='w-48 rounded-lg object-contain'
+                />
                 <h3 className='mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>
                   <Link href={`/blog/${post.id}`}>
                     <span className='absolute inset-0' />
                     {post.title}
                   </Link>
                 </h3>
+
+                <div className='my-2 flex items-center gap-x-4 text-xs'>
+                  <time dateTime={post.datetime} className='text-gray-500'>
+                    {post.date}
+                  </time>
+                </div>
+
                 <p className='mt-5 line-clamp-3 text-sm leading-6 text-gray-600'>
                   {post.description}
                 </p>

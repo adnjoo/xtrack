@@ -15,6 +15,8 @@ export const getPosts = cache(async (returnArchive = false) => {
       ...data,
       id,
       body: content,
+      image: data.image || undefined,
+      description: data.description || undefined,
     };
   }) as any;
 
@@ -39,4 +41,4 @@ export const getPosts = cache(async (returnArchive = false) => {
 export async function getPost(slug: string, returnArchive = false) {
   const posts = await getPosts(returnArchive);
   return posts.find((post) => post.id === slug);
-}
+};
