@@ -19,31 +19,32 @@ export default async function Blog() {
           {posts.map((post) => (
             <article
               key={post.id}
-              className='flex max-w-xl flex-col items-start justify-between'
+              className='flex max-w-xl flex-col items-start justify-between gap-2'
             >
-              <div className='group relative'>
+              <Link
+                className='cursor-pointer overflow-hidden rounded-lg'
+                href={`/blog/${post.id}`}
+              >
                 <img
                   src={post.image}
                   alt=''
-                  className='w-48 rounded-lg object-contain'
+                  className='w-48 rounded-lg object-cover duration-300 hover:scale-110'
                 />
-                <h3 className='mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>
-                  <Link href={`/blog/${post.id}`}>
-                    <span className='absolute inset-0' />
-                    {post.title}
-                  </Link>
-                </h3>
+              </Link>
 
-                <div className='my-2 flex items-center gap-x-4 text-xs'>
-                  <time dateTime={post.datetime} className='text-gray-500'>
-                    {post.date}
-                  </time>
-                </div>
+              <h3 className='text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>
+                <Link href={`/blog/${post.id}`}>{post.title}</Link>
+              </h3>
 
-                <p className='mt-5 line-clamp-3 text-sm leading-6 text-gray-600'>
-                  {post.description}
-                </p>
+              <div className='flex items-center gap-x-4 text-xs'>
+                <time dateTime={post.datetime} className='text-gray-500'>
+                  {post.date}
+                </time>
               </div>
+
+              <p className='line-clamp-3 text-sm leading-6 text-gray-600'>
+                {post.description}
+              </p>
             </article>
           ))}
         </div>
