@@ -1,3 +1,6 @@
+import Link from 'next/link';
+
+import { PAGES } from '@/app/lib/constants';
 import { getPost } from '../functions';
 import { PostBody } from '../components/PostBody';
 
@@ -19,7 +22,20 @@ export default async function PostPage({
 
   return (
     <div className='mx-4 md:mx-24'>
-      <h1 className='mb-6 mt-12 text-3xl sm:mt-24'>{post.title}</h1>
+      <Link href={PAGES.BLOG.href} passHref>
+        <h3 className='mb-6 mt-12 sm:mt-24 hover:underline'>Back to Blog</h3>
+      </Link>
+
+      <h1 className='mb-6 text-3xl'>{post.title}</h1>
+
+      <p className='text-gray-600'>
+        {post.author} | {post.timeToRead} min read |{' '}
+        {new Date(post.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </p>
       <PostBody>{post.body}</PostBody>
     </div>
   );

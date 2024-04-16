@@ -36,10 +36,13 @@ export default async function Blog() {
                 <Link href={`/blog/${post.id}`}>{post.title}</Link>
               </h3>
 
-              <div className='flex items-center gap-x-4 text-xs'>
-                <time dateTime={post.datetime} className='text-gray-500'>
-                  {post.date}
-                </time>
+              <div className='flex items-center gap-x-4 text-xs text-gray-600'>
+                {post.timeToRead} min read |{' '}
+                {new Date(post.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
               </div>
 
               <p className='line-clamp-3 text-sm leading-6 text-gray-600'>
