@@ -6,19 +6,24 @@ XTrack gives you wings!
 
 <img src='./web/public/screenshot.png' width='300'>
 
-### frontend
+🥞
+- Next.js 14.x.x
+- Expo 50.x.x
+- Clerkjs
+- Express 4.x.x
+- Postgres (railway)
 
-- next (vercel)
-- react native expo
+Quickstart
 
-### middleware
+Start web and server:
+```
+cd web
+npm install
+npm run dev
+```
 
-- clerkjs
-
-### backend
-
-- express (railway)
-
-database
-- postgres (railway)
-
+```
+cd server
+npm install
+npm run dev
+```
