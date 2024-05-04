@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { UserButton, SignInButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { UserButton, SignInButton, SignedOut } from '@clerk/nextjs';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -54,9 +54,7 @@ export default function MyNavbar() {
 
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 {/* Profile */}
-                <SignedIn>
-                  <UserButton afterSignOutUrl='/' />
-                </SignedIn>
+                <UserButton afterSignOutUrl='/' />
                 <SignedOut>
                   <SignInButton>
                     <button className='h-[42px] w-[100px] rounded-lg bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-800 hover:shadow-lg'>
