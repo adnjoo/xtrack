@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { Dialog } from '@headlessui/react';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit, MdDelete, MdAdd } from 'react-icons/md';
 
 import { API_URL } from '@/app/lib/utils';
 
@@ -116,8 +116,12 @@ export default function SubscriptionForm({
   return (
     <>
       {!editMode ? (
-        <button onClick={() => setIsOpen(true)} className='rounded'>
+        <button
+          onClick={() => setIsOpen(true)}
+          className='my-1 flex items-center rounded border p-2 text-sm transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800'
+        >
           Create Subscription
+          <MdAdd className='ml-2 fill-black' />
         </button>
       ) : (
         <div className='flex gap-4'>
