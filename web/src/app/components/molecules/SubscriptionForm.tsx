@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
 import { Dialog } from '@headlessui/react';
-import { useQuery } from '@tanstack/react-query';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 import { API_URL } from '@/app/lib/utils';
@@ -20,15 +19,14 @@ export interface SubscriptionData {
 interface SubscriptionFormProps {
   initialData?: SubscriptionData; // Optional initial data for editing
   editMode?: boolean;
+  refetch?: () => void;
 }
 
 export default function SubscriptionForm({
   initialData,
   editMode,
+  refetch,
 }: SubscriptionFormProps) {
-  const { refetch } = useQuery({
-    queryKey: ['subscriptions'],
-  });
   const [formData, setFormData] = useState(
     initialData || {
       title: '',
@@ -63,7 +61,9 @@ export default function SubscriptionForm({
         dateEnded: '',
       });
       alert(`Subscription ${editMode ? 'updated' : 'created'} successfully!`);
-      refetch();
+      if (refetch) {
+        refetch();
+      }
       setIsOpen(false);
     } catch (error) {
       console.error('Error:', error);
@@ -104,7 +104,9 @@ export default function SubscriptionForm({
         headers: { Authorization: `Bearer ${token}` },
       });
       alert('Subscription deleted successfully');
-      refetch();
+      if (refetch) {
+        refetch();
+      }
     } catch (error) {
       console.error('Error deleting subscription:', error);
       // Handle error gracefully

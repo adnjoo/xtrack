@@ -11,7 +11,7 @@ import SubscriptionView from '@/app/components/molecules/SubscriptionView';
 
 export default function SubscriptionsHero() {
   const { getToken } = useAuth();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['subscriptions'],
     queryFn: async () => {
       try {
@@ -38,7 +38,7 @@ export default function SubscriptionsHero() {
       {data && (
         <p className='mb-2'>Total Amount: ${calculateTotalAmount(data)}</p>
       )}
-      <SubscriptionForm />
+      <SubscriptionForm refetch={refetch} />
       <div className='grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
         {data &&
           data.map((item: any) => (
