@@ -1,8 +1,12 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text } from "react-native";
-import { Button, Image } from "react-native";
-import axios from "axios";
 import React from "react";
+import {
+  StatusBar,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from "react-native";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
 import AuthExample from "@/components/AuthExample";
@@ -12,20 +16,6 @@ import { tokenCache } from "@/lib/clerk";
 import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
 
 export default function App() {
-  const [counter, setCounter] = React.useState(1);
-  const [data, setData] = React.useState<any>("");
-  React.useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${counter}`)
-      .then((res) => {
-        setData(res.data);
-      });
-  }, [counter]);
-
-  const handleClick = () => {
-    setCounter(counter + 1);
-  };
-
   return (
     <ClerkProvider
       tokenCache={tokenCache}
@@ -33,19 +23,23 @@ export default function App() {
     >
       <SafeAreaView style={styles.container}>
         <SignedIn>
-          <Text>You are Signed in</Text>
-          <SignOut />
-          <Text>{data.title}</Text>
-          <Text>{data.body}</Text>
-          <StatusBar style="auto" />
-          <Button title="Click" onPress={handleClick} />
+          <View style={styles.signedInContainer}>
+            <Text style={styles.signedInText}>You are Signed in</Text>
+            <SignOut />
+          </View>
+          <StatusBar />
         </SignedIn>
 
         <SignedOut>
-          {/* TODO: find out how to share code between repos */}
-          <Text>XTrack</Text>
-          <Image style={{ width: 100, height: 100 }} source={require("./assets/logo.png")} />
-          <SignInWithOAuth />
+          <View style={styles.signedOutContainer}>
+            <Text style={styles.appName}>XTrack</Text>
+            <Image
+              source={require("./assets/logo.png")}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+            <SignInWithOAuth />
+          </View>
         </SignedOut>
 
         <AuthExample />
@@ -57,8 +51,30 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f8f8f8",
     alignItems: "center",
     justifyContent: "center",
+    padding: 20,
+  },
+  signedInContainer: {
+    alignItems: "center",
+  },
+  signedInText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  signedOutContainer: {
+    alignItems: "center",
+  },
+  appName: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
   },
 });
