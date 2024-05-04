@@ -140,65 +140,67 @@ export default function SubscriptionForm({
             onSubmit={handleSubmit}
             className='max-w-xl rounded bg-white p-8 shadow-lg'
           >
-            <Dialog.Title className='text-2xl font-bold'>
-              {editMode ? 'Edit' : 'Create'} Subscription
-            </Dialog.Title>
-            <div className='mb-4'>
-              <label htmlFor='title' className='block font-medium'>
-                Title
-              </label>
-              <input
-                type='text'
-                id='title'
-                name='title'
-                value={formData.title}
-                onChange={handleChange}
-                className='w-full rounded border border-solid border-gray-300 px-3 py-2'
-              />
-            </div>
+            <Dialog.Panel>
+              <Dialog.Title className='text-2xl font-bold'>
+                {editMode ? 'Edit' : 'Create'} Subscription
+              </Dialog.Title>
+              <div className='mb-4'>
+                <label htmlFor='title' className='block font-medium'>
+                  Title
+                </label>
+                <input
+                  type='text'
+                  id='title'
+                  name='title'
+                  value={formData.title}
+                  onChange={handleChange}
+                  className='w-full rounded border border-solid border-gray-300 px-3 py-2'
+                />
+              </div>
 
-            <div className='mb-4'>
-              <label htmlFor='amount' className='block font-medium'>
-                Amount
-              </label>
-              <input
-                type='text'
-                id='amount'
-                name='amount'
-                value={formData.amount}
-                onChange={handleChange}
-                className='w-full rounded border border-solid border-gray-300 px-3 py-2'
-              />
-            </div>
+              <div className='mb-4'>
+                <label htmlFor='amount' className='block font-medium'>
+                  Amount
+                </label>
+                <input
+                  type='text'
+                  id='amount'
+                  name='amount'
+                  value={formData.amount}
+                  onChange={handleChange}
+                  className='w-full rounded border border-solid border-gray-300 px-3 py-2'
+                />
+              </div>
 
-            <div className='mb-4'>
-              <label htmlFor='description' className='block font-medium'>
-                Description
-              </label>
-              <input
-                type='text'
-                id='description'
-                name='description'
-                value={formData.description}
-                onChange={handleChange}
-                className='w-full rounded border border-solid border-gray-300 px-3 py-2'
-              />
-            </div>
+              <div className='mb-4'>
+                <label htmlFor='description' className='block font-medium'>
+                  Description
+                </label>
+                <input
+                  type='text'
+                  id='description'
+                  name='description'
+                  value={formData.description}
+                  onChange={handleChange}
+                  className='w-full rounded border border-solid border-gray-300 px-3 py-2'
+                />
+              </div>
 
-            <div className='flex justify-between'>
-              <button
-                type='submit'
-                className='rounded bg-blue-500 px-4 py-2 text-white'
-              >
-                Submit
-              </button>
-              <button
-                className='rounded bg-red-500 px-4 py-2 text-white'
-                onClick={() => setIsOpen(false)}
-              >
-                Cancel
-              </button>
-            </div>
+              <div className='flex justify-between'>
+                <button
+                  type='submit'
+                  className='rounded bg-blue-500 px-4 py-2 text-white'
+                >
+                  Submit
+                </button>
+                <button
+                  className='rounded bg-red-500 px-4 py-2 text-white'
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Dialog.Panel>
           </form>
         </div>
       </Dialog>
