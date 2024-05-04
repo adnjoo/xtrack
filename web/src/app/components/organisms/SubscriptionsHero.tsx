@@ -35,7 +35,9 @@ export default function SubscriptionsHero() {
   return (
     <div className='rounded-md bg-white p-4 shadow-md'>
       {isLoading && <p>Loading...</p>}
-      <p className='mb-2'>Total Amount: ${calculateTotalAmount(data)}</p>
+      {data && (
+        <p className='mb-2'>Total Amount: ${calculateTotalAmount(data)}</p>
+      )}
       <SubscriptionForm />
       <div className='grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
         {data &&
