@@ -1,20 +1,46 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '@clerk/nextjs';
-import { Dialog } from '@headlessui/react'; // Import Dialog from headlessui
+import { Dialog } from '@headlessui/react';
+import { useQuery } from '@tanstack/react-query';
+import { MdEdit, MdDelete } from 'react-icons/md';
+
 import { API_URL } from '@/app/lib/utils';
 
-export default function SubscriptionForm({ refetch }: any) {
-  const [formData, setFormData] = useState({
-    title: '',
-    amount: '',
-    category: '',
-    description: '',
-    dateStarted: '',
-    dateEnded: '',
+export interface SubscriptionData {
+  id: number;
+  title: string;
+  amount: number;
+  category?: string;
+  description: string;
+  dateStarted?: Date;
+  dateEnded?: Date;
+}
+
+interface SubscriptionFormProps {
+  initialData?: SubscriptionData; // Optional initial data for editing
+  editMode?: boolean;
+}
+
+export default function SubscriptionForm({
+  initialData,
+  editMode,
+}: SubscriptionFormProps) {
+  const { refetch } = useQuery({
+    queryKey: ['subscriptions'],
   });
-  const { getToken } = useAuth();
+  const [formData, setFormData] = useState(
+    initialData || {
+      title: '',
+      amount: '',
+      category: '',
+      description: '',
+      dateStarted: '',
+      dateEnded: '',
+    }
+  );
   const [isOpen, setIsOpen] = useState(false); // State to control modal visibility
+  const { getToken } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,7 +53,7 @@ export default function SubscriptionForm({ refetch }: any) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await createSubscription(formData);
+      await upsertSubscription(formData);
       setFormData({
         title: '',
         amount: '',
@@ -36,16 +62,16 @@ export default function SubscriptionForm({ refetch }: any) {
         dateStarted: '',
         dateEnded: '',
       });
-      alert('Subscription created successfully!');
+      alert(`Subscription ${editMode ? 'updated' : 'created'} successfully!`);
       refetch();
-      setIsOpen(false); // Close the modal after submission
+      setIsOpen(false);
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to create subscription');
+      alert(`Failed to ${editMode ? 'update' : 'create'} subscription`);
     }
   };
 
-  const createSubscription = async (formData: any) => {
+  const upsertSubscription = async (formData: any) => {
     const token = await getToken();
     try {
       const response = await axios.post(
@@ -63,14 +89,45 @@ export default function SubscriptionForm({ refetch }: any) {
     }
   };
 
+  const handleDelete = async () => {
+    if (
+      !window.confirm('Are you sure you want to delete this subscription?') ||
+      !initialData
+    ) {
+      return;
+    }
+
+    const token = await getToken();
+
+    try {
+      await axios.delete(`${API_URL}/subscriptions/delete/${initialData.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert('Subscription deleted successfully');
+      refetch();
+    } catch (error) {
+      console.error('Error deleting subscription:', error);
+      // Handle error gracefully
+    }
+  };
+
   return (
     <>
-      <button
-        onClick={() => setIsOpen(true)}
-        className='my-4 rounded bg-blue-500 px-4 py-2 text-white'
-      >
-        Create Subscription
-      </button>
+      {!editMode ? (
+        <button onClick={() => setIsOpen(true)} className='rounded'>
+          Create Subscription
+        </button>
+      ) : (
+        <div className='flex gap-4'>
+          <button onClick={() => setIsOpen(true)} className='rounded'>
+            <MdEdit className='fill-black' />
+          </button>
+
+          <button onClick={handleDelete} className='my-4 '>
+            <MdDelete className='fill-black' />
+          </button>
+        </div>
+      )}
 
       {/* Modal */}
       <Dialog
