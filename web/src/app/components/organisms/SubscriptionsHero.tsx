@@ -28,6 +28,7 @@ export default function SubscriptionsHero() {
   return (
     <div>
       {isLoading && <p>Loading...</p>}
+      <SubscriptionForm refetch={refetch} />
       {data && (
         <div className='mx-4 my-4 max-w-3xl'>
           {data.map((item: any) => (
@@ -35,7 +36,6 @@ export default function SubscriptionsHero() {
           ))}
         </div>
       )}
-      <SubscriptionForm refetch={refetch} />
     </div>
   );
 }
