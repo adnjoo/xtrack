@@ -1,19 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { UserButton, SignInButton, SignedIn, SignedOut } from '@clerk/nextjs';
+import { SignInButton, useUser, UserButton } from '@clerk/nextjs';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { APP_NAME, PAGES } from '@/app/lib/constants';
 
 export default function MyNavbar() {
+  const { isSignedIn, user } = useUser();
+
   const showPages = Object.values(PAGES).filter((page) => page.menu);
   return (
-    <Disclosure as='nav' className='bg-white border-b border-black'>
+    <Disclosure as='nav' className='border-b border-black bg-white'>
       {({ open }) => (
         <>
-          <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
+          <section className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
             <div className='relative flex h-16 items-center justify-between'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                 {/* Mobile menu button*/}
@@ -52,34 +54,35 @@ export default function MyNavbar() {
                 </div>
               </div>
 
-              <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
+              <section className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 {/* Profile */}
-                <SignedIn>
+                {isSignedIn && user ? (
                   <UserButton afterSignOutUrl='/' />
-                </SignedIn>
-                <SignedOut>
+                ) : (
                   <SignInButton>
-                    <button className='h-[42px] w-[100px] rounded-lg bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-800 hover:shadow-lg'>
+                    <button className='flex h-[42px] w-[100px] items-center justify-center rounded-lg bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-800 hover:shadow-lg'>
                       Sign In
                     </button>
                   </SignInButton>
-                </SignedOut>
-              </div>
+                )}
+              </section>
             </div>
-          </div>
+          </section>
 
           <Disclosure.Panel className='sm:hidden'>
             <div className='space-y-1 px-2 pb-3 pt-2'>
-              {Object.values(PAGES).filter((page) => page.menu).map((item) => (
-                <Disclosure.Button
-                  key={item.label}
-                  as={Link}
-                  href={item.href}
-                  className='block rounded-md px-3 py-2 text-base font-medium text-black hover:underline'
-                >
-                  {item.label}
-                </Disclosure.Button>
-              ))}
+              {Object.values(PAGES)
+                .filter((page) => page.menu)
+                .map((item) => (
+                  <Disclosure.Button
+                    key={item.label}
+                    as={Link}
+                    href={item.href}
+                    className='block rounded-md px-3 py-2 text-base font-medium text-black hover:underline'
+                  >
+                    {item.label}
+                  </Disclosure.Button>
+                ))}
             </div>
           </Disclosure.Panel>
         </>
