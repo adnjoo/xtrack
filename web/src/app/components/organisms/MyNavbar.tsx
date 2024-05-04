@@ -8,7 +8,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { APP_NAME, PAGES } from '@/app/lib/constants';
 
 export default function MyNavbar() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn, user } = useUser();
 
   const showPages = Object.values(PAGES).filter((page) => page.menu);
   return (
