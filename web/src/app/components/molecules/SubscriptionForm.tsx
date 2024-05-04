@@ -141,7 +141,7 @@ export default function SubscriptionForm({
             className='max-w-xl rounded bg-white p-8 shadow-lg'
           >
             <Dialog.Title className='text-2xl font-bold'>
-              Create Subscription
+              {editMode ? 'Edit' : 'Create'} Subscription
             </Dialog.Title>
             <div className='mb-4'>
               <label htmlFor='title' className='block font-medium'>
