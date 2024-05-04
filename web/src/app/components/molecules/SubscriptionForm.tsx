@@ -121,7 +121,7 @@ export default function SubscriptionForm({
         </button>
       ) : (
         <div className='flex gap-4'>
-          <button onClick={() => setIsOpen(true)} className='rounded'>
+          <button onClick={() => setIsOpen(true)} className='my-4'>
             <MdEdit className='fill-black' />
           </button>
 
