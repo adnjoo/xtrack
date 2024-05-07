@@ -1,6 +1,6 @@
 # xtrack
 
-<img src='./expo/assets/logo.png' width='50'>
+<img src='./mobile/assets/logo.png' width='50'>
 
 XTrack gives you wings!
 
