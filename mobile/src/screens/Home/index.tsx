@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StatusBar, SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 
 import AuthExample from "@/components/AuthExample";
@@ -25,6 +25,10 @@ export default function Home() {
 
         <SignedOut>
           <View style={styles.signedOutContainer}>
+            <Image
+              source={require("../../../assets/logo.png")}
+              style={styles.logo}
+            />
             <Text style={styles.appName}>XTrack</Text>
             <SignInWithOAuth />
           </View>
