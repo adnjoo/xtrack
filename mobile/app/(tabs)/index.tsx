@@ -45,7 +45,7 @@ export default function Home() {
         <SignedOut>
           <View style={styles.signedOutContainer}>
             <Image
-              source={require("../assets/logo.png")}
+              source={require("@/assets/logo.png")}
               style={styles.logo}
             />
             <Text style={styles.appName}>XTrack</Text>

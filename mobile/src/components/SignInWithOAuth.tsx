@@ -32,7 +32,7 @@ const SignInWithOAuth = () => {
   return (
     <TouchableOpacity style={styles.button} onPress={handleSignIn}>
       <Image
-        source={require("../../assets/google.jpg")}
+        source={require("@/assets/google.jpg")}
         style={styles.icon}
         resizeMode="contain"
       />
