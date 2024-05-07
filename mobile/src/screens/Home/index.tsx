@@ -3,7 +3,6 @@ import { StatusBar, SafeAreaView, StyleSheet, Text, View, Image } from "react-na
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import axios from "axios";
 
-import AuthExample from "@/components/AuthExample";
 import SignInWithOAuth from "@/components/SignInWithOAuth";
 import { SignOut } from "@/components/SignOut";
 import { tokenCache } from "@/lib/clerk";
