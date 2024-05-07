@@ -31,11 +31,11 @@ const SignInWithOAuth = () => {
 
   return (
     <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-      {/* <Image
+      <Image
         source={require("../../assets/google.jpg")}
         style={styles.icon}
         resizeMode="contain"
-      /> */}
+      />
       <Text style={styles.buttonText}>Sign in with Google</Text>
     </TouchableOpacity>
   );

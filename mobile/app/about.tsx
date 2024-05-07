@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { A } from "@expo/html-elements";
 
-const About = () => {
+export default function About() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>About</Text>
@@ -40,5 +40,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-export default About;
