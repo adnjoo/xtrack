@@ -1,6 +1,7 @@
 import React from "react";
 import { StatusBar, SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import axios from "axios";
 
 import AuthExample from "@/components/AuthExample";
 import SignInWithOAuth from "@/components/SignInWithOAuth";
@@ -9,6 +10,22 @@ import { tokenCache } from "@/lib/clerk";
 import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
 
 export default function Home() {
+  const [message, setMessage] = React.useState("");
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("https://xtrack-production.up.railway.app/");
+      setMessage(response.data.message);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+
   return (
     <ClerkProvider
       tokenCache={tokenCache}
@@ -18,6 +35,7 @@ export default function Home() {
         <SignedIn>
           <View style={styles.signedInContainer}>
             <Text style={styles.signedInText}>You are Signed in</Text>
+            <Text>{message}</Text>
             <SignOut />
           </View>
           <StatusBar />
@@ -33,8 +51,6 @@ export default function Home() {
             <SignInWithOAuth />
           </View>
         </SignedOut>
-
-        <AuthExample />
       </SafeAreaView>
     </ClerkProvider>
   );
