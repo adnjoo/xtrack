@@ -1,5 +1,5 @@
 import { useAuth } from "@clerk/clerk-expo";
-import { SafeAreaView, Text, StyleSheet, View, Button } from "react-native";
+import { View, Button } from "react-native";
 
 export const SignOut = () => {
   const { isLoaded, signOut } = useAuth();

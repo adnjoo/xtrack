@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { SignedOut } from "@clerk/clerk-expo";
+import { Redirect } from "expo-router";
 import { A } from "@expo/html-elements";
+
+import { SignOut } from "@/components/SignOut";
 
 export default function Settings() {
   return (
@@ -11,9 +14,11 @@ export default function Settings() {
         XTrack was created out of a need to better track finances, by{" "}
         <A href="https://bamboostud.io">Team Bamboo 🎋</A>.
       </Text>
-      <Link href="/" style={styles.link}>
-        Go to Home
-      </Link>
+      <SignOut />
+
+      <SignedOut>
+        <Redirect href="/login" />
+      </SignedOut>
     </View>
   );
 }

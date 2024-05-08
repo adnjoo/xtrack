@@ -4,7 +4,7 @@ import { useAuth } from "@clerk/clerk-expo";
 import { Redirect } from "expo-router";
 
 import SignInWithOAuth from "@/components/SignInWithOAuth";
-import { styles as indexStyles } from ".";
+import { styles as indexStyles } from "./index";
 
 export default function LoginScreen() {
   const { isSignedIn } = useAuth();
