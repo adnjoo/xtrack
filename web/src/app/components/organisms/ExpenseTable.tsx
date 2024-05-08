@@ -15,8 +15,8 @@ import { classNames, calculateTZOffset } from '@/app/lib/utils';
 import MyModal from '@/app/components/atoms/MyModal';
 import ExpenseForm from '@/app/components/organisms/ExpenseForm';
 import { SkeletonTable } from '@/app/components/molecules/SkeletonTable';
-import { sortExpensesByDate } from '@/utils/helpers';
-import { SortOrder } from '@/utils/constants';
+import { sortExpensesByDate } from '@/app/lib/utils';
+import { SortOrder } from '@/app/lib/constants';
 
 export default function ExpenseTable() {
   const today = useMemo(() => new Date(), []);
