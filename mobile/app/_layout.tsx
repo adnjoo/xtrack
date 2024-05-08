@@ -1,7 +1,8 @@
 import { Stack } from "expo-router";
 import { ClerkProvider } from "@clerk/clerk-expo";
+
 import { tokenCache } from "@/lib/clerk";
-import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
+import { CLERK_PUBLISHABLE_KEY } from "@/lib/constants";
 
 export default function RootLayout() {
   return (

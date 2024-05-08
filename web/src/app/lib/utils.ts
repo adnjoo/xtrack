@@ -1,5 +1,7 @@
 import { DateValueType } from 'react-tailwindcss-datepicker';
 
+import { SortOrder } from './constants';
+
 export const API_URL =
   process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4001';
 
@@ -34,4 +36,24 @@ export async function calculateTZOffset(newValue: DateValueType) {
   // console.log(adjustedStartDate, adjustedEndDate);
 
   return { adjustedStartDate, adjustedEndDate };
+}
+
+/**
+ * Sorts expenses by date based on the specified sort order.
+ *
+ * @param {any[]} expenses - The array of expenses to be sorted.
+ * @param {SortOrder} sortOrder - The sort order to be applied.
+ * @return {any[]} The sorted array of expenses.
+ */
+
+export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
+  if (sortOrder === SortOrder.DESC) {
+    return expenses.sort(
+      (a: any, b: any) => +new Date(b.date) - +new Date(a.date)
+    );
+  } else {
+    return expenses.sort(
+      (a: any, b: any) => +new Date(a.date) - +new Date(b.date)
+    );
+  }
 };
