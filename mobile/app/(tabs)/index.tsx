@@ -17,7 +17,7 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://xtrack-production.up.railway.app/");
+      const response = await axios.get(process.env.EXPO_PUBLIC_API_URL as string);
       setMessage(response.data.message);
     } catch (error) {
       console.error("Error fetching data:", error);
