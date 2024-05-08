@@ -3,10 +3,10 @@ import { View, Text, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { A } from "@expo/html-elements";
 
-export default function About() {
+export default function Settings() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>About</Text>
+      <Text style={styles.title}>Settings</Text>
       <Text style={styles.description}>
         XTrack was created out of a need to better track finances, by{" "}
         <A href="https://bamboostud.io">Team Bamboo 🎋</A>.

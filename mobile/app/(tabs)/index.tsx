@@ -2,7 +2,6 @@ import React from "react";
 import { StatusBar, SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import axios from "axios";
-import { Link } from "expo-router";
 
 import SignInWithOAuth from "@/components/SignInWithOAuth";
 import { SignOut } from "@/components/SignOut";
@@ -35,7 +34,6 @@ export default function Home() {
         <SignedIn>
           <View style={styles.signedInContainer}>
             <Text style={styles.signedInText}>You are Signed in</Text>
-            <Link href="/about">About</Link>
             <Text>{message}</Text>
             <SignOut />
           </View>
