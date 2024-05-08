@@ -5,15 +5,13 @@ import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
 
 export default function RootLayout() {
   return (
-    <>
-      <ClerkProvider
-        tokenCache={tokenCache}
-        publishableKey={CLERK_PUBLISHABLE_KEY as string}
-      >
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
-      </ClerkProvider>
-    </>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={CLERK_PUBLISHABLE_KEY as string}
+    >
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </ClerkProvider>
   );
 }

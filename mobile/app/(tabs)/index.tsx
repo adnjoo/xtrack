@@ -5,12 +5,11 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
 } from "react-native";
 import { SignedIn, SignedOut } from "@clerk/clerk-expo";
+import { Redirect } from "expo-router";
 import axios from "axios";
 
-import SignInWithOAuth from "@/components/SignInWithOAuth";
 import { SignOut } from "@/components/SignOut";
 
 export default function Home() {
@@ -22,7 +21,9 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(process.env.EXPO_PUBLIC_API_URL as string);
+      const response = await axios.get(
+        process.env.EXPO_PUBLIC_API_URL as string
+      );
       setMessage(response.data.message);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -41,17 +42,13 @@ export default function Home() {
       </SignedIn>
 
       <SignedOut>
-        <View style={styles.signedOutContainer}>
-          <Image source={require("@/assets/logo.png")} style={styles.logo} />
-          <Text style={styles.appName}>XTrack</Text>
-          <SignInWithOAuth />
-        </View>
+        <Redirect href="/login" />
       </SignedOut>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f8f8f8",
@@ -66,18 +63,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 20,
-  },
-  signedOutContainer: {
-    alignItems: "center",
-  },
-  appName: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
+  }
 });
