@@ -10,8 +10,6 @@ import {
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
 import { Redirect } from "expo-router";
 import axios from "axios";
-// import { SortOrder } from "../../../web/src/app/lib/constants";
-// import { sortExpensesByDate } from '../../../web/src/app/lib/utils';
 
 import { SignOut } from "@/components/SignOut";
 
@@ -33,10 +31,11 @@ export default function Home() {
           headers: { Authorization: `Bearer ${await getToken()}` },
         }
       );
-      // const sortedData = sortExpensesByDate(data, SortOrder.DESC);
+      const sortedData = data.sort(
+        (a: any, b: any) => +new Date(b.date) - +new Date(a.date)
+      );
 
-      // setData(sortedData);
-      setData(data);
+      setData(sortedData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
