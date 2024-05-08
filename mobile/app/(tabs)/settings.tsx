@@ -16,7 +16,7 @@ export default function Settings() {
       </Link>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
