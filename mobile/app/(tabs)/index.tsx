@@ -1,12 +1,17 @@
 import React from "react";
-import { StatusBar, SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import {
+  StatusBar,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from "react-native";
+import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import axios from "axios";
 
 import SignInWithOAuth from "@/components/SignInWithOAuth";
 import { SignOut } from "@/components/SignOut";
-import { tokenCache } from "@/lib/clerk";
-import { CLERK_PUBLISHABLE_KEY } from "@/lib/utils";
 
 export default function Home() {
   const [message, setMessage] = React.useState("");
@@ -24,34 +29,25 @@ export default function Home() {
     }
   };
 
-
   return (
-    <ClerkProvider
-      tokenCache={tokenCache}
-      publishableKey={CLERK_PUBLISHABLE_KEY as string}
-    >
-      <SafeAreaView style={styles.container}>
-        <SignedIn>
-          <View style={styles.signedInContainer}>
-            <Text style={styles.signedInText}>You are Signed in</Text>
-            <Text>{message}</Text>
-            <SignOut />
-          </View>
-          <StatusBar />
-        </SignedIn>
+    <SafeAreaView style={styles.container}>
+      <SignedIn>
+        <View style={styles.signedInContainer}>
+          <Text style={styles.signedInText}>You are Signed in</Text>
+          <Text>{message}</Text>
+          <SignOut />
+        </View>
+        <StatusBar />
+      </SignedIn>
 
-        <SignedOut>
-          <View style={styles.signedOutContainer}>
-            <Image
-              source={require("@/assets/logo.png")}
-              style={styles.logo}
-            />
-            <Text style={styles.appName}>XTrack</Text>
-            <SignInWithOAuth />
-          </View>
-        </SignedOut>
-      </SafeAreaView>
-    </ClerkProvider>
+      <SignedOut>
+        <View style={styles.signedOutContainer}>
+          <Image source={require("@/assets/logo.png")} style={styles.logo} />
+          <Text style={styles.appName}>XTrack</Text>
+          <SignInWithOAuth />
+        </View>
+      </SignedOut>
+    </SafeAreaView>
   );
 }
 
