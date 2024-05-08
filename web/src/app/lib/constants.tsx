@@ -57,3 +57,8 @@ export const FOOTER: any = {
     label: 'Terms of Service',
   },
 };
+
+export enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}

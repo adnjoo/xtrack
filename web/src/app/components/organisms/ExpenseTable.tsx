@@ -15,23 +15,8 @@ import { classNames, calculateTZOffset } from '@/app/lib/utils';
 import MyModal from '@/app/components/atoms/MyModal';
 import ExpenseForm from '@/app/components/organisms/ExpenseForm';
 import { SkeletonTable } from '@/app/components/molecules/SkeletonTable';
-
-enum SortOrder {
-  ASC = 'asc',
-  DESC = 'desc',
-}
-
-export const sortExpensesByDate = (expenses: any, sortOrder: SortOrder) => {
-  if (sortOrder === SortOrder.DESC) {
-    return expenses.sort(
-      (a: any, b: any) => +new Date(b.date) - +new Date(a.date)
-    );
-  } else {
-    return expenses.sort(
-      (a: any, b: any) => +new Date(a.date) - +new Date(b.date)
-    );
-  }
-};
+import { sortExpensesByDate } from '@/utils/helpers';
+import { SortOrder } from '@/utils/constants';
 
 export default function ExpenseTable() {
   const today = useMemo(() => new Date(), []);

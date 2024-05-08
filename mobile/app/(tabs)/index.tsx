@@ -5,26 +5,38 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
 } from "react-native";
-import { SignedIn, SignedOut } from "@clerk/clerk-expo";
+import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
 import { Redirect } from "expo-router";
 import axios from "axios";
+// import { SortOrder } from "../../../web/src/app/lib/constants";
+// import { sortExpensesByDate } from '../../../web/src/app/lib/utils';
 
 import { SignOut } from "@/components/SignOut";
 
 export default function Home() {
-  const [message, setMessage] = React.useState("");
+  const [data, setData] = React.useState<any[]>([]);
+  const { getToken, isSignedIn } = useAuth();
 
   React.useEffect(() => {
-    fetchData();
-  }, []);
+    if (isSignedIn) {
+      fetchExpenses();
+    }
+  }, [isSignedIn]);
 
-  const fetchData = async () => {
+  const fetchExpenses = async () => {
     try {
-      const response = await axios.get(
-        process.env.EXPO_PUBLIC_API_URL as string
+      const { data } = await axios.get(
+        `${process.env.EXPO_PUBLIC_API_URL}/expenses` as string,
+        {
+          headers: { Authorization: `Bearer ${await getToken()}` },
+        }
       );
-      setMessage(response.data.message);
+      // const sortedData = sortExpensesByDate(data, SortOrder.DESC);
+
+      // setData(sortedData);
+      setData(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -33,11 +45,21 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <SignedIn>
-        <View style={styles.signedInContainer}>
-          <Text style={styles.signedInText}>You are Signed in</Text>
-          <Text>{message}</Text>
-          <SignOut />
-        </View>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={styles.signedInContainer}>
+            {data.map((item) => (
+              <View key={item.id} style={styles.expenseItem}>
+                <Text style={styles.expenseTitle}>{item.title}</Text>
+                <Text style={styles.expenseCategory}>{item.category}</Text>
+                <Text style={styles.expenseAmount}>${item.amount}</Text>
+                <Text style={styles.expenseDate}>
+                  {new Date(item.date).toLocaleDateString()}
+                </Text>
+              </View>
+            ))}
+            <SignOut />
+          </View>
+        </ScrollView>
         <StatusBar />
       </SignedIn>
 
@@ -48,7 +70,7 @@ export default function Home() {
   );
 }
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f8f8f8",
@@ -57,11 +79,42 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   signedInContainer: {
+    flex: 1,
     alignItems: "center",
+    width: "100%",
   },
   signedInText: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 20,
-  }
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+  expenseItem: {
+    marginBottom: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    width: "100%",
+  },
+  expenseTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  expenseCategory: {
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  expenseAmount: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  expenseDate: {
+    fontSize: 12,
+    color: "#666",
+  },
 });
