@@ -12,9 +12,9 @@ function getCurrentDate() {
 
 // Directories to analyze
 const directories = [
-  { name: "web", path: "../web" },
-  { name: "mobile", path: "../mobile" },
-  { name: "server", path: "../server" },
+  { name: "web", path: "../../web" },
+  { name: "mobile", path: "../../mobile" },
+  { name: "server", path: "../../server" },
 ];
 
 // Function to count lines of code in a directory and return result
