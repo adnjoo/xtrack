@@ -1,6 +1,1 @@
-quickstart:
-
-```
-npm install
-npm run count
-```
+dir for random projects

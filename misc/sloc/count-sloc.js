@@ -1,7 +1,6 @@
 const fs = require("fs");
 const slocjs = require("slocjs");
 
-// Function to get the current date in YYYY-MM-DD format
 function getCurrentDate() {
   const now = new Date();
   const year = now.getFullYear();
@@ -10,14 +9,13 @@ function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
-// Directories to analyze
 const directories = [
-  { name: "web", path: "../web" },
-  { name: "mobile", path: "../mobile" },
-  { name: "server", path: "../server" },
+  { name: "web", path: "../../web" },
+  { name: "mobile", path: "../../mobile" },
+  { name: "server", path: "../../server" },
+  { name: "expo51", path: "../expo51" },
 ];
 
-// Function to count lines of code in a directory and return result
 async function countLinesInDir(path) {
   try {
     const result = await slocjs.countLinesInDir(path);
@@ -25,21 +23,18 @@ async function countLinesInDir(path) {
     return parseInt(slocCount, 10);
   } catch (error) {
     console.error(`Error counting lines for ${path}:`, error);
-    return 0; // Return 0 if there's an error
+    return 0;
   }
 }
 
-// Process directories and append results to CSV file
 async function processDirectories() {
   const currentDate = getCurrentDate();
   const csvFileName = `sloc_results.csv`;
 
-  // Ensure CSV file exists and write header if file is newly created
   if (!fs.existsSync(csvFileName)) {
     fs.writeFileSync(csvFileName, "Date,Directory,SLOC\n", "utf8");
   }
 
-  // Process each directory and append results to CSV file
   for (const dirInfo of directories) {
     const slocCount = await countLinesInDir(dirInfo.path);
     const csvLine = `${currentDate},${dirInfo.name},${slocCount}\n`;
@@ -57,5 +52,4 @@ async function processDirectories() {
   console.log(`SLOC data appended to '${csvFileName}' successfully.`);
 }
 
-// Start processing directories
 processDirectories();
