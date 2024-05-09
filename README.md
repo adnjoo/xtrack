@@ -7,11 +7,18 @@ XTrack gives you wings!
 <img src='./web/public/screenshot.png' width='300'>
 
 🥞
+
+web
 - Next.js 14.x.x
-- Expo 50.x.x
 - Clerkjs
+
+mobile
+- Expo 50.x.x
+
+server
 - Express 4.x.x
-- Postgres (railway)
+- Prisma
+- Postgres
 
 Quickstart
 

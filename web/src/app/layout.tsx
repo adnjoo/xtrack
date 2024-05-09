@@ -17,14 +17,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <ClerkProvider>
       <html lang='en'>
         <body>
           <Providers>
-            <MyNavbar />
-            <main className='min-h-screen'>{children}</main>
-            <MyFooter />
+            <>under maintenance</>
+            {/* <MyNavbar /> */}
+            {/* <main className='hidden min-h-screen'>{children}</main> */}
+            {/* <MyFooter /> */}
           </Providers>
         </body>
       </html>
