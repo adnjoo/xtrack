@@ -114,6 +114,7 @@ export default function Page() {
                     onChange={(e) => setNewEditNoteTitle(e.target.value)}
                   />
                   <button onClick={() => editNote(note.id)}>Save</button>
+                  <button onClick={() => setEditNoteId(null)}>Cancel</button>
                 </>
               ) : (
                 <>
