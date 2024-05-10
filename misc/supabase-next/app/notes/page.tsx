@@ -6,7 +6,7 @@ import { createClient } from '@/utils/supabase/client';
 // TODO: types
 type Note = {
   id: string;
-  text: string;
+  title: string;
   user_id: string;
 }
 
