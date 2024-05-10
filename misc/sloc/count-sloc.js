@@ -14,6 +14,7 @@ const directories = [
   { name: "mobile", path: "../../mobile" },
   { name: "server", path: "../../server" },
   { name: "expo51", path: "../expo51" },
+  { name: "supabase-next", path: "../supabase-next" },
 ];
 
 async function countLinesInDir(path) {
