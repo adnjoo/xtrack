@@ -69,34 +69,27 @@ export default function Avatar({
   };
 
   return (
-    <div>
+    <div className='flex flex-col items-center justify-center space-y-4 rounded-xl border p-4'>
+      <h3>Avatar</h3>
       {avatarUrl ? (
-        <Image
-          width={size}
-          height={size}
-          src={avatarUrl}
-          alt='Avatar'
-          className='avatar image'
-          style={{ height: size, width: size }}
-        />
+        <div className='relative h-[100px] w-[100px] overflow-hidden rounded-full'>
+          <Image src={avatarUrl} alt='Avatar' layout='fill' objectFit='cover' />
+        </div>
       ) : (
-        <div
-          className='avatar no-image'
-          style={{ height: size, width: size }}
-        />
+        <div className='h-[100px] w-[100px] rounded-full bg-gray-200'></div>
       )}
-      <div style={{ width: size }}>
-        <label className='button primary block' htmlFor='single'>
+      <div className='w-[100px]'>
+        <label
+          htmlFor='single'
+          className='block cursor-pointer rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700'
+        >
           {uploading ? 'Uploading ...' : 'Upload'}
         </label>
         <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
-          type='file'
           id='single'
+          type='file'
           accept='image/*'
+          className='hidden'
           onChange={uploadAvatar}
           disabled={uploading}
         />

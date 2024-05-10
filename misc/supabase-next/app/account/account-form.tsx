@@ -75,7 +75,7 @@ export default function AccountForm({ user }: { user: User | null }) {
   }
 
   return (
-    <div className='form-widget'>
+    <div className='mx-auto max-w-md rounded bg-white p-6 shadow-lg'>
       <Avatar
         uid={user?.id ?? null}
         url={avatar_url}
@@ -86,41 +86,69 @@ export default function AccountForm({ user }: { user: User | null }) {
         }}
       />
 
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input id='email' type='text' value={user?.email} disabled />
+      <div className='mt-4'>
+        <label className='block text-sm font-medium text-gray-700'>Email</label>
+        <input
+          className='form-input mt-1 block w-full'
+          type='text'
+          value={user?.email}
+          disabled
+        />
       </div>
-      <div>
-        <label htmlFor='fullName'>Full Name</label>
+
+      <div className='mt-4'>
+        <label
+          className='block text-sm font-medium text-gray-700'
+          htmlFor='fullName'
+        >
+          Full Name
+        </label>
         <input
           id='fullName'
+          className='form-input mt-1 block w-full border'
           type='text'
           value={fullname || ''}
           onChange={(e) => setFullname(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor='username'>Username</label>
+
+      <div className='mt-4'>
+        <label
+          className='block text-sm font-medium text-gray-700'
+          htmlFor='username'
+        >
+          Username
+        </label>
         <input
           id='username'
+          className='form-input mt-1 block w-full border'
           type='text'
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label htmlFor='website'>Website</label>
+
+      <div className='mt-4'>
+        <label
+          className='block text-sm font-medium text-gray-700'
+          htmlFor='website'
+        >
+          Website
+        </label>
         <input
           id='website'
+          className='form-input mt-1 block w-full border'
           type='url'
           value={website || ''}
           onChange={(e) => setWebsite(e.target.value)}
         />
       </div>
 
-      <div>
+      <div className='mt-6'>
         <button
-          className='button primary block'
+          className={`rounded bg-blue-500 px-4 py-2 font-bold text-white ${
+            loading ? 'cursor-not-allowed opacity-50' : ''
+          }`}
           onClick={() =>
             updateProfile({ fullname, username, website, avatar_url })
           }
@@ -130,9 +158,12 @@ export default function AccountForm({ user }: { user: User | null }) {
         </button>
       </div>
 
-      <div>
+      <div className='mt-4'>
         <form action='/auth/signout' method='post'>
-          <button className='button block' type='submit'>
+          <button
+            className='block w-full rounded bg-gray-300 px-4 py-2 font-bold text-gray-800'
+            type='submit'
+          >
             Sign out
           </button>
         </form>
