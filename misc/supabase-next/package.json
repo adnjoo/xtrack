@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^2.0.3",
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.17",

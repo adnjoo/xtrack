@@ -3,19 +3,19 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
+import { Dialog, DialogPanel, Description } from '@headlessui/react';
 
 import { MainNavItem } from '@/types';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
-import { MobileNav } from '@/components/mobile-nav';
 
 interface MainNavProps {
   items?: MainNavItem[];
   children?: React.ReactNode;
 }
 
-export function MainNav({ items, children }: MainNavProps) {
+export function MainNav({ items }: MainNavProps) {
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
@@ -53,9 +53,33 @@ export function MainNav({ items, children }: MainNavProps) {
         {showMobileMenu ? <Icons.close /> : <Icons.logo />}
         <span className='font-bold'>Menu</span>
       </button>
-      {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
-      )}
+
+      <Dialog
+        open={showMobileMenu}
+        onClose={() => setShowMobileMenu(false)}
+        className='relative z-50'
+      >
+        <div className='fixed inset-0 top-[2.5em] flex w-screen p-4'>
+          <DialogPanel className='max-h-[150px] w-full space-y-4 rounded-xl border bg-white p-2'>
+            <Description>
+              {items &&
+                items.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.disabled ? '#' : item.href}
+                    className={cn(
+                      'flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline',
+                      item.disabled && 'cursor-not-allowed opacity-60'
+                    )}
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+            </Description>
+          </DialogPanel>
+        </div>
+      </Dialog>
     </div>
   );
 }

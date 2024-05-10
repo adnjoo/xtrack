@@ -4,7 +4,7 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  Command,
+  CircleDollarSign,
   CreditCard,
   File,
   FileText,
@@ -29,7 +29,7 @@ import {
 export type Icon = typeof LucideIcon;
 
 export const Icons = {
-  logo: Command,
+  logo: CircleDollarSign,
   close: X,
   spinner: Loader2,
   chevronLeft: ChevronLeft,
