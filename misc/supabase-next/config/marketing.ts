@@ -1,14 +1,25 @@
-import { MarketingConfig } from '@/types';
+import { MainNav } from '@/types';
 
-export const marketingConfig: MarketingConfig = {
-  mainNav: [
-    {
-      title: 'Notes',
-      href: '/notes',
-    },
-    {
-      title: 'Account',
-      href: '/account',
-    },
-  ],
-};
+export const mainNav: MainNav = [
+  {
+    title: 'Home',
+    href: '/',
+  },
+  {
+    title: 'Notes',
+    href: '/notes',
+  },
+  {
+    title: 'Login',
+    href: '/login',
+    desktopOnly: true,
+  }
+];
+
+export const authNav = [
+  ...mainNav,
+  {
+    title: 'Account',
+    href: '/account',
+  },
+];

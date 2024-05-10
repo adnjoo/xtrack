@@ -1,20 +1,17 @@
-import Link from 'next/link';
+import { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 
 import './globals.css';
-import { marketingConfig } from '@/config/marketing';
 import { MainNav } from '@/components/MainNav';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : 'http://localhost:3000';
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: 'XTrack',
+  description: 'The fastest way to track your expenses',
 };
 
 export default function RootLayout({
@@ -24,22 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={GeistSans.className}>
-      <body className='bg-background text-foreground'>
-        <header className='container z-40 bg-background'>
-          <div className='flex h-20 items-center justify-between py-6'>
-            <MainNav items={marketingConfig.mainNav} />
-            <nav>
-              <Link
-                href='/login'
-                className={cn(
-                  buttonVariants({ variant: 'secondary', size: 'sm' }),
-                  'px-4'
-                )}
-              >
-                Login
-              </Link>
-            </nav>
-          </div>
+      <body>
+        <header className='z-40 flex h-20 w-full items-center py-6'>
+          <MainNav />
         </header>
         <main className='flex min-h-screen flex-col items-center'>
           {children}

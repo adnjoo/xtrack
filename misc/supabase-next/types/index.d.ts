@@ -6,6 +6,7 @@ export type NavItem = {
   title: string;
   href: string;
   disabled?: boolean;
+  desktopOnly?: boolean;
 };
 
 export type MainNavItem = NavItem;
@@ -45,6 +46,10 @@ export type DocsConfig = {
 export type MarketingConfig = {
   mainNav: MainNavItem[];
 };
+
+export type MainNav = MainNavItem[];
+
+export type AuthNav = typeof MainNav;
 
 export type DashboardConfig = {
   mainNav: MainNavItem[];
