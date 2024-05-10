@@ -1,8 +1,10 @@
 'use client';
 
-import { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
+import { User } from '@supabase/supabase-js';
+
 import { createClient } from '@/utils/supabase/client';
+import { useUser } from '@/utils/hooks/useUser';
 
 type Note = {
   id: string;
@@ -12,11 +14,12 @@ type Note = {
 
 export default function Page() {
   const supabase = createClient();
+  const user: User | null = useUser();
+
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [newEditNoteTitle, setNewEditNoteTitle] = useState('');
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(null);
 
   const fetchNotes = async () => {
     const { data, error } = await supabase
@@ -76,24 +79,15 @@ export default function Page() {
     }
   };
 
-  useEffect(() => {
-    if (!user) return;
-    fetchNotes();
-  }, [user]);
-
-  useEffect(() => {
-    (async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user || null);
-    })();
-  }, []);
-
   const handleEdit = (id: string) => {
     setEditNoteId(id);
     setNewEditNoteTitle(notes.find((note) => note.id === id)?.title || '');
   };
+
+  useEffect(() => {
+    if (!user) return;
+    fetchNotes();
+  }, [user]);
 
   return (
     <div>
