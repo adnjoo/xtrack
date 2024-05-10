@@ -1,26 +1,24 @@
 'use client';
 
+import { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
 import { createClient } from '@/utils/supabase/client';
 
-// TODO: types
 type Note = {
   id: string;
   title: string;
   user_id: string;
-}
+};
 
 export default function Page() {
   const supabase = createClient();
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNoteTitle, setNewNoteTitle] = useState('');
+  const [newEditNoteTitle, setNewEditNoteTitle] = useState('');
+  const [editNoteId, setEditNoteId] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-  // Function to fetch notes from Supabase
   const fetchNotes = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
     const { data, error } = await supabase
       .from('notes')
       .select()
@@ -32,16 +30,11 @@ export default function Page() {
     }
   };
 
-  // Function to handle note submission
   const addNote = async () => {
     if (newNoteTitle.trim() === '') {
       alert('Please enter a note title');
       return;
     }
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
 
     const { data, error } = await supabase
       .from('notes')
@@ -50,20 +43,57 @@ export default function Page() {
       console.error('Error adding note:', error.message);
     } else {
       console.log('Note added successfully:', data);
-      setNewNoteTitle(''); // Clear input field after adding note
-      fetchNotes(); // Refresh notes list after adding a new note
+      setNewNoteTitle('');
+      fetchNotes();
     }
   };
 
-  // Handle input change for new note title
-  const handleInputChange = (event: any) => {
-    setNewNoteTitle(event.target.value);
+  const editNote = async (noteId: string) => {
+    const { error } = await supabase
+      .from('notes')
+      .update({ title: newEditNoteTitle })
+      .eq('id', noteId);
+
+    if (error) {
+      console.error('Error updating note:', error.message);
+    } else {
+      console.log('Note updated successfully');
+      setEditNoteId(null);
+      fetchNotes();
+    }
   };
 
-  // Initial fetch of notes when component mounts
+  const deleteNote = async (noteId: string) => {
+    if (!window.confirm('Are you sure you want to delete this note?')) {
+      return;
+    }
+    const { error } = await supabase.from('notes').delete().eq('id', noteId);
+    if (error) {
+      console.error('Error deleting note:', error.message);
+    } else {
+      console.log('Note deleted successfully');
+      fetchNotes();
+    }
+  };
+
   useEffect(() => {
+    if (!user) return;
     fetchNotes();
-  }, []); // Empty dependency array ensures this effect runs only once on component mount
+  }, [user]);
+
+  useEffect(() => {
+    (async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user || null);
+    })();
+  }, []);
+
+  const handleEdit = (id: string) => {
+    setEditNoteId(id);
+    setNewEditNoteTitle(notes.find((note) => note.id === id)?.title || '');
+  };
 
   return (
     <div>
@@ -72,7 +102,7 @@ export default function Page() {
         <input
           type='text'
           value={newNoteTitle}
-          onChange={handleInputChange}
+          onChange={(e) => setNewNoteTitle(e.target.value)}
           placeholder='Enter note title'
         />
         <button onClick={addNote}>Add Note</button>
@@ -81,7 +111,24 @@ export default function Page() {
         <h2>All Notes</h2>
         <ul>
           {notes.map((note) => (
-            <li key={note.id}>{note.title}</li>
+            <li key={note.id}>
+              {editNoteId === note.id ? (
+                <>
+                  <input
+                    type='text'
+                    value={newEditNoteTitle}
+                    onChange={(e) => setNewEditNoteTitle(e.target.value)}
+                  />
+                  <button onClick={() => editNote(note.id)}>Save</button>
+                </>
+              ) : (
+                <>
+                  {note.title}
+                  <button onClick={() => handleEdit(note.id)}>Edit</button>
+                  <button onClick={() => deleteNote(note.id)}>Delete</button>
+                </>
+              )}
+            </li>
           ))}
         </ul>
       </div>
