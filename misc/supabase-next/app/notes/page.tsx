@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
 
 import { createClient } from '@/utils/supabase/client';
-import { useUser } from '@/utils/hooks/useUser';
+import { useUser } from '@/hooks/useUser';
 
 type Note = {
   id: string;
@@ -20,6 +20,7 @@ export default function Page() {
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [newEditNoteTitle, setNewEditNoteTitle] = useState('');
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchNotes = async () => {
     const { data, error } = await supabase
@@ -31,6 +32,8 @@ export default function Page() {
     } else {
       setNotes(data || []);
     }
+
+    setLoading(false);
   };
 
   const addNote = async () => {
@@ -90,42 +93,73 @@ export default function Page() {
   }, [user]);
 
   return (
-    <div>
-      <h1>Notes</h1>
-      <div>
+    <div className='mx-auto max-w-4xl p-4'>
+      <h1 className='mb-4 text-3xl font-bold'>Notes</h1>
+      <div className='mb-4'>
         <input
           type='text'
           value={newNoteTitle}
           onChange={(e) => setNewNoteTitle(e.target.value)}
           placeholder='Enter note title'
+          className='mr-2 rounded border p-2'
         />
-        <button onClick={addNote}>Add Note</button>
+        <button
+          onClick={addNote}
+          className='rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600'
+        >
+          Add Note
+        </button>
       </div>
       <div>
-        <h2>All Notes</h2>
-        <ul>
-          {notes.map((note) => (
-            <li key={note.id}>
-              {editNoteId === note.id ? (
-                <>
-                  <input
-                    type='text'
-                    value={newEditNoteTitle}
-                    onChange={(e) => setNewEditNoteTitle(e.target.value)}
-                  />
-                  <button onClick={() => editNote(note.id)}>Save</button>
-                  <button onClick={() => setEditNoteId(null)}>Cancel</button>
-                </>
-              ) : (
-                <>
-                  {note.title}
-                  <button onClick={() => handleEdit(note.id)}>Edit</button>
-                  <button onClick={() => deleteNote(note.id)}>Delete</button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
+        <h2 className='mb-4 text-2xl font-bold'>All Notes</h2>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <ul>
+            {notes.map((note) => (
+              <li key={note.id} className='mb-2'>
+                {editNoteId === note.id ? (
+                  <>
+                    <input
+                      type='text'
+                      value={newEditNoteTitle}
+                      onChange={(e) => setNewEditNoteTitle(e.target.value)}
+                      className='mr-2 rounded border p-2'
+                    />
+                    <button
+                      onClick={() => editNote(note.id)}
+                      className='mr-2 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600'
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={() => setEditNoteId(null)}
+                      className='rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className='mr-2'>{note.title}</span>
+                    <button
+                      onClick={() => handleEdit(note.id)}
+                      className='mr-2 rounded bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600'
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteNote(note.id)}
+                      className='rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600'
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

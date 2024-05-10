@@ -1,7 +1,11 @@
+'use client';
+
+import { useUser } from '@/hooks/useUser';
 import { login, signup } from './actions';
 
 export default function LoginPage() {
-  return (
+  const user = useUser();
+  if (!user) return (
     <form className='mt-8 flex flex-col gap-4'>
       <label htmlFor='email'>Email:</label>
       <input id='email' name='email' type='email' required />
@@ -11,4 +15,6 @@ export default function LoginPage() {
       <button formAction={signup}>Sign up</button>
     </form>
   );
+
+  return <p>You are logged in</p>;
 }

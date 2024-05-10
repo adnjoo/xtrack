@@ -1,12 +1,18 @@
+'use client';
+
+import { useUser } from '@/hooks/useUser';
 import AccountForm from './account-form';
-import { createClient } from '@/utils/supabase/server';
 
-export default async function Account() {
-  const supabase = createClient();
+export default function Account() {
+  const user = useUser();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  if (!user) {
+    return (
+      <div>
+        <p>You are not logged in</p>
+      </div>
+    )
+  }
 
   return <AccountForm user={user} />;
 }
