@@ -10,9 +10,5 @@ export const marketingConfig: MarketingConfig = {
       title: 'Notes',
       href: '/notes',
     },
-    {
-      title: 'Account',
-      href: '/account',
-    },
   ],
 };
