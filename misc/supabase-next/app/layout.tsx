@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 
 import './globals.css';
-import { marketingConfig } from '@/config/marketing';
 import { MainNav } from '@/components/MainNav';
 
 const defaultUrl = process.env.VERCEL_URL
@@ -24,7 +23,7 @@ export default function RootLayout({
     <html lang='en' className={GeistSans.className}>
       <body>
         <header className='z-40 flex h-20 w-full items-center py-6'>
-          <MainNav items={marketingConfig.mainNav} />
+          <MainNav />
         </header>
         <main className='flex min-h-screen flex-col items-center'>
           {children}

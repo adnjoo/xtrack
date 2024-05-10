@@ -11,16 +11,14 @@ import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
 import { useUser } from '@/hooks/useUser';
+import { mainNav, authNav } from '@/config/marketing';
 
-interface MainNavProps {
-  items?: MainNavItem[];
-  children?: React.ReactNode;
-}
-
-export function MainNav({ items }: MainNavProps) {
+export function MainNav() {
   const user = useUser();
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
+
+  const items = user ? authNav : mainNav;
 
   return (
     <div className='flex w-full justify-between gap-6 md:gap-1'>
@@ -43,7 +41,8 @@ export function MainNav({ items }: MainNavProps) {
                   item.href.startsWith(`/${segment}`)
                     ? 'text-foreground'
                     : 'text-foreground/60',
-                  item.disabled && 'cursor-not-allowed opacity-80'
+                  item.disabled && 'cursor-not-allowed opacity-80',
+                  item.desktopOnly && 'hidden'
                 )}
               >
                 {item.title}
@@ -66,13 +65,13 @@ export function MainNav({ items }: MainNavProps) {
           </Link>
         ) : (
           <Link
-            href='/account'
+            href='/logout'
             className={cn(
               buttonVariants({ variant: 'secondary', size: 'sm' }),
               'px-4'
             )}
           >
-            Account
+            Logout
           </Link>
         )}
       </div>
