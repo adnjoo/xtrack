@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 
-import { SidebarContextProvider } from '@/components/sidebar/context';
 import Sidebar from '@/components/sidebar';
 
 // import { apiUrls } from 'lib/apiUrls';
@@ -37,10 +36,8 @@ export default async function Layout({ children }: any) {
 
   return (
     <main lang='en' suppressHydrationWarning>
-      <SidebarContextProvider>
-        <Sidebar />
-        <div className='h-full w-full sm:ml-[64px]'>{children}</div>
-      </SidebarContextProvider>
+      <Sidebar />
+      <div className='h-full w-full sm:ml-[64px]'>{children}</div>
     </main>
   );
 }

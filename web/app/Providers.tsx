@@ -6,14 +6,20 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { queryClientConfig } from '@/lib/queryClient';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { AuthProvider } from '@/components/context/auth-provider';
+import { SidebarContextProvider } from '@/components/context/sidebar-provider';
 
 const Providers = ({ children }: any) => {
   const [queryClient] = useState(() => new QueryClient(queryClientConfig));
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>{children}</TooltipProvider>
-      <ReactQueryDevtools buttonPosition='bottom-left' />
+      <SidebarContextProvider>
+        {/* <AuthProvider> */}
+          <TooltipProvider>{children}</TooltipProvider>
+        {/* </AuthProvider> */}
+        <ReactQueryDevtools buttonPosition='bottom-right' />
+      </SidebarContextProvider>
     </QueryClientProvider>
   );
 };

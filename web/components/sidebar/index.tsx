@@ -7,7 +7,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 // import SvgWhiteLogo from 'public/icons/white-logo.svg';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import { useSidebar } from './context';
+import { useSidebar } from '../context/sidebar-provider';
 import { Icons } from '@/components/icons';
 // import { Separator } from 'components/ui/separator';
 import { cn } from '@/lib/utils';
@@ -81,7 +81,7 @@ export default function Sidebar() {
 
   async function signOut() {
     await supabase.auth.signOut();
-    window.location.href = '/signin';
+    window.location.href = '/';
   }
 
   return (
@@ -145,15 +145,15 @@ export default function Sidebar() {
                   </SidebarLink>
                 );
               })} */}
-              <button
+              <a
                 className={`mt-2 flex h-[40px] w-full items-center justify-center rounded-lg p-2 text-base tracking-wide text-white hover:bg-[#27272a]`}
-                onClick={signOut}
+                href='/logout'
                 title='Sign out'
               >
                 <div className='flex items-center'>
                   <Icons.logout className='text-white' />
                 </div>
-              </button>
+              </a>
             </div>
           </div>
         </div>
