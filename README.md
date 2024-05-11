@@ -4,7 +4,7 @@
 
 XTrack gives you wings!
 
-<img src='./web/public/screenshot.png' width='300'>
+<!-- <img src='./web/public/screenshot.png' width='300'> -->
 
 🥞
 
