@@ -4,6 +4,7 @@ import { MainNav } from '@/components/MainNav';
 import './globals.css';
 import Providers from './Providers';
 import MyFooter from '@/components/molecules/MyFooter';
+// import Sidebar from '@/components/sidebar';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -28,6 +29,7 @@ export default function RootLayout({
             <MainNav />
           </header>
           <main className='flex min-h-screen flex-col items-center'>
+            {/* <Sidebar /> */}
             {children}
           </main>
           <MyFooter />
