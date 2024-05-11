@@ -1,6 +1,7 @@
 import {
   AlertTriangle,
   ArrowRight,
+  BookOpenIcon,
   Check,
   ChevronLeft,
   ChevronRight,
@@ -29,6 +30,7 @@ import {
 export type Icon = typeof LucideIcon;
 
 export const Icons = {
+  book: BookOpenIcon,
   logo: CircleDollarSign,
   close: X,
   spinner: Loader2,

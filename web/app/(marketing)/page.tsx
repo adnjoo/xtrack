@@ -1,60 +1,67 @@
+import Link from 'next/link';
+import { BookOpenIcon } from 'lucide-react';
+
 import MySpeedDial from '@/components/organisms/MySpeedDial';
 import MyLottie from '@/components/atoms/MyLottie';
 import TabsHero from '@/components/organisms/TabsHero';
 import Testimonials from '@/components/molecules/Testimonials';
 import AuthButton from '@/components/AuthButton';
 import { createClient } from '@/utils/supabase/server';
+import Features from '@/components/molecules/Features';
 
 export default async function Home() {
-  const client= createClient();
+  const client = createClient();
 
-  const { data: { user } } = await client.auth.getUser()
+  const {
+    data: { user },
+  } = await client.auth.getUser();
 
   // console.log('user', user)
 
   if (!user) {
     return (
       <section className='relative isolate px-6 pt-14 '>
-        <div className='mx-auto flex max-w-2xl flex-col py-32 sm:flex-row sm:py-48 lg:max-w-4xl lg:py-56'>
+        <header className='mx-auto flex max-w-2xl flex-col py-8 sm:py-16 lg:max-w-4xl'>
           <div className='text-center'>
-            <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-              Track your expenses
+            <h1 className='mt-4	text-4xl font-black leading-[1.15] tracking-[-0.03em] text-black sm:text-5xl sm:leading-[1.15]'>
+              Effortlessly Track and Manage{' '}
+              <span className='bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-transparent'>
+                Expenses.
+              </span>
             </h1>
-            <p className='mt-6 text-lg leading-8 text-gray-600'>
-              Supercharge your net worth by tracking your expenses.
-            </p>
-            <div className='mt-10 flex items-center justify-center gap-x-6'>
-              <AuthButton />
-              <a
-                href='/blog'
-                className='text-sm font-semibold leading-6 text-gray-900'
+            <div className='mt-10 flex justify-center'>
+              <Link
+                href='/login'
+                className='hover:bg-primary/90 inline-flex h-[34px] items-center justify-center rounded-full bg-gray-900 px-4 py-2.5 text-sm font-medium text-white hover:shadow'
               >
+                Try it for Free
+              </Link>
+              <Link
+                href='/blog'
+                className='ml-6 inline-flex h-[34px] items-center justify-center gap-2 rounded-full bg-white/0 px-4 py-2.5 text-sm font-medium text-slate-900 ring-1 ring-slate-900/10 hover:bg-gray-100 hover:shadow'
+              >
+                <BookOpenIcon />
                 Learn more <span aria-hidden='true'>→</span>
-              </a>
+              </Link>
             </div>
           </div>
           <MyLottie />
-        </div>
+        </header>
 
-        <article className='mx-auto flex max-w-2xl flex-col items-center px-4 py-8 sm:flex-row lg:max-w-4xl'>
-          <div className='mr-4 w-full sm:w-1/3'>
-            <h3 className='mb-4 text-2xl font-semibold text-gray-900'>
-              AI Powered 🪄
-            </h3>
-            <p className='mt-4 text-gray-700'>
-              Explore the power of data visualization and intelligent algorithms
-              in action.
-            </p>
-          </div>
-          <div className='w-full sm:w-2/3'>
-            <video className='w-full' playsInline muted autoPlay>
-              <source src='/demos/demo-analytics.mp4' type='video/mp4' />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+        <article className='mx-auto flex flex-col items-center justify-center py-8 sm:py-16 lg:max-w-4xl'>
+          <h2 className='mb-12 mt-8 text-center text-3xl font-extrabold tracking-[-0.03em] text-black sm:text-4xl'>
+            Simple yet,&nbsp;
+            <span className='bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-transparent'>
+              powerful&nbsp;
+            </span>
+            features.
+          </h2>
+          <Features />
         </article>
 
-        <Testimonials />
+        <article className='py-8 sm:py-16'>
+          <Testimonials />
+        </article>
       </section>
     );
   }
