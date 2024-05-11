@@ -53,7 +53,7 @@ export const FOOTER: any = {
     label: 'Privacy',
   },
   TERMS: {
-    href: '/tos',
+    href: '/terms',
     label: 'Terms of Service',
   },
 };

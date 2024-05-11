@@ -32,7 +32,7 @@ export default function ExpenseForm({
   setIsOpen,
   propExpense,
 }: ExpenseFormProps) {
-  const { getToken } = useAuth();
+  // const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: propExpense?.title || '',
     amount: propExpense?.amount || 0,
@@ -46,15 +46,15 @@ export default function ExpenseForm({
   });
 
   const handleSubmit = async () => {
-    const token = await getToken();
+    // const token = await getToken();
 
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
         expense,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        // {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
       console.log('Expense submitted successfully', response.data);
     } catch (error) {
