@@ -10,7 +10,7 @@ export default async function Home() {
 
   const { data: { user } } = await client.auth.getUser()
 
-  console.log('user 123', user)
+  // console.log('user', user)
 
   if (!user) {
     return (

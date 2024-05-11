@@ -29,7 +29,7 @@ export function MainNav() {
         </span>
       </Link>
 
-      {items?.length ? (
+      {items?.length && (
         <nav className='hidden gap-6 md:flex'>
           <div className='flex flex-row gap-6'>
             {items?.map((item, index) => (
@@ -37,7 +37,7 @@ export function MainNav() {
                 key={index}
                 href={item.disabled ? '#' : item.href}
                 className={cn(
-                  'flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm',
+                  'hover:text-foreground/80 flex items-center text-lg font-medium transition-colors sm:text-sm',
                   item.href.startsWith(`/${segment}`)
                     ? 'text-foreground'
                     : 'text-foreground/60',
@@ -50,7 +50,7 @@ export function MainNav() {
             ))}
           </div>
         </nav>
-      ) : null}
+      )}
 
       <div className='hidden md:flex'>
         {!user ? (
