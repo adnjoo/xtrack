@@ -17,6 +17,7 @@ const AddExpenseButton = ({
   isMobile?: boolean;
 }) => {
   return (
+    // @ts-ignore
     <Draggable disabled={isMobile}>
       <div className='fixed bottom-4 right-4'>
         {!isMobile && (

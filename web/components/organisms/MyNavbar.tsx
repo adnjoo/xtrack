@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { SignInButton, useUser, UserButton } from '@clerk/nextjs';
+// import { SignInButton, useUser, UserButton } from '@clerk/nextjs';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import { APP_NAME, PAGES } from '@/app/lib/constants';
+import { APP_NAME, PAGES } from '@/lib/constants';
 
 export default function MyNavbar() {
-  const { isSignedIn, user } = useUser();
+  // const { isSignedIn, user } = useUser();
 
   const showPages = Object.values(PAGES).filter((page) => page.menu);
   return (
@@ -56,7 +56,7 @@ export default function MyNavbar() {
 
               <section className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
                 {/* Profile */}
-                {isSignedIn && user ? (
+                {/* {isSignedIn && user ? (
                   <UserButton afterSignOutUrl='/' />
                 ) : (
                   <SignInButton>
@@ -64,7 +64,7 @@ export default function MyNavbar() {
                       Sign In
                     </button>
                   </SignInButton>
-                )}
+                )} */}
               </section>
             </div>
           </section>

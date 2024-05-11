@@ -49,7 +49,7 @@ export default function ExpenseTable() {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/expenses` as string,
           {
-            headers: { Authorization: `Bearer ${await getToken()}` },
+            // headers: { Authorization: `Bearer ${await getToken()}` },
             params: {
               startDate: adjustedStartDate,
               endDate: adjustedEndDate,
@@ -90,13 +90,13 @@ export default function ExpenseTable() {
     ) {
       return;
     }
-    const token = await getToken();
+    // const token = await getToken();
     try {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/expenses/delete/${id}` as string,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        // {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
       console.log('Expense deleted successfully', response.data);
       refetch();
@@ -117,11 +117,11 @@ export default function ExpenseTable() {
 
   const handleDownload = async () => {
     try {
-      const token = await getToken();
+      // const token = await getToken();
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/expenses/export`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          // headers: { Authorization: `Bearer ${token}` },
           responseType: 'blob', // Set response type to blob to handle file download
         }
       );

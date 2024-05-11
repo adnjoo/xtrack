@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Footer } from 'flowbite-react';
 import { BsGithub, BsTwitter } from 'react-icons/bs';
 
-import { APP_NAME, PAGES } from '@/app/lib/constants';
+import { APP_NAME, PAGES } from '@/lib/constants';
 
 export default function MyFooter() {
   return (
@@ -13,7 +13,7 @@ export default function MyFooter() {
         <div className='grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1'>
           <div>
             <Link passHref href={PAGES.HOME.href}>
-              <Footer.Brand src='/logo.svg' alt={APP_NAME} name={APP_NAME} />
+              <Footer.Brand src='/logo.png' alt={APP_NAME} name={APP_NAME} />
             </Link>
           </div>
           <div className='grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6'>
@@ -37,7 +37,7 @@ export default function MyFooter() {
               <Footer.Title title='Legal' />
               <Footer.LinkGroup col>
                 <Link href='/privacy'>Privacy</Link>
-                <Link href='/tos'>Terms &amp; Conditions</Link>
+                <Link href='/terms'>Terms &amp; Conditions</Link>
               </Footer.LinkGroup>
             </div>
           </div>
