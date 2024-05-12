@@ -8,6 +8,9 @@ import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
 import { BsX } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
 
+import { createClient } from '@/utils/supabase/client';
+import { useUser } from '@/hooks/useUser';
+
 const expenseCategories = [
   '',
   'Other',
@@ -32,6 +35,11 @@ export default function ExpenseForm({
   setIsOpen,
   propExpense,
 }: ExpenseFormProps) {
+  const supabase = createClient();
+  const user = useUser();
+
+  console.log('user', user);
+
   // const { getToken } = useAuth();
   const [expense, setExpense] = React.useState({
     title: propExpense?.title || '',
@@ -48,21 +56,34 @@ export default function ExpenseForm({
   const handleSubmit = async () => {
     // const token = await getToken();
 
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
-        expense,
-        // {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // }
-      );
-      console.log('Expense submitted successfully', response.data);
-    } catch (error) {
-      console.error('Error submitting expense:', error);
-    } finally {
-      setIsOpen(false);
-      refetch();
-    }
+    const { data, error, status } = await supabase.from('expenses').insert([
+      {
+        title: expense.title,
+        amount: Number(expense.amount),
+        category: expense.category,
+        description: expense.description,
+        date: expense.date,
+        user_id: user?.id,
+      }
+    ])
+
+    console.log('data', data, status);
+
+    // try {
+    //   const response = await axios.post(
+    //     `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
+    //     expense,
+    //     // {
+    //     //   headers: { Authorization: `Bearer ${token}` },
+    //     // }
+    //   );
+    //   console.log('Expense submitted successfully', response.data);
+    // } catch (error) {
+    //   console.error('Error submitting expense:', error);
+    // } finally {
+    //   setIsOpen(false);
+    //   refetch();
+    // }
   };
 
   const handleInputChange = (e: any) => {

@@ -14,7 +14,7 @@ type Note = {
 
 export default function Page() {
   const supabase = createClient();
-  const user: User | null = useUser();
+  const user = useUser();
 
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNoteTitle, setNewNoteTitle] = useState('');

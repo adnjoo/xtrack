@@ -38,7 +38,6 @@ export default async function Layout({ children }: any) {
     <>
       <Sidebar />
       <div className='h-full w-full sm:pl-[64px]'>{children}</div>
-      qwe
     </>
   );
 }
