@@ -2,12 +2,12 @@ import { MainNav } from '@/types';
 
 export const mainNav: MainNav = [
   {
-    title: 'Home',
-    href: '/',
+    title: 'Pricing',
+    href: '/pricing',
   },
   {
-    title: 'Notes',
-    href: '/notes',
+    title: 'Blog',
+    href: '/blog',
   },
   {
     title: 'Login',

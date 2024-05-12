@@ -26,7 +26,7 @@ export function MainNav() {
   const items = mainNav;
 
   return (
-    <div className='flex w-full justify-between gap-6 md:gap-1 px-4'>
+    <div className='mt-4 flex w-full justify-between gap-6 px-4 md:gap-1'>
       <Link href='/' className='hidden items-center space-x-2 md:flex'>
         <Icons.logo />
         <span className='hidden font-bold sm:inline-block'>
