@@ -15,10 +15,11 @@ export default function Dashboard() {
   const { user } = useAuth();
   const supabase = createClient();
   const [expenses, setExpenses] = React.useState<any[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const getExpenses = async () => {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from('expenses')
         .select()
