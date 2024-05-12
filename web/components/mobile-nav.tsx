@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
-
-import { MainNavItem } from '@/types';
 import { cn } from '@/lib/utils';
+import { MainNavItem } from '@/types';
 
 interface MobileNavProps {
   items: MainNavItem[];

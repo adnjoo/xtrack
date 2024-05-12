@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { MdEdit, MdDelete, MdAdd } from 'react-icons/md';
 // import { useAuth } from '@clerk/nextjs';
 import { Dialog } from '@headlessui/react';
-import { MdEdit, MdDelete, MdAdd } from 'react-icons/md';
-
+import axios from 'axios';
 import { API_URL } from '@/lib/utils';
 
 export interface SubscriptionData {
@@ -76,7 +75,7 @@ export default function SubscriptionForm({
     try {
       const response = await axios.post(
         `${API_URL}/subscriptions/upsert`,
-        formData,
+        formData
         // {
         //   headers: {
         //     Authorization: `Bearer ${token}`,
@@ -100,10 +99,11 @@ export default function SubscriptionForm({
     // const token = await getToken();
 
     try {
-      await axios.delete(`${API_URL}/subscriptions/delete/${initialData.id}`
-      // , {
-      //   headers: { Authorization: `Bearer ${token}` },
-      // }
+      await axios.delete(
+        `${API_URL}/subscriptions/delete/${initialData.id}`
+        // , {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // }
       );
       alert('Subscription deleted successfully');
       if (refetch) {

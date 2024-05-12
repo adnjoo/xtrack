@@ -1,22 +1,21 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import axios from 'axios';
-// import { useAuth } from '@clerk/nextjs';
-import { useQuery } from '@tanstack/react-query';
-import { Tooltip } from 'react-tooltip';
-import { Table } from 'flowbite-react';
 import { FaArrowUp } from 'react-icons/fa';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import Datepicker, { DateValueType } from 'react-tailwindcss-datepicker';
-
-import { classNames, calculateTZOffset } from '@/lib/utils';
+import { Tooltip } from 'react-tooltip';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+// import { useAuth } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Table } from 'flowbite-react';
 import MyModal from '@/components/atoms/MyModal';
-import ExpenseForm from '@/components/organisms/ExpenseForm';
 import { SkeletonTable } from '@/components/molecules/SkeletonTable';
-import { sortExpensesByDate } from '@/lib/utils';
+import ExpenseForm from '@/components/organisms/ExpenseForm';
 import { SortOrder } from '@/lib/constants';
+import { classNames, calculateTZOffset } from '@/lib/utils';
+import { sortExpensesByDate } from '@/lib/utils';
 
 export default function ExpenseTable() {
   const today = useMemo(() => new Date(), []);
@@ -93,7 +92,7 @@ export default function ExpenseTable() {
     // const token = await getToken();
     try {
       const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_URL}/expenses/delete/${id}` as string,
+        `${process.env.NEXT_PUBLIC_API_URL}/expenses/delete/${id}` as string
         // {
         //   headers: { Authorization: `Bearer ${token}` },
         // }

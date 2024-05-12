@@ -1,7 +1,7 @@
-import matter from 'gray-matter';
-import fs from 'fs/promises';
-import path from 'path';
 import { cache } from 'react';
+import fs from 'fs/promises';
+import matter from 'gray-matter';
+import path from 'path';
 
 export const getPosts = cache(async (returnArchive = false) => {
   const posts = await fs.readdir(path.join(process.cwd(), 'posts'));
@@ -39,9 +39,9 @@ export const getPosts = cache(async (returnArchive = false) => {
  * @return {object | undefined} The post object if found, otherwise undefined
  */
 export async function getPost(slug: string, returnArchive = false) {
-const posts = await getPosts(returnArchive);
+  const posts = await getPosts(returnArchive);
   return posts.find((post) => post.id === slug);
-};
+}
 
 /**
  * Calculates the estimated time to read the content based on an average reading speed.
@@ -61,4 +61,4 @@ function calculateTimeToRead(content: string) {
 
   // Round up to the nearest integer
   return Math.ceil(timeInMinutes);
-};
+}

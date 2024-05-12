@@ -4,13 +4,13 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Dialog, DialogPanel, Description } from '@headlessui/react';
-
-import { MainNavItem } from '@/types';
-import { siteConfig } from '@/config/site';
-import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
 import { mainNav, authNav } from '@/config/marketing';
+import { siteConfig } from '@/config/site';
+import { useUser } from '@/hooks/useUser';
+import { cn } from '@/lib/utils';
+import { MainNavItem } from '@/types';
 import Sidebar from './sidebar';
 import { useAuth } from '@/utils/supabase/auth';
 

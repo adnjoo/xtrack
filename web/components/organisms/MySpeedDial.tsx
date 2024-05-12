@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Button, Tooltip } from 'flowbite-react';
 import { BsPlusCircleFill } from 'react-icons/bs';
-
+import { Button, Tooltip } from 'flowbite-react';
 import MyModal from '@/components/atoms/MyModal';
 import ExpenseForm from '@/components/organisms/ExpenseForm';
 import { useCheckMobileScreen } from '@/lib/hooks';

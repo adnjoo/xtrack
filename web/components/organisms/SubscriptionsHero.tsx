@@ -1,13 +1,12 @@
 'use client';
 
 import React from 'react';
-import axios from 'axios';
 // import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
-
-import { API_URL } from '@/lib/utils';
+import axios from 'axios';
 import SubscriptionForm from '@/components/molecules/SubscriptionForm';
 import SubscriptionView from '@/components/molecules/SubscriptionView';
+import { API_URL } from '@/lib/utils';
 
 export default function SubscriptionsHero() {
   // const { getToken } = useAuth();
