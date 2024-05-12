@@ -12,13 +12,18 @@ import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
 import { useUser } from '@/hooks/useUser';
 import { mainNav, authNav } from '@/config/marketing';
+import Sidebar from './sidebar';
 
 export function MainNav() {
   const user = useUser();
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
-  const items = user ? authNav : mainNav;
+  if (user) {
+    return <Sidebar />;
+  }
+
+  const items = mainNav;
 
   return (
     <div className='flex w-full justify-between gap-6 md:gap-1 px-4'>

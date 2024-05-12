@@ -4,6 +4,8 @@ import { MainNav } from '@/components/MainNav';
 import './globals.css';
 import Providers from './Providers';
 import MyFooter from '@/components/molecules/MyFooter';
+import Sidebar from '@/components/sidebar';
+import { useUser } from '@/hooks/useUser';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -20,17 +22,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const user = useUser();
+
+  // console.log(user);
   return (
     <html lang='en'>
       <body>
         <Providers>
-          <header className='z-40 flex h-20 w-full items-center py-6'>
+          {/* <header className='z-40 flex h-20 w-full items-center py-6'> */}
             <MainNav />
-          </header>
+          {/* </header> */}
           <main className='flex min-h-screen flex-col items-center'>
             {children}
           </main>
-          <MyFooter />
+
         </Providers>
       </body>
     </html>

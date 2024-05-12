@@ -22,6 +22,8 @@ export default function AccountForm({ user }: { user: User | null }) {
         .eq('id', user?.id)
         .single();
 
+      console.log(data, error, status);
+
       if (error && status !== 406) {
         console.log(error);
         throw error;
@@ -34,7 +36,8 @@ export default function AccountForm({ user }: { user: User | null }) {
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
-      alert('Error loading user data!');
+      // alert('Error loading user data!');
+      console.log(error);
     } finally {
       setLoading(false);
     }
