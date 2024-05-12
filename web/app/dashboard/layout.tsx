@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-
 import Sidebar from '@/components/sidebar';
 
 // import { apiUrls } from 'lib/apiUrls';

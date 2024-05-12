@@ -3,20 +3,18 @@
 import React, { useEffect } from 'react';
 // import { DataContextProvider } from 'components/context/data-provider';
 import LayoutHeader from '@/components/layout/header';
-
 // import ExpensesSummary from './summary';
 // import ExpenseTable from './table';
 // import AddButton from '@/components/atoms/add-button';
 import MySpeedDial from '@/components/organisms/MySpeedDial';
-import { createClient } from '@/utils/supabase/client';
 // import { useUser } from '@/hooks/useUser';
 import { useAuth } from '@/utils/supabase/auth';
+import { createClient } from '@/utils/supabase/client';
 
 export default function Page() {
   const [expenses, setExpenses] = React.useState<any[]>([]);
   const supabase = createClient();
   const { user } = useAuth();
-
 
   const getExpenses = async () => {
     const { data, error } = await supabase

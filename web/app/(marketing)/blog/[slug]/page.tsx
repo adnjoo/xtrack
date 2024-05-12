@@ -1,8 +1,7 @@
 import Link from 'next/link';
-
 import { PAGES } from '@/lib/constants';
-import { getPost } from '../functions';
 import { PostBody } from '../components/PostBody';
+import { getPost } from '../functions';
 
 export default async function PostPage({
   params,

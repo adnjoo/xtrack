@@ -1,15 +1,14 @@
 'use client';
 
-import axios from 'axios';
 import React from 'react';
-// import { useAuth } from '@clerk/nextjs';
-import { useQuery } from '@tanstack/react-query';
-import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
 import { BsX } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
-
-import { createClient } from '@/utils/supabase/client';
+// import { useAuth } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
 import { useUser } from '@/hooks/useUser';
+import { createClient } from '@/utils/supabase/client';
 
 const expenseCategories = [
   '',
@@ -64,8 +63,8 @@ export default function ExpenseForm({
         description: expense.description,
         date: expense.date,
         user_id: user?.id,
-      }
-    ])
+      },
+    ]);
 
     console.log('data', data, status);
 

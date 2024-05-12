@@ -1,9 +1,8 @@
 'use client';
 
+import { BsGithub, BsTwitter } from 'react-icons/bs';
 import Link from 'next/link';
 import { Footer } from 'flowbite-react';
-import { BsGithub, BsTwitter } from 'react-icons/bs';
-
 import { APP_NAME, PAGES } from '@/lib/constants';
 
 export default function MyFooter() {

@@ -1,6 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
 import { Code } from 'bright';
+import remarkGfm from 'remark-gfm';
 
 export const mdxComponents = {
   pre: Code,

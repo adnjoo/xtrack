@@ -1,8 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 type SidebarLinkProps = {
   href: string;
