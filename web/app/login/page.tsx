@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
-import { useUser } from '@/hooks/useUser';
+
+import { useAuth } from '@/utils/supabase/auth';
 import { login, signup } from './actions';
 
 export default function LoginPage() {
-  const user = useUser();
+  const { user } = useAuth();
 
   if (!user) {
     return (

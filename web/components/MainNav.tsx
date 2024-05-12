@@ -10,12 +10,12 @@ import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
-import { useUser } from '@/hooks/useUser';
 import { mainNav, authNav } from '@/config/marketing';
 import Sidebar from './sidebar';
+import { useAuth } from '@/utils/supabase/auth';
 
 export function MainNav() {
-  const user = useUser();
+  const { user } = useAuth();
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
