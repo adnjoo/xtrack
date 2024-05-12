@@ -38,6 +38,7 @@ export default async function Layout({ children }: any) {
     <main lang='en' suppressHydrationWarning>
       <Sidebar />
       <div className='h-full w-full sm:ml-[64px]'>{children}</div>
+      qwe
     </main>
   );
 }

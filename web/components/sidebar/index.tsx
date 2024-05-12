@@ -21,30 +21,13 @@ const dashboardLinks = [
   //     Icon: OverviewIcon,
   //     shortcutText: shortcuts.menu.overview.shortcut,
   //   },
-  //   {
-  //     name: 'Income',
-  //     href: '/income',
-  //     Icon: IncomeIcon,
-  //     shortcutText: shortcuts.menu.income.shortcut,
-  //   },
+
   {
     name: 'Expenses',
-    href: '/expenses',
+    href: '/dashboard/expenses',
     Icon: Icons.logo,
     shortcutText: shortcuts.menu.expenses.shortcut,
   },
-  //   {
-  //     name: 'Investments',
-  //     href: '/investments',
-  //     Icon: InvestmentIcon,
-  //     shortcutText: shortcuts.menu.investments.shortcut,
-  //   },
-  //   {
-  //     name: 'Subscriptions',
-  //     href: '/subscriptions',
-  //     Icon: SubscriptionsIcon,
-  //     shortcutText: shortcuts.menu.subscriptions.shortcut,
-  //   },
 ];
 
 // const settingsLinks = [
@@ -70,7 +53,8 @@ export default function Sidebar() {
       const keys = handler.keys?.join('');
       if (keys === shortcuts.menu.overview.shortcut) router.push('/');
       if (keys === shortcuts.menu.income.shortcut) router.push('/income');
-      if (keys === shortcuts.menu.expenses.shortcut) router.push('/expenses');
+      if (keys === shortcuts.menu.expenses.shortcut)
+        router.push('/dashboard/expenses');
       if (keys === shortcuts.menu.investments.shortcut)
         router.push('/investments');
       if (keys === shortcuts.menu.subscriptions.shortcut)
@@ -145,15 +129,15 @@ export default function Sidebar() {
                   </SidebarLink>
                 );
               })} */}
-              <a
+              <button
                 className={`mt-2 flex h-[40px] w-full items-center justify-center rounded-lg p-2 text-base tracking-wide text-white hover:bg-[#27272a]`}
-                href='/logout'
+                onClick={signOut}
                 title='Sign out'
               >
                 <div className='flex items-center'>
                   <Icons.logout className='text-white' />
                 </div>
-              </a>
+              </button>
             </div>
           </div>
         </div>
