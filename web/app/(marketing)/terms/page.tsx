@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function TermsOfService() {
   return (
-    <div className='container mx-auto p-4'>
+    <div className='container mx-auto p-4 min-h-[80vh]'>
       <h1 className='mb-4 text-2xl font-bold'>Terms of Service</h1>
 
       <p className='mb-2'>

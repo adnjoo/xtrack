@@ -31,7 +31,8 @@ export default function Layout({ children }: any) {
   const { user } = useAuth();
 
   if (!user) {
-    redirect('/');
+    // redirect('/');
+    return null;
   }
   //   const supabase = createServerComponentClient<Database>(
   //     { cookies },
