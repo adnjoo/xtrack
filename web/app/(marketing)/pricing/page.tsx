@@ -1,7 +1,6 @@
 import { CheckIcon } from '@heroicons/react/20/solid';
-
-import { classNames } from '@/lib/utils';
 import { PAGES } from '@/lib/constants';
+import { classNames } from '@/lib/utils';
 
 const tiers = [
   {

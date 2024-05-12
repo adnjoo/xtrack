@@ -56,7 +56,8 @@ export default function Contact() {
                 className='text-sm font-semibold leading-6 text-indigo-600'
                 target='_blank'
               >
-                Report a bug or suggest an improvement <span aria-hidden='true'>&rarr;</span>
+                Report a bug or suggest an improvement{' '}
+                <span aria-hidden='true'>&rarr;</span>
               </a>
             </p>
           </div>

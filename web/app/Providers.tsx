@@ -3,10 +3,9 @@
 import { useState } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-import { queryClientConfig } from '@/lib/queryClient';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import { SidebarContextProvider } from '@/components/context/sidebar-provider';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { queryClientConfig } from '@/lib/queryClient';
 import { AuthProvider } from '@/utils/supabase/auth';
 
 const Providers = ({ children }: any) => {

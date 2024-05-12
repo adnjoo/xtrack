@@ -117,7 +117,11 @@ export default function LineChartHero() {
         ✨ Get AI
       </button>
       {isLoading && <div>Loading...</div>}
-      {aiText && <pre className='mt-4 rounded-lg bg-gray-100 p-4 overflow-auto whitespace-pre-wrap'>{aiText}</pre>}
+      {aiText && (
+        <pre className='mt-4 rounded-lg bg-gray-100 p-4 overflow-auto whitespace-pre-wrap'>
+          {aiText}
+        </pre>
+      )}
     </>
   );
 }

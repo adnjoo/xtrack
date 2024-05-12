@@ -1,7 +1,7 @@
 'use client';
 
-import AccountForm from './account-form';
 import { useAuth } from '@/utils/supabase/auth';
+import AccountForm from './account-form';
 
 export default function Account() {
   const { user } = useAuth();

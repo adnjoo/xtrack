@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { BookOpenIcon } from 'lucide-react';
-
-import MySpeedDial from '@/components/organisms/MySpeedDial';
-import MyLottie from '@/components/atoms/MyLottie';
-import TabsHero from '@/components/organisms/TabsHero';
-import Testimonials from '@/components/molecules/Testimonials';
 import AuthButton from '@/components/AuthButton';
-import { createClient } from '@/utils/supabase/server';
+import MyLottie from '@/components/atoms/MyLottie';
 import Features from '@/components/molecules/Features';
+import Testimonials from '@/components/molecules/Testimonials';
+import MySpeedDial from '@/components/organisms/MySpeedDial';
+import TabsHero from '@/components/organisms/TabsHero';
+import { createClient } from '@/utils/supabase/server';
 
 export default async function Home() {
   const client = createClient();

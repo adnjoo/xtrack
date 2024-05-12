@@ -1,9 +1,8 @@
 'use client';
 
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@tremor/react';
-import { WalletIcon, CreditCardIcon } from '@heroicons/react/24/outline';
 import { BsGraphUp } from 'react-icons/bs';
-
+import { WalletIcon, CreditCardIcon } from '@heroicons/react/24/outline';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@tremor/react';
 import ExpenseTable from '@/components/organisms/ExpenseTable';
 import LineChartHero from '@/components/organisms/LineChartHero';
 import SubscriptionsHero from '@/components/organisms/SubscriptionsHero';
@@ -40,11 +39,7 @@ export default function TabsHero() {
       <TabGroup>
         <TabList variant='line' defaultValue='1'>
           {tabs.map((tab) => (
-            <Tab
-              key={tab.label}
-              value={tab.label}
-              icon={tab.icon}
-            >
+            <Tab key={tab.label} value={tab.label} icon={tab.icon}>
               {tab.label}
             </Tab>
           ))}

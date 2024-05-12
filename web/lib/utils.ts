@@ -1,6 +1,6 @@
 import { ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { DateValueType } from 'react-tailwindcss-datepicker';
+import { twMerge } from 'tailwind-merge';
 
 import { SortOrder } from './constants';
 
