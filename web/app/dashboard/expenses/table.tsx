@@ -25,39 +25,39 @@ const categories = Object.keys(expensesCategory)
   }));
 
 export default function ExpenseTable() {
-  const [selected, setSelected] = useState({});
-  const { data, loading, filter, mutate } = useData();
-  const user = useUser();
+  // const [selected, setSelected] = useState({});
+  // const { data, loading, filter, mutate } = useData();
+  // const user = useUser();
 
-  const onDelete = useCallback(
-    async (id: string) => {
-      try {
-        await deleteExpense(id);
-        toast.success(messages.deleted);
-        mutate();
-      } catch {
-        toast.error(messages.error);
-      }
-    },
-    [mutate]
-  );
+  // const onDelete = useCallback(
+  //   async (id: string) => {
+  //     try {
+  //       await deleteExpense(id);
+  //       toast.success(messages.deleted);
+  //       mutate();
+  //     } catch {
+  //       toast.error(messages.error);
+  //     }
+  //   },
+  //   [mutate]
+  // );
 
-  const onEdit = useCallback(async (data: ExpenseData | any) => {
-    setSelected(data);
-  }, []);
+  // const onEdit = useCallback(async (data: ExpenseData | any) => {
+  //   setSelected(data);
+  // }, []);
 
-  const onHide = useCallback(() => {
-    setSelected({});
-  }, []);
+  // const onHide = useCallback(() => {
+  //   setSelected({});
+  // }, []);
 
-  const onLookup = useCallback(
-    (name: string) => lookup({ data, name }),
-    [data]
-  );
+  // const onLookup = useCallback(
+  //   (name: string) => lookup({ data, name }),
+  //   [data]
+  // );
 
   return (
     <>
-      <DataTable
+      {/* <DataTable
         options={{ user, onDelete, onEdit }}
         filter={filter}
         columns={columns}
@@ -65,7 +65,7 @@ export default function ExpenseTable() {
         loading={loading}
         filename='Expenses'
         categories={categories}
-      />
+      /> */}
       <Add
         onHide={onHide}
         onLookup={onLookup}

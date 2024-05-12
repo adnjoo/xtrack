@@ -29,9 +29,9 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <Providers>
-          <header className='z-40 flex h-20 w-full items-center py-6'>
+          {/* <header className='z-40 flex h-20 w-full items-center py-6'> */}
             <MainNav />
-          </header>
+          {/* </header> */}
           <main className='flex min-h-screen flex-col items-center'>
             {children}
           </main>

@@ -77,48 +77,6 @@ export default function Add({
           }}
         />
       ) : null}
-      {/* {type === 'income' ? (
-        <AddIncome
-          lookup={(value: string) => {
-            if (onLookup) return onLookup(value);
-          }}
-          show={show}
-          selected={selected}
-          mutate={mutate}
-          onHide={() => {
-            if (onHide) onHide();
-            setShow(false);
-          }}
-        />
-      ) : null}
-      {type === 'investments' ? (
-        <AddInvestments
-          lookup={(value: string) => {
-            if (onLookup) return onLookup(value);
-          }}
-          show={show}
-          selected={selected}
-          mutate={mutate}
-          onHide={() => {
-            if (onHide) onHide();
-            setShow(false);
-          }}
-        />
-      ) : null}
-      {type === 'subscriptions' ? (
-        <AddSubscriptions
-          lookup={(value: string) => {
-            if (onLookup) return onLookup(value);
-          }}
-          show={show}
-          selected={selected}
-          mutate={mutate}
-          onHide={() => {
-            if (onHide) onHide();
-            setShow(false);
-          }}
-        />
-      ) : null} */}
     </>
   );
 }

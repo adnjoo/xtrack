@@ -35,10 +35,10 @@ export default async function Layout({ children }: any) {
   //   const user = await getUser(cookies());
 
   return (
-    <main lang='en' suppressHydrationWarning>
+    <>
       <Sidebar />
-      <div className='h-full w-full sm:ml-[64px]'>{children}</div>
+      <div className='h-full w-full sm:pl-[64px]'>{children}</div>
       qwe
-    </main>
+    </>
   );
 }

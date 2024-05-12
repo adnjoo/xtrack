@@ -1,11 +1,8 @@
 'use client';
 
-import { useSidebar } from 'components/context/sidebar-provider';
-import { Button } from 'components/ui/button';
-import { Separator } from 'components/ui/separator';
-
-import DatePicker from '../datepicker';
-import Feedback from '../feedback';
+import { useSidebar } from '@/components/context/sidebar-provider';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 const MenuIcon = () => (
   <svg
@@ -24,20 +21,13 @@ const MenuIcon = () => (
   </svg>
 );
 
-export default function LayoutHeader({
-  title,
-  showDatePicker = false,
-}: {
-  title: string;
-  showDatePicker?: boolean;
-}) {
+export default function LayoutHeader({ title }: { title: string }) {
   const { show, setShow } = useSidebar();
   return (
     <>
       <div
-        className={`flex justify-between p-3 pl-4 pr-4 text-gray-950 dark:text-gray-200 ${
-          showDatePicker ? 'flex-col sm:flex-row' : 'flex-row items-center'
-        }`}
+        className='flex w-full flex-row items-center justify-between p-3 pl-4 pr-4
+        text-gray-950 dark:text-gray-200'
       >
         <div className='flex'>
           <Button
@@ -48,26 +38,13 @@ export default function LayoutHeader({
             <MenuIcon />
           </Button>
           <h2
-            className={`text-2xl font-extrabold capitalize leading-snug tracking-tight ${
-              showDatePicker ? 'mb-2 sm:mb-0' : ''
-            }`}
+            className={`text-2xl font-extrabold capitalize leading-snug tracking-tight`}
           >
             {title}
           </h2>
         </div>
-        <div className='flex items-center justify-between sm:mt-0'>
-          {showDatePicker ? (
-            <div className='date-picker mr-0 flex w-full items-center max-sm:mt-1 sm:mr-4'>
-              {/* <span className="mr-2 hidden text-xs font-semibold uppercase md:inline-block">Showing:</span> */}
-              <DatePicker />
-            </div>
-          ) : null}
-          <Feedback
-            showDatePicker={showDatePicker}
-            className='absolute right-[16px] top-[12px] sm:relative sm:right-0 sm:top-0'
-          />
-        </div>
       </div>
+
       <Separator />
     </>
   );
