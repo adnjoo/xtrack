@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
-import { useUser } from '@/hooks/useUser';
+import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
 
 type Note = {
@@ -13,7 +13,7 @@ type Note = {
 
 export default function Page() {
   const supabase = createClient();
-  const user = useUser();
+  const { user } = useAuth();
 
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNoteTitle, setNewNoteTitle] = useState('');

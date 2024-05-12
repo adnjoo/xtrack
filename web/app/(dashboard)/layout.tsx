@@ -1,6 +1,8 @@
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import Sidebar from '@/components/sidebar';
+import { useAuthServer } from '@/utils/supabase/useAuthServer';
 
 // import { apiUrls } from 'lib/apiUrls';
 // import { Database } from 'lib/database.types';
@@ -24,6 +26,12 @@ import Sidebar from '@/components/sidebar';
 // }
 
 export default async function Layout({ children }: any) {
+  const user = await useAuthServer();
+
+  if (!user) {
+    // redirect('/');
+    return <>not auth</>;
+  }
   //   const supabase = createServerComponentClient<Database>(
   //     { cookies },
   //     supabaseOption

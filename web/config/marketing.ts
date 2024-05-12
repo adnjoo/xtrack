@@ -2,22 +2,25 @@ import { MainNav } from '@/types';
 
 export const mainNav: MainNav = [
   {
-    title: 'Home',
-    href: '/',
+    title: 'Pricing',
+    href: '/pricing',
   },
   {
-    title: 'Notes',
-    href: '/notes',
+    title: 'Blog',
+    href: '/blog',
   },
   {
     title: 'Login',
     href: '/login',
     desktopOnly: true,
-  }
+  },
 ];
 
-export const authNav = [
-  ...mainNav,
+export const authNav: MainNav = [
+  {
+    title: 'Dashboard',
+    href: '/dashboard',
+  },
   {
     title: 'Account',
     href: '/account',

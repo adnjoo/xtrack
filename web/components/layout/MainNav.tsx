@@ -8,24 +8,16 @@ import { Icons } from '@/components/icons';
 import { buttonVariants } from '@/components/ui/button';
 import { mainNav, authNav } from '@/config/marketing';
 import { siteConfig } from '@/config/site';
-import { useUser } from '@/hooks/useUser';
 import { cn } from '@/lib/utils';
-import { MainNavItem } from '@/types';
-import Sidebar from './sidebar';
 
 export function MainNav() {
-  const user = useUser();
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
-
-  if (user) {
-    return <Sidebar />;
-  }
 
   const items = mainNav;
 
   return (
-    <div className='flex w-full justify-between gap-6 md:gap-1 px-4'>
+    <div className='mt-4 flex w-full justify-between gap-6 px-4 md:gap-1'>
       <Link href='/' className='hidden items-center space-x-2 md:flex'>
         <Icons.logo />
         <span className='hidden font-bold sm:inline-block'>
@@ -57,27 +49,15 @@ export function MainNav() {
       )}
 
       <div className='hidden md:flex'>
-        {!user ? (
-          <Link
-            href='/login'
-            className={cn(
-              buttonVariants({ variant: 'secondary', size: 'sm' }),
-              'px-4'
-            )}
-          >
-            Login
-          </Link>
-        ) : (
-          <Link
-            href='/logout'
-            className={cn(
-              buttonVariants({ variant: 'secondary', size: 'sm' }),
-              'px-4'
-            )}
-          >
-            Logout
-          </Link>
-        )}
+        <Link
+          href='/login'
+          className={cn(
+            buttonVariants({ variant: 'secondary', size: 'sm' }),
+            'px-4'
+          )}
+        >
+          Login
+        </Link>
       </div>
 
       <button

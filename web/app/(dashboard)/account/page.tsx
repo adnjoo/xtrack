@@ -1,11 +1,12 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { type User } from '@supabase/supabase-js';
+import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
 import Avatar from './avatar';
 
-export default function AccountForm({ user }: { user: User | null }) {
+export default function AccountForm() {
+  const { user } = useAuth();
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [fullname, setFullname] = useState<string | null>(null);
