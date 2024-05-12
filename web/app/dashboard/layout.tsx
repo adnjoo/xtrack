@@ -1,10 +1,8 @@
-'use client';
-
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import Sidebar from '@/components/sidebar';
-import { useAuth } from '@/utils/supabase/auth';
+import { useAuthServer } from '@/utils/supabase/useAuthServer';
 
 // import { apiUrls } from 'lib/apiUrls';
 // import { Database } from 'lib/database.types';
@@ -27,12 +25,12 @@ import { useAuth } from '@/utils/supabase/auth';
 //   return await res.json();
 // }
 
-export default function Layout({ children }: any) {
-  const { user } = useAuth();
+export default async function Layout({ children }: any) {
+  const user = await useAuthServer();
 
   if (!user) {
     // redirect('/');
-    return null;
+    return <>not auth</>;
   }
   //   const supabase = createServerComponentClient<Database>(
   //     { cookies },

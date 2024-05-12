@@ -11,20 +11,27 @@ import MySpeedDial from '@/components/organisms/MySpeedDial';
 import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
 
-export default function Page() {
-  const [expenses, setExpenses] = React.useState<any[]>([]);
-  const supabase = createClient();
+export default function Dashboard() {
   const { user } = useAuth();
+  const supabase = createClient();
+  const [expenses, setExpenses] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
 
   const getExpenses = async () => {
-    const { data, error } = await supabase
-      .from('expenses')
-      .select()
-      .eq('user_id', user?.id);
-    if (error) {
-      console.error('Error fetching notes:', error.message);
-    } else {
-      setExpenses(data || []);
+    try {
+      const { data, error } = await supabase
+        .from('expenses')
+        .select()
+        .eq('user_id', user?.id);
+      if (error) {
+        console.error('Error fetching notes:', error.message);
+      } else {
+        setExpenses(data || []);
+      }
+    } catch (error) {
+      console.error('Error fetching expenses:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -38,6 +45,7 @@ export default function Page() {
       <LayoutHeader title='expenses' />
       {/* <DataContextProvider name='expenses'> */}
       <div className='w-full overflow-x-auto p-4 pt-3'>
+        {loading && <div>Loading...</div>}
         {expenses &&
           expenses.map((expense) => (
             <div>

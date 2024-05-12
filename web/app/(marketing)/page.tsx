@@ -1,26 +1,12 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { BookOpenIcon } from 'lucide-react';
-import AuthButton from '@/components/AuthButton';
-import MyLottie from '@/components/atoms/MyLottie';
+import { Icons } from '@/components/icons';
 import Features from '@/components/molecules/Features';
 import Testimonials from '@/components/molecules/Testimonials';
-import MySpeedDial from '@/components/organisms/MySpeedDial';
-import TabsHero from '@/components/organisms/TabsHero';
-import { createClient } from '@/utils/supabase/server';
 import { useAuthServer } from '@/utils/supabase/useAuthServer';
 
 export default async function Home() {
   const user = await useAuthServer();
-
-  if (user) {
-    redirect('/dashboard');
-    return (
-      <div>
-        <a href='/dashboard'>Dashboard</a>
-      </div>
-    );
-  }
 
   return (
     <section className='relative isolate px-6 pt-14 '>
@@ -43,7 +29,7 @@ export default async function Home() {
               href='/blog'
               className='ml-6 inline-flex h-[34px] items-center justify-center gap-2 rounded-full bg-white/0 px-4 py-2.5 text-sm font-medium text-slate-900 ring-1 ring-slate-900/10 hover:bg-gray-100 hover:shadow'
             >
-              <BookOpenIcon />
+              <Icons.book />
               Learn more <span aria-hidden='true'>→</span>
             </Link>
           </div>

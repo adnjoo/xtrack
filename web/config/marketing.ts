@@ -13,11 +13,14 @@ export const mainNav: MainNav = [
     title: 'Login',
     href: '/login',
     desktopOnly: true,
-  }
+  },
 ];
 
-export const authNav = [
-  ...mainNav,
+export const authNav: MainNav = [
+  {
+    title: 'Dashboard',
+    href: '/dashboard',
+  },
   {
     title: 'Account',
     href: '/account',
