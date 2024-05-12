@@ -4,25 +4,23 @@ import { useCallback, useState } from 'react';
 
 import { toast } from 'sonner';
 
-import Add from '@/components/atoms/add-button';
-import { useUser } from '@/components/context/auth-provider';
+// import Add from '@/components/atoms/add-button';
+// import { useUser } from '@/components/context/auth-provider';
 // import { useData } from '@/components/context/data-provider';
-import DataTable from 'components/table/data-table';
+// import DataTable from 'components/table/data-table';
+// import { lookup } from 'lib/lookup';
+// import { expensesCategory } from 'constants/categories';
+// import messages from 'constants/messages';
 
-import { lookup } from 'lib/lookup';
+// import { ExpenseData, deleteExpense } from './apis';
+// import { columns } from './columns';
 
-import { expensesCategory } from 'constants/categories';
-import messages from 'constants/messages';
-
-import { ExpenseData, deleteExpense } from './apis';
-import { columns } from './columns';
-
-const categories = Object.keys(expensesCategory)
-  .filter(Boolean)
-  .map((categoryKey) => ({
-    label: expensesCategory[categoryKey].name,
-    value: categoryKey,
-  }));
+// const categories = Object.keys(expensesCategory)
+//   .filter(Boolean)
+//   .map((categoryKey) => ({
+//     label: expensesCategory[categoryKey].name,
+//     value: categoryKey,
+//   }));
 
 export default function ExpenseTable() {
   // const [selected, setSelected] = useState({});
@@ -66,13 +64,13 @@ export default function ExpenseTable() {
         filename='Expenses'
         categories={categories}
       /> */}
-      <Add
+      {/* <Add
         onHide={onHide}
         onLookup={onLookup}
         selected={selected}
         mutate={mutate}
         type='expenses'
-      />
+      /> */}
     </>
   );
 }
