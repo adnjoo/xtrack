@@ -24,7 +24,7 @@ const dashboardLinks = [
 
   {
     name: 'Expenses',
-    href: '/dashboard/expenses',
+    href: '/dashboard',
     Icon: Icons.logo,
     shortcutText: shortcuts.menu.expenses.shortcut,
   },
@@ -54,7 +54,7 @@ export default function Sidebar() {
       if (keys === shortcuts.menu.overview.shortcut) router.push('/');
       if (keys === shortcuts.menu.income.shortcut) router.push('/income');
       if (keys === shortcuts.menu.expenses.shortcut)
-        router.push('/dashboard/expenses');
+        router.push('/dashboard');
       if (keys === shortcuts.menu.investments.shortcut)
         router.push('/investments');
       if (keys === shortcuts.menu.subscriptions.shortcut)
