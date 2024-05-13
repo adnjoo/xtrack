@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import LayoutHeader from '@/components/layout/header';
 import Sidebar from '@/components/sidebar';
 import { useAuthServer } from '@/utils/supabase/useAuthServer';
 
@@ -44,7 +45,10 @@ export default async function Layout({ children }: any) {
   return (
     <>
       <Sidebar />
-      <div className='h-full w-full sm:pl-[64px]'>{children}</div>
+      <div className='h-full w-full sm:pl-[64px]'>
+        <LayoutHeader />
+        {children}
+      </div>
     </>
   );
 }

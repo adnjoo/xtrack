@@ -80,7 +80,7 @@ export default function AccountForm() {
   }
 
   return (
-    <div className='mx-auto max-w-md rounded bg-white p-6 shadow-lg'>
+    <section className='mx-auto max-w-md rounded bg-white p-6 shadow-lg'>
       <Avatar
         uid={user?.id ?? null}
         url={avatar_url}
@@ -93,6 +93,7 @@ export default function AccountForm() {
 
       <div className='mt-4'>
         <label className='block text-sm font-medium text-gray-700'>Email</label>
+
         <input
           className='form-input mt-1 block w-full'
           type='text'
@@ -173,6 +174,6 @@ export default function AccountForm() {
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 }

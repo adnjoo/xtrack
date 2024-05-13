@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { redirect } from 'next/navigation';
 import { useAuth } from '@/utils/supabase/auth';
 import { login, signup } from './actions';
 
@@ -60,9 +61,5 @@ export default function LoginPage() {
     );
   }
 
-  return (
-    <p className='text-center text-xl text-gray-800'>
-      You are logged in go to <a href='/dashboard'>Dashboard</a>
-    </p>
-  );
+  redirect('/dashboard');
 }
