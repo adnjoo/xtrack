@@ -10,6 +10,7 @@ import MySpeedDial from '@/components/organisms/MySpeedDial';
 // import { useUser } from '@/hooks/useUser';
 import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
+import { Expense } from '@/types/supabase';
 
 export type DashboardBodyProps = {
     data: any;
@@ -26,7 +27,7 @@ export function DashboardBody({ data }: DashboardBodyProps) {
       <div className='w-full overflow-x-auto p-4 pt-3'>
         {/* {loading && <div>Loading...</div>} */}
         {data &&
-          data.map((expense: any) => (
+          data.map((expense: Expense) => (
             <div>
               {expense.title} {expense.amount}
             </div>
