@@ -26,7 +26,7 @@ export function DashboardBody({ data }: DashboardBodyProps) {
       <div className='w-full overflow-x-auto p-4 pt-3'>
         {/* {loading && <div>Loading...</div>} */}
         {data &&
-          data.map((expense) => (
+          data.map((expense: any) => (
             <div>
               {expense.title} {expense.amount}
             </div>
