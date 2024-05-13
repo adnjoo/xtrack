@@ -10,7 +10,7 @@ import { Icons } from '@/components/icons';
 // import { Separator } from 'components/ui/separator';
 import { cn } from '@/lib/utils';
 import shortcuts from '@/utils/constants/shortcuts';
-import { useSidebar } from '../context/sidebar-provider';
+import { useSidebar } from '../../context/sidebar-provider';
 import SidebarLink from './link';
 
 const dashboardLinks = [
@@ -31,7 +31,7 @@ const dashboardLinks = [
 
 const settingsLinks = [
   // { href: 'mailto:support@expense.fyi', name: 'Support', Icon: SupportIcon },
-  { href: '/account', name: 'Account', Icon: Icons.settings },
+  { href: '/settings', name: 'Settings', Icon: Icons.settings },
 ];
 
 const menuShortcutList = Object.values(shortcuts.menu).map((_) => _.shortcut);
@@ -50,13 +50,13 @@ export default function Sidebar() {
     menuShortcutList,
     (_, handler) => {
       const keys = handler.keys?.join('');
-      if (keys === shortcuts.menu.overview.shortcut) router.push('/');
-      if (keys === shortcuts.menu.income.shortcut) router.push('/income');
-      if (keys === shortcuts.menu.expenses.shortcut) router.push('/dashboard');
-      if (keys === shortcuts.menu.investments.shortcut)
-        router.push('/investments');
-      if (keys === shortcuts.menu.subscriptions.shortcut)
-        router.push('/subscriptions');
+      // if (keys === shortcuts.menu.overview.shortcut) router.push('/');
+      // if (keys === shortcuts.menu.income.shortcut) router.push('/income');
+      if (keys === shortcuts.menu.expenses.shortcut) router.push('/expenses');
+      // if (keys === shortcuts.menu.investments.shortcut)
+      //   router.push('/investments');
+      if (keys === shortcuts.menu.settings.shortcut)
+        router.push('/settings');
     },
     options
   );
