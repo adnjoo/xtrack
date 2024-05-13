@@ -1,5 +1,4 @@
 import { StyleSheet, View, Alert, Text } from 'react-native';
-import { Button } from 'react-native-elements';
 import React, { useState, useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
 import { Expense } from '@/types/supabase';
@@ -7,10 +6,6 @@ import { supabase } from '../lib/supabase';
 
 const Expenses = ({ session }: { session: Session }) => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
-
-  useEffect(() => {
-    console.log('expenses', expenses);
-  }, [expenses]);
 
   async function getExpenses() {
     try {
@@ -35,6 +30,10 @@ const Expenses = ({ session }: { session: Session }) => {
     }
   }
 
+  useEffect(() => {
+    getExpenses();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Expenses:</Text>
@@ -54,11 +53,6 @@ const Expenses = ({ session }: { session: Session }) => {
           </View>
         ))}
       </View>
-      <Button
-        title='Get Expenses'
-        onPress={() => getExpenses()}
-        buttonStyle={styles.button}
-      />
     </View>
   );
 };
