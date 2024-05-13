@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { redirect } from 'next/navigation';
+import { Icons } from '@/components/icons';
+import { Button } from '@/components/ui/button';
 import { useAuth } from '@/utils/supabase/auth';
 import { login, signup } from './actions';
 
 export default function LoginPage() {
   const { user } = useAuth();
+  const [loginLoading, setLoginLoading] = React.useState(false);
+  const [signupLoading, setSignupLoading] = React.useState(false);
 
   if (!user) {
     return (
@@ -43,18 +47,26 @@ export default function LoginPage() {
             />
           </div>
           <div className='flex items-center justify-between'>
-            <button
+            <Button
               formAction={login}
+              onClick={() => setLoginLoading(true)}
               className='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
             >
+              {loginLoading && (
+                <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+              )}
               Log in
-            </button>
-            <button
+            </Button>
+            <Button
               formAction={signup}
+              onClick={() => setSignupLoading(true)}
               className='focus:shadow-outline rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700 focus:outline-none'
             >
+              {signupLoading && (
+                <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
+              )}
               Sign up
-            </button>
+            </Button>
           </div>
         </form>
       </div>

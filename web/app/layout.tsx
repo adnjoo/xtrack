@@ -17,9 +17,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const user = useUser();
-
-  // console.log(user);
   return (
     <html lang='en'>
       <body>

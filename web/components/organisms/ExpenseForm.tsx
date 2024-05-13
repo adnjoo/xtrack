@@ -5,7 +5,6 @@ import { BsX } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
 // import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
 import { useUser } from '@/hooks/useUser';
 import { createClient } from '@/utils/supabase/client';
@@ -67,22 +66,6 @@ export default function ExpenseForm({
     ]);
 
     console.log('data', data, status);
-
-    // try {
-    //   const response = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_API_URL}/expenses/upsert`,
-    //     expense,
-    //     // {
-    //     //   headers: { Authorization: `Bearer ${token}` },
-    //     // }
-    //   );
-    //   console.log('Expense submitted successfully', response.data);
-    // } catch (error) {
-    //   console.error('Error submitting expense:', error);
-    // } finally {
-    //   setIsOpen(false);
-    //   refetch();
-    // }
   };
 
   const handleInputChange = (e: any) => {
