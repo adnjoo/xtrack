@@ -11,9 +11,7 @@ function getCurrentDate() {
 
 const directories = [
   { name: "web", path: "../../web" },
-  // { name: "mobile", path: "../../mobile" },
-  // { name: "server", path: "../../server" },
-  // { name: "expo51", path: "../expo51" },
+  { name: "mobile", path: "../../mobile" },
 ];
 
 async function countLinesInDir(path) {
