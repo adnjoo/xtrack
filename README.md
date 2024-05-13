@@ -1,6 +1,8 @@
 # xtrack
 
-<img src='./mobile/assets/logo.png' width='50'>
+<img src='./web/app/icon.ico' width='50'>
+
+<br />
 
 XTrack gives you wings!
 
