@@ -15,7 +15,7 @@ web
 
 mobile
 
-- Expo 50.x.x
+- Expo 51.x.x
 
 ---
 
