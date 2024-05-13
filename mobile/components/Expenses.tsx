@@ -1,6 +1,7 @@
 import { StyleSheet, View, Alert, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
+import { Link } from 'expo-router';
 import { Expense } from '@/types/supabase';
 import { supabase } from '../lib/supabase';
 
@@ -52,6 +53,11 @@ const Expenses = ({ session }: { session: Session }) => {
             </Text>
           </View>
         ))}
+        <Link href='/modal' style={styles.button}>
+          <Text style={{ textAlign: 'center' }}>
+            Add Expense
+          </Text>
+        </Link>
       </View>
     </View>
   );
@@ -88,7 +94,8 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   button: {
-    backgroundColor: 'blue',
+    borderColor: '#000',
+    borderWidth: 1,
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
