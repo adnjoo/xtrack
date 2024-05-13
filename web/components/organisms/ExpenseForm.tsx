@@ -6,8 +6,8 @@ import { FaSave } from 'react-icons/fa';
 // import { useAuth } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Textarea, Label, TextInput, Datepicker } from 'flowbite-react';
-import { useUser } from '@/hooks/useUser';
 import { createClient } from '@/utils/supabase/client';
+import { useAuth } from '@/utils/supabase/auth';
 
 const expenseCategories = [
   '',
@@ -34,7 +34,7 @@ export default function ExpenseForm({
   propExpense,
 }: ExpenseFormProps) {
   const supabase = createClient();
-  const user = useUser();
+  const { user } = useAuth();
 
   console.log('user', user);
 
