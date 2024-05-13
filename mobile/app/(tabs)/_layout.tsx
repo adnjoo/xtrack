@@ -1,59 +1,43 @@
-import React from "react";
-import { Tabs } from "expo-router";
-import { StyleSheet } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useAuth } from "@clerk/clerk-expo";
+import React from 'react';
+import { Tabs } from 'expo-router';
+import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { Colors } from '@/constants/Colors';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
-  const { isSignedIn } = useAuth();
+  const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveBackgroundColor: "#ffffff",
-        tabBarInactiveBackgroundColor: "white",
-        tabBarLabelStyle: styles.tabLabel,
+        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        headerShown: false,
       }}
     >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          title: "Spending",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons size={24} name="attach-money" color={color} />
+          title: 'Home',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'home' : 'home-outline'}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name='explore'
         options={{
-          title: "Settings",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="cog" size={24} color={color} />
+          title: 'Explore',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'code-slash' : 'code-slash-outline'}
+              color={color}
+            />
           ),
-          href: isSignedIn ? "/settings" : null,
-        }}
-      />
-      <Tabs.Screen
-        name="login"
-        options={{
-          title: "Login",
-          href: null,
         }}
       />
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  tabLabel: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "black",
-  },
-  tabIndicator: {
-    backgroundColor: "blue",
-    height: 3,
-  },
-});
