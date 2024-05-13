@@ -1,9 +1,10 @@
 nextjs
 
+🥞
+
 - supabase
 - react-query (state management)
 - flowbite
-- tailwindcss
 
 ---
 

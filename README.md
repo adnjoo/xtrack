@@ -9,16 +9,11 @@ XTrack gives you wings!
 🥞
 
 web
-- Next.js 14.x.x
-- Clerkjs
+- Next.js 14.x
+- Supabase 2.x
 
 mobile
 - Expo 50.x.x
-
-server
-- Express 4.x.x
-- Prisma
-- Postgres
 
 Quickstart
 
