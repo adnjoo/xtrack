@@ -9,23 +9,20 @@ XTrack gives you wings!
 🥞
 
 web
+
 - Next.js 14.x
 - Supabase 2.x
 
 mobile
+
 - Expo 50.x.x
 
-Quickstart
+---
 
-Start web and server:
+Quickstart:
+
 ```
 cd web
-npm install
-npm run dev
-```
-
-```
-cd server
 npm install
 npm run dev
 ```
