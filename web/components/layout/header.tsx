@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useSidebar } from '@/components/context/sidebar-provider';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -21,8 +22,11 @@ const MenuIcon = () => (
   </svg>
 );
 
-export function LayoutHeader({ title }: { title: string }) {
+export default function LayoutHeader() {
   const { show, setShow } = useSidebar();
+  const pathname = usePathname();
+  const title = pathname.split('/')[1];
+
   return (
     <>
       <div

@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 // import { DataContextProvider } from 'components/context/data-provider';
-import { LayoutHeader } from '@/components/layout/header';
 // import ExpensesSummary from './summary';
 // import ExpenseTable from './table';
 // import AddButton from '@/components/atoms/add-button';
@@ -43,7 +42,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <LayoutHeader title='expenses' />
       {/* <DataContextProvider name='expenses'> */}
       <div className='w-full overflow-x-auto p-4 pt-3'>
         {loading && <div>Loading...</div>}
