@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, Text } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useState, useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
