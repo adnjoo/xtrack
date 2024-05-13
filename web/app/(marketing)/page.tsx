@@ -13,9 +13,9 @@ export default async function Home() {
       <header className='mx-auto flex max-w-2xl flex-col py-8 sm:py-16 lg:max-w-4xl'>
         <div className='text-center'>
           <h1 className='mt-4	text-4xl font-black leading-[1.15] tracking-[-0.03em] text-black sm:text-5xl sm:leading-[1.15]'>
-            Effortlessly Track and Manage{' '}
+            Supercharge your{' '}
             <span className='bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-transparent'>
-              Expenses.
+              net worth
             </span>
           </h1>
           <div className='mt-10 flex justify-center'>
@@ -43,7 +43,7 @@ export default async function Home() {
           <span className='bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-transparent'>
             powerful&nbsp;
           </span>
-          features.
+          features
         </h2>
         <Features />
       </article>
