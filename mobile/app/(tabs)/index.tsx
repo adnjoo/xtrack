@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Session } from '@supabase/supabase-js';
+import { Link } from 'expo-router';
 import Expenses from '@/components/Expenses';
 import { supabase } from '@/lib/supabase';
 
@@ -18,27 +19,24 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <View style={styles.titleContainer}>
-      {session && <Expenses session={session} />}
+    <View style={styles.container}>
+      {session ? (
+        <Expenses session={session} />
+      ) : (
+        <Link href='/settings'>Login to see your expenses</Link>
+      )}
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    padding: 20,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  loginText: {
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
