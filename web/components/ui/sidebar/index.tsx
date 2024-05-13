@@ -23,7 +23,7 @@ const dashboardLinks = [
 
   {
     name: 'Expenses',
-    href: '/dashboard',
+    href: '/expenses',
     Icon: Icons.logo,
     shortcutText: shortcuts.menu.expenses.shortcut,
   },
