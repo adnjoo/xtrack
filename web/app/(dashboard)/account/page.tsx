@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { LayoutHeader } from '@/components/layout/header';
 import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
 import Avatar from './avatar';
@@ -80,99 +81,105 @@ export default function AccountForm() {
   }
 
   return (
-    <div className='mx-auto max-w-md rounded bg-white p-6 shadow-lg'>
-      <Avatar
-        uid={user?.id ?? null}
-        url={avatar_url}
-        size={150}
-        onUpload={(url) => {
-          setAvatarUrl(url);
-          updateProfile({ fullname, username, website, avatar_url: url });
-        }}
-      />
-
-      <div className='mt-4'>
-        <label className='block text-sm font-medium text-gray-700'>Email</label>
-        <input
-          className='form-input mt-1 block w-full'
-          type='text'
-          value={user?.email}
-          disabled
+    <>
+      <LayoutHeader title='Account' />
+      <div className='mx-auto max-w-md rounded bg-white p-6 shadow-lg'>
+        <Avatar
+          uid={user?.id ?? null}
+          url={avatar_url}
+          size={150}
+          onUpload={(url) => {
+            setAvatarUrl(url);
+            updateProfile({ fullname, username, website, avatar_url: url });
+          }}
         />
-      </div>
 
-      <div className='mt-4'>
-        <label
-          className='block text-sm font-medium text-gray-700'
-          htmlFor='fullName'
-        >
-          Full Name
-        </label>
-        <input
-          id='fullName'
-          className='form-input mt-1 block w-full border'
-          type='text'
-          value={fullname || ''}
-          onChange={(e) => setFullname(e.target.value)}
-        />
-      </div>
+        <div className='mt-4'>
+          <label className='block text-sm font-medium text-gray-700'>
+            Email
+          </label>
 
-      <div className='mt-4'>
-        <label
-          className='block text-sm font-medium text-gray-700'
-          htmlFor='username'
-        >
-          Username
-        </label>
-        <input
-          id='username'
-          className='form-input mt-1 block w-full border'
-          type='text'
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
+          <input
+            className='form-input mt-1 block w-full'
+            type='text'
+            value={user?.email}
+            disabled
+          />
+        </div>
 
-      <div className='mt-4'>
-        <label
-          className='block text-sm font-medium text-gray-700'
-          htmlFor='website'
-        >
-          Website
-        </label>
-        <input
-          id='website'
-          className='form-input mt-1 block w-full border'
-          type='url'
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
-
-      <div className='mt-6'>
-        <button
-          className={`rounded bg-blue-500 px-4 py-2 font-bold text-white ${
-            loading ? 'cursor-not-allowed opacity-50' : ''
-          }`}
-          onClick={() =>
-            updateProfile({ fullname, username, website, avatar_url })
-          }
-          disabled={loading}
-        >
-          {loading ? 'Loading ...' : 'Update'}
-        </button>
-      </div>
-
-      <div className='mt-4'>
-        <form action='/auth/signout' method='post'>
-          <button
-            className='block w-full rounded bg-gray-300 px-4 py-2 font-bold text-gray-800'
-            type='submit'
+        <div className='mt-4'>
+          <label
+            className='block text-sm font-medium text-gray-700'
+            htmlFor='fullName'
           >
-            Sign out
+            Full Name
+          </label>
+          <input
+            id='fullName'
+            className='form-input mt-1 block w-full border'
+            type='text'
+            value={fullname || ''}
+            onChange={(e) => setFullname(e.target.value)}
+          />
+        </div>
+
+        <div className='mt-4'>
+          <label
+            className='block text-sm font-medium text-gray-700'
+            htmlFor='username'
+          >
+            Username
+          </label>
+          <input
+            id='username'
+            className='form-input mt-1 block w-full border'
+            type='text'
+            value={username || ''}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+
+        <div className='mt-4'>
+          <label
+            className='block text-sm font-medium text-gray-700'
+            htmlFor='website'
+          >
+            Website
+          </label>
+          <input
+            id='website'
+            className='form-input mt-1 block w-full border'
+            type='url'
+            value={website || ''}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </div>
+
+        <div className='mt-6'>
+          <button
+            className={`rounded bg-blue-500 px-4 py-2 font-bold text-white ${
+              loading ? 'cursor-not-allowed opacity-50' : ''
+            }`}
+            onClick={() =>
+              updateProfile({ fullname, username, website, avatar_url })
+            }
+            disabled={loading}
+          >
+            {loading ? 'Loading ...' : 'Update'}
           </button>
-        </form>
-      </div>
-    </div>
+        </div>
+
+        <div className='mt-4'>
+          <form action='/auth/signout' method='post'>
+            <button
+              className='block w-full rounded bg-gray-300 px-4 py-2 font-bold text-gray-800'
+              type='submit'
+            >
+              Sign out
+            </button>
+          </form>
+        </div>
+      </div>{' '}
+    </>
   );
 }

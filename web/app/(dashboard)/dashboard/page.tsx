@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 // import { DataContextProvider } from 'components/context/data-provider';
-import LayoutHeader from '@/components/layout/header';
+import { LayoutHeader } from '@/components/layout/header';
 // import ExpensesSummary from './summary';
 // import ExpenseTable from './table';
 // import AddButton from '@/components/atoms/add-button';

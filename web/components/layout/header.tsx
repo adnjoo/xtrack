@@ -21,7 +21,7 @@ const MenuIcon = () => (
   </svg>
 );
 
-export default function LayoutHeader({ title }: { title: string }) {
+export function LayoutHeader({ title }: { title: string }) {
   const { show, setShow } = useSidebar();
   return (
     <>
