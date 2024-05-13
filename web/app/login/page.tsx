@@ -73,5 +73,5 @@ export default function LoginPage() {
     );
   }
 
-  redirect('/dashboard');
+  redirect('/expenses');
 }

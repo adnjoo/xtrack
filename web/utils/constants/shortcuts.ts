@@ -7,10 +7,11 @@ const shortcuts = {
   },
   menu: {
     expenses: { shortcut: 'e', text: 'expenses' },
-    income: { shortcut: 'i', text: 'income' },
-    investments: { shortcut: 'v', text: 'investment' },
-    overview: { shortcut: 'o', text: 'overview' },
-    subscriptions: { shortcut: 's', text: 'subscriptions' },
+    // income: { shortcut: 'i', text: 'income' },
+    // investments: { shortcut: 'v', text: 'investment' },
+    // overview: { shortcut: 'o', text: 'overview' },
+    // subscriptions: { shortcut: 's', text: 'subscriptions' },
+    settings: { shortcut: 's', text: 'settings' },
   },
 };
 

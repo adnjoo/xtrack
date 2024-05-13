@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import LayoutHeader from '@/components/layout/header';
-import Sidebar from '@/components/sidebar';
+import Sidebar from '@/components/ui/sidebar';
 import { useAuthServer } from '@/utils/supabase/useAuthServer';
 
 // import { apiUrls } from 'lib/apiUrls';
