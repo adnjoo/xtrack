@@ -7,7 +7,6 @@ import { useSearchParams } from 'next/navigation';
 // import ExpenseTable from './table';
 // import AddButton from '@/components/atoms/add-button';
 import MySpeedDial from '@/components/organisms/MySpeedDial';
-// import { useUser } from '@/hooks/useUser';
 import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
 import { Expense } from '@/types/supabase';

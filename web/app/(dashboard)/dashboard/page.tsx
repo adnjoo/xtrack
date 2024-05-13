@@ -4,7 +4,6 @@
 // import AddButton from '@/components/atoms/add-button';
 import { createServerClient } from '@supabase/ssr';
 import MySpeedDial from '@/components/organisms/MySpeedDial';
-// import { useUser } from '@/hooks/useUser';
 import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/server';
 import { useAuthServer } from '@/utils/supabase/useAuthServer';
