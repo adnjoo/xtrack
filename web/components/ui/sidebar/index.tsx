@@ -7,9 +7,9 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Icons } from '@/components/icons';
+import shortcuts from '@/constants/shortcuts';
 // import { Separator } from 'components/ui/separator';
 import { cn } from '@/lib/utils';
-import shortcuts from '@/utils/constants/shortcuts';
 import { useSidebar } from '../../context/sidebar-provider';
 import SidebarLink from './link';
 
@@ -55,8 +55,7 @@ export default function Sidebar() {
       if (keys === shortcuts.menu.expenses.shortcut) router.push('/expenses');
       // if (keys === shortcuts.menu.investments.shortcut)
       //   router.push('/investments');
-      if (keys === shortcuts.menu.settings.shortcut)
-        router.push('/settings');
+      if (keys === shortcuts.menu.settings.shortcut) router.push('/settings');
     },
     options
   );
