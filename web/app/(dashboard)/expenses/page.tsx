@@ -11,6 +11,7 @@ import { DashboardBody } from './client';
 
 const getExpenses = async () => {
   const supabase = createClient();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const user = await useAuthServer();
   try {
     const { data, error } = await supabase

@@ -27,7 +27,7 @@ export function DashboardBody({ data }: DashboardBodyProps) {
         {/* {loading && <div>Loading...</div>} */}
         {data &&
           data.map((expense: Expense) => (
-            <div>
+            <div key={expense.id}>
               {expense.title} {expense.amount}
             </div>
           ))}
