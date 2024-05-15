@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '@/utils/supabase/auth';
 import { createClient } from '@/utils/supabase/client';
-import Avatar from './avatar';
 
 export default function AccountForm() {
   const { user } = useAuth();
@@ -81,16 +80,6 @@ export default function AccountForm() {
 
   return (
     <section className='mx-auto max-w-md rounded bg-white p-6 shadow-lg'>
-      <Avatar
-        uid={user?.id ?? null}
-        url={avatar_url}
-        size={150}
-        onUpload={(url) => {
-          setAvatarUrl(url);
-          updateProfile({ fullname, username, website, avatar_url: url });
-        }}
-      />
-
       <div className='mt-4'>
         <label className='block text-sm font-medium text-gray-700'>Email</label>
 

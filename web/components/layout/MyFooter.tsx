@@ -32,13 +32,6 @@ export default function MyFooter() {
                 <Link href='/faq'>FAQ</Link>
               </Footer.LinkGroup>
             </div>
-            <div>
-              <Footer.Title title='Legal' />
-              <Footer.LinkGroup col>
-                <Link href='/privacy'>Privacy</Link>
-                <Link href='/terms'>Terms &amp; Conditions</Link>
-              </Footer.LinkGroup>
-            </div>
           </div>
         </div>
         <Footer.Divider />

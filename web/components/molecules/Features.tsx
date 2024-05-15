@@ -83,7 +83,7 @@ const features = [
 export default function Features() {
   const [selected, setSelected] = useState(0);
   return (
-    <section className='flex w-full flex-row justify-between gap-4'>
+    <section className='flex w-full flex-row justify-center gap-4'>
       <div className='block h-fit max-w-sm rounded-2xl border-[1px] bg-white p-2'>
         {features.map((feature, index) => {
           const isSelected = index === selected;
@@ -124,19 +124,6 @@ export default function Features() {
             </div>
           );
         })}
-      </div>
-      <div className='relative hidden max-w-sm overflow-hidden whitespace-nowrap rounded-lg border-[1px] bg-white shadow sm:flex'>
-        <video
-          playsInline
-          autoPlay
-          muted
-          loop
-          width='1200'
-          height='400'
-          src='/demos/demo-analytics.mp4'
-        >
-          Your browser does not support the video tag.
-        </video>
       </div>
     </section>
   );
