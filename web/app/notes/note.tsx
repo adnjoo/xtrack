@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 
 export const Note = ({ note }: { note: any }) => {
@@ -18,7 +18,10 @@ export const Note = ({ note }: { note: any }) => {
   };
 
   const handleSave = async () => {
-    await supabase.from("notes").update({ title: editedTitle }).eq("id", note.id);
+    await supabase
+      .from("notes")
+      .update({ title: editedTitle })
+      .eq("id", note.id);
     setIsEditing(false);
   };
 
@@ -35,17 +38,17 @@ export const Note = ({ note }: { note: any }) => {
             type="text"
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
-            className='text-black'
+            className="text-black"
           />
           <button onClick={handleSave}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
         </>
       ) : (
-        <>
+        <div className={note.done ? "line-through" : ""}>
           {note.title}
           <button onClick={handleEdit}>Edit</button>
           <button onClick={() => handleDelete(note.id)}>Delete</button>
-        </>
+        </div>
       )}
     </div>
   );
