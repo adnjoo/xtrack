@@ -45,7 +45,10 @@ export const Note = ({ note }: { note: any }) => {
         </>
       ) : (
         <>
+        <span className={note.done ? 'line-through' : ''}>
+
           {note.title}
+        </span>
           <button onClick={handleEdit}>Edit</button>
           <button onClick={() => handleDelete(note.id)}>Delete</button>
         </>
