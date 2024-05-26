@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
 
 export const Note = ({ note }: { note: any }) => {
   const supabase = createClient();
@@ -9,8 +9,8 @@ export const Note = ({ note }: { note: any }) => {
   const [editedTitle, setEditedTitle] = useState(note.title);
 
   const handleDelete = async (id: number) => {
-    if (!window.confirm("Are you sure you want to delete this note?")) return;
-    await supabase.from("notes").delete().eq("id", id);
+    if (!window.confirm('Are you sure you want to delete this note?')) return;
+    await supabase.from('notes').delete().eq('id', id);
   };
 
   const handleEdit = () => {
@@ -19,9 +19,9 @@ export const Note = ({ note }: { note: any }) => {
 
   const handleSave = async () => {
     await supabase
-      .from("notes")
+      .from('notes')
       .update({ title: editedTitle })
-      .eq("id", note.id);
+      .eq('id', note.id);
     setIsEditing(false);
   };
 
@@ -35,16 +35,16 @@ export const Note = ({ note }: { note: any }) => {
       {isEditing ? (
         <>
           <input
-            type="text"
+            type='text'
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}
-            className="text-black"
+            className='text-black'
           />
           <button onClick={handleSave}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
         </>
       ) : (
-        <div className={note.done ? "line-through" : ""}>
+        <div className={note.done ? 'line-through' : ''}>
           {note.title}
           <button onClick={handleEdit}>Edit</button>
           <button onClick={() => handleDelete(note.id)}>Delete</button>
