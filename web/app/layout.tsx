@@ -1,6 +1,11 @@
-import { GeistSans } from 'geist/font/sans';
+import { Varela_Round } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import './globals.css';
+
+const varela = Varela_Round({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={GeistSans.className}>
+    <html lang='en' className={varela.className}>
       <body className='bg-background text-foreground'>
         <Navbar />
         <main className='min-h-screen flex flex-col items-center'>
