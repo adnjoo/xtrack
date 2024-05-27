@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/client';
 
 export const Note = ({ note }: { note: any }) => {
@@ -51,7 +52,7 @@ export const Note = ({ note }: { note: any }) => {
   };
 
   return (
-    <Card>
+    <Card className='max-w-[300px]'>
       <CardHeader>
         <CardTitle className='flex justify-between items-center'>
           {isEditing ? (
@@ -63,7 +64,10 @@ export const Note = ({ note }: { note: any }) => {
             />
           ) : (
             <>
-              <span className={note.done ? 'line-through' : ''}>
+              <span
+                className={cn('cursor-pointer', isDone && 'line-through')}
+                onClick={handleToggleDone}
+              >
                 {note.title}
               </span>
               <span className='text-xs'>
@@ -99,9 +103,6 @@ export const Note = ({ note }: { note: any }) => {
             </Button>
             <Button variant='outline' onClick={() => handleDelete(note.id)}>
               Delete
-            </Button>
-            <Button variant='outline' onClick={handleToggleDone}>
-              {isDone ? 'Mark as Undone' : 'Mark as Done'}
             </Button>
           </>
         )}

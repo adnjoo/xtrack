@@ -4,7 +4,7 @@ import { Note } from './note';
 
 export default async function Page() {
   const supabase = createClient();
-  const { data: notes } = await supabase.from('notes').select();
+  const { data: notes } = await supabase.from('notes').select().eq('done', false);
   const points = notes?.map((note) => note.done).reduce((a, b) => a + b, 0);
   return (
     <div className='mt-12'>
