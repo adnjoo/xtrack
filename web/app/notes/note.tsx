@@ -53,7 +53,7 @@ export const Note = ({ note }: { note: any }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>
+        <CardTitle className='flex justify-between items-center'>
           {isEditing ? (
             <Input
               type='text'
@@ -62,9 +62,18 @@ export const Note = ({ note }: { note: any }) => {
               className='text-black'
             />
           ) : (
-            <span className={note.done ? 'line-through' : ''}>
-              {note.title}
-            </span>
+            <>
+              <span className={note.done ? 'line-through' : ''}>
+                {note.title}
+              </span>
+              <span className='text-xs'>
+                {new Date(note.updated_at).toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                })}
+              </span>
+            </>
           )}
         </CardTitle>
       </CardHeader>
