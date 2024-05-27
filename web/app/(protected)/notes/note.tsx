@@ -52,7 +52,7 @@ export const Note = ({ note }: { note: any }) => {
   };
 
   return (
-    <Card className='max-w-[300px]'>
+    <Card className='max-w-[350px]'>
       <CardHeader>
         <CardTitle className='flex justify-between items-center'>
           {isEditing ? (
@@ -71,8 +71,8 @@ export const Note = ({ note }: { note: any }) => {
                 {note.title}
               </span>
               <span className='text-xs'>
-                {new Date(note.updated_at).toLocaleString('en-US', {
-                  year: 'numeric',
+                {new Date(note.updated_at).toLocaleString('fr-CH', {
+                  year: '2-digit',
                   month: '2-digit',
                   day: '2-digit',
                 })}
