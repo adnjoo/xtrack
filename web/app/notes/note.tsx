@@ -1,12 +1,23 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { createClient } from '@/utils/supabase/client';
 
 export const Note = ({ note }: { note: any }) => {
   const supabase = createClient();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(note.title);
+  const [isDone, setIsDone] = useState(note.done);
 
   const handleDelete = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this note?')) return;
@@ -30,28 +41,62 @@ export const Note = ({ note }: { note: any }) => {
     setIsEditing(false);
   };
 
+  const handleToggleDone = async () => {
+    const updatedStatus = !isDone;
+    await supabase
+      .from('notes')
+      .update({ done: updatedStatus })
+      .eq('id', note.id);
+    setIsDone(updatedStatus);
+  };
+
   return (
-    <div>
-      {isEditing ? (
-        <>
-          <input
-            type='text'
-            value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
-            className='text-black'
-          />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </>
-      ) : (
-        <div>
-        <span className={note.done ? 'line-through' : ''}>
-          {note.title}
-        </span>
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={() => handleDelete(note.id)}>Delete</button>
-        </div>
-      )}
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>
+          {isEditing ? (
+            <Input
+              type='text'
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+              className='text-black'
+            />
+          ) : (
+            <span className={note.done ? 'line-through' : ''}>
+              {note.title}
+            </span>
+          )}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription>
+          {/* Additional note details can go here */}
+        </CardDescription>
+      </CardContent>
+      <CardFooter className='flex gap-4'>
+        {isEditing ? (
+          <>
+            <Button variant='outline' onClick={handleSave}>
+              Save
+            </Button>
+            <Button variant='outline' onClick={handleCancel}>
+              Cancel
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant='outline' onClick={handleEdit}>
+              Edit
+            </Button>
+            <Button variant='outline' onClick={() => handleDelete(note.id)}>
+              Delete
+            </Button>
+            <Button variant='outline' onClick={handleToggleDone}>
+              {isDone ? 'Mark as Undone' : 'Mark as Done'}
+            </Button>
+          </>
+        )}
+      </CardFooter>
+    </Card>
   );
 };
