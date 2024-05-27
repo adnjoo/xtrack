@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
+import { CreateNote } from './create';
 import { Note } from './note';
 
 export default async function Page() {
@@ -11,7 +12,7 @@ export default async function Page() {
         {notes?.map((note) => <Note note={note} />)}
       </div>
       <div>total points: {points}</div>
-      <div>make note</div>
+      <CreateNote />
     </div>
   );
 }
