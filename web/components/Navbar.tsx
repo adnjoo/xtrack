@@ -17,7 +17,7 @@ export const Navbar = async () => {
           {user ? (
             <>
               <Link href='/notes'>Notes</Link>
-              <Link href='/protected'>Protected</Link>
+              {/* <Link href='/protected'>Protected</Link> */}
             </>
           ) : null}
           <AuthButton />
