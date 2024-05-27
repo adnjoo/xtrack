@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <div className='mt-12'>
       <Badge>⭐️ {points}</Badge>
-      <div className='gap-4 grid grid-cols-3 my-6'>
+      <div className='gap-4 grid grid-cols-1 sm:grid-cols-3 my-6'>
         {notes?.filter((note) => !note.done).map((note) => <Note note={note} />)}
       </div>
       <CreateNote />
