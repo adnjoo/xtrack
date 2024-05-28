@@ -1,11 +1,21 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/badge';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/utils/supabase/client';
 import { CreateNote } from './create';
 import { Note } from './note';
 
-export default async function Page() {
+export default function Page() {
   const supabase = createClient();
-  const { data: notes } = await supabase.from('notes').select();
+  const { data: notes } = useQuery({
+    queryKey: ['notes'],
+    queryFn: async () => {
+      const { data } = await supabase.from('notes').select();
+      return data;
+    }
+  })
+
   const points = notes?.map((note) => note.done).reduce((a, b) => a + b, 0);
   return (
     <div className='mt-12 max-w-5xl'>
