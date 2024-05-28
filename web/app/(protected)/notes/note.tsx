@@ -52,7 +52,7 @@ export const Note = ({ note }: { note: any }) => {
   };
 
   return (
-    <Card className='max-w-[350px]'>
+    <Card className='w-[320px]'>
       <CardHeader>
         <CardTitle className='flex justify-between items-center'>
           {isEditing ? (
@@ -63,21 +63,21 @@ export const Note = ({ note }: { note: any }) => {
               className='text-black'
             />
           ) : (
-            <>
+            <div className='flex flex-col'>
               <span
-                className={cn('cursor-pointer', isDone && 'line-through')}
+                className={cn('cursor-pointer text-xl', isDone && 'line-through')}
                 onClick={handleToggleDone}
               >
                 {note.title}
               </span>
-              <span className='text-xs'>
+              <span className='text-xs mt-1'>
                 {new Date(note.updated_at).toLocaleString('fr-CH', {
                   year: '2-digit',
                   month: '2-digit',
                   day: '2-digit',
                 })}
               </span>
-            </>
+            </div>
           )}
         </CardTitle>
       </CardHeader>

@@ -10,7 +10,7 @@ export const Navbar = async () => {
   } = await supabase.auth.getUser();
   return (
     <div className='w-full flex justify-center border-b border-b-foreground/10 h-16'>
-      <div className='w-full max-w-4xl flex justify-between items-center p-3 text-sm'>
+      <div className='w-full max-w-5xl flex justify-between items-center p-3 text-sm'>
         <Link href='/'>Home</Link>
 
         <div className='flex gap-4 items-center'>
