@@ -1,5 +1,6 @@
 import { Varela_Round } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
+import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
 import './globals.css';
 
 const varela = Varela_Round({
@@ -23,13 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={varela.className}>
-      <body className='bg-background text-foreground'>
-        <Navbar />
-        <main className='min-h-screen flex flex-col items-center'>
-          {children}
-        </main>
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang='en' className={varela.className}>
+        <body className='bg-background text-foreground'>
+          <Navbar />
+          <main className='flex min-h-screen flex-col items-center'>
+            {children}
+          </main>
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }
