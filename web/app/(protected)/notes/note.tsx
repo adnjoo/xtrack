@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -20,9 +21,14 @@ export const Note = ({ note }: { note: any }) => {
   const [editedTitle, setEditedTitle] = useState(note.title);
   const [isDone, setIsDone] = useState(note.done);
 
+  const { refetch } = useQuery({
+    queryKey: ['notes'],
+  });
+
   const handleDelete = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this note?')) return;
     await supabase.from('notes').delete().eq('id', id);
+    refetch();
   };
 
   const handleEdit = () => {
@@ -35,6 +41,7 @@ export const Note = ({ note }: { note: any }) => {
       .update({ title: editedTitle })
       .eq('id', note.id);
     setIsEditing(false);
+    refetch();
   };
 
   const handleCancel = () => {
@@ -49,12 +56,13 @@ export const Note = ({ note }: { note: any }) => {
       .update({ done: updatedStatus })
       .eq('id', note.id);
     setIsDone(updatedStatus);
+    refetch();
   };
 
   return (
-    <Card className='max-w-[350px]'>
+    <Card className='w-[320px]'>
       <CardHeader>
-        <CardTitle className='flex justify-between items-center'>
+        <CardTitle className='flex items-center justify-between'>
           {isEditing ? (
             <Input
               type='text'
@@ -63,21 +71,24 @@ export const Note = ({ note }: { note: any }) => {
               className='text-black'
             />
           ) : (
-            <>
+            <div className='flex flex-col'>
               <span
-                className={cn('cursor-pointer', isDone && 'line-through')}
+                className={cn(
+                  'cursor-pointer text-xl',
+                  isDone && 'line-through'
+                )}
                 onClick={handleToggleDone}
               >
                 {note.title}
               </span>
-              <span className='text-xs'>
+              <span className='mt-1 text-xs'>
                 {new Date(note.updated_at).toLocaleString('fr-CH', {
                   year: '2-digit',
                   month: '2-digit',
                   day: '2-digit',
                 })}
               </span>
-            </>
+            </div>
           )}
         </CardTitle>
       </CardHeader>

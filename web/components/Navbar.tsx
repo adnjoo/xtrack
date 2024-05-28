@@ -9,11 +9,11 @@ export const Navbar = async () => {
     data: { user },
   } = await supabase.auth.getUser();
   return (
-    <div className='w-full flex justify-center border-b border-b-foreground/10 h-16'>
-      <div className='w-full max-w-4xl flex justify-between items-center p-3 text-sm'>
+    <div className='flex h-16 w-full justify-center border-b border-b-foreground/10'>
+      <div className='flex w-full max-w-5xl items-center justify-between p-3 text-sm'>
         <Link href='/'>Home</Link>
 
-        <div className='flex gap-4 items-center'>
+        <div className='flex items-center gap-4'>
           {user ? (
             <>
               <Link href='/notes'>Notes</Link>
