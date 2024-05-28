@@ -13,8 +13,8 @@ export default function Page() {
     queryFn: async () => {
       const { data } = await supabase.from('notes').select();
       return data;
-    }
-  })
+    },
+  });
 
   const points = notes?.map((note) => note.done).reduce((a, b) => a + b, 0);
   return (
