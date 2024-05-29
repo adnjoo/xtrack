@@ -26,7 +26,23 @@ export const Note = ({ note }: { note: any }) => {
   });
 
   const handleDelete = async (id: number) => {
-    if (!window.confirm('Are you sure you want to delete this note?')) return;
+    if (note.done) {
+      if (
+        !window.confirm(
+          'Are you sure you want to delete this note and get a point?'
+        )
+      ) {
+        return;
+      }
+      await supabase
+        .from('points')
+        .upsert({ points: 1, user_id: note.user_id });
+    }
+    if (!note.done) {
+      if (!window.confirm('Are you sure you want to delete this note?')) {
+        return;
+      }
+    }
     await supabase.from('notes').delete().eq('id', id);
     refetch();
   };
