@@ -25,6 +25,11 @@ export const Note = ({ note }: { note: any }) => {
     queryKey: ['notes'],
   });
 
+  const { refetch: refetchPoints } = useQuery({
+    queryKey: ['points'],
+  });
+
+
   const handleDelete = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this note?')) return;
     await supabase.from('notes').delete().eq('id', id);
@@ -57,6 +62,7 @@ export const Note = ({ note }: { note: any }) => {
       .eq('id', note.id);
     setIsDone(updatedStatus);
     refetch();
+    refetchPoints();
   };
 
   return (
