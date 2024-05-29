@@ -17,14 +17,21 @@ export default function Page() {
     },
   });
 
-  const points = notes?.map((note) => note.done).reduce((a, b) => a + b, 0);
+  const { data: points } = useQuery({
+    queryKey: ['points'],
+    queryFn: async () => {
+      const { data } = await supabase.from('notes').select().eq('done', true);
+      return data;
+    },
+  });
+
   return (
     <div className='mt-12 max-w-5xl'>
       <div className='flex w-full items-center gap-8'>
         <CreateNote />
-        <Badge className='max-h-[24px]'>⭐️ {points}</Badge>
+        <Badge className='max-h-[24px]'>⭐️ {points?.length}</Badge>
       </div>
-      <div className='my-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8'>
+      <div className='my-6 grid grid-cols-1 gap-4 md:grid-cols-2 sm:gap-8 lg:grid-cols-3'>
         {isLoading &&
           Array.from({ length: 6 }).map((_, i) => <LoadingNote key={i} />)}
         {notes
