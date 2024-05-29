@@ -35,8 +35,8 @@ export default function Page() {
         {isLoading &&
           Array.from({ length: 6 }).map((_, i) => <LoadingNote key={i} />)}
         {notes
-          ?.filter((note) => !note.done)
-          .map((note) => <Note key={note.id} note={note} />)}
+          ?.sort((a, b) => (a.done === b.done ? 0 : a.done ? 1 : -1))
+          ?.map((note) => <Note key={note.id} note={note} />)}
       </div>
     </div>
   );
