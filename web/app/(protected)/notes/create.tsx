@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -23,7 +24,13 @@ export const CreateNote = () => {
   });
 
   const handleCreateNote = async () => {
-    await supabase.from('notes').insert({ title: newNoteTitle, done: false });
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    await supabase
+      .from('notes')
+      .insert({ title: newNoteTitle, done: false, user_id: user?.id });
     setNewNoteTitle('');
     setIsDialogOpen(false);
     refetch();
