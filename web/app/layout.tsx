@@ -1,6 +1,8 @@
 import { Varela_Round } from 'next/font/google';
+
 import { Navbar } from '@/components/Navbar';
 import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
+
 import './globals.css';
 
 const varela = Varela_Round({

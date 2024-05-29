@@ -2,11 +2,12 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { ChevronUp } from 'lucide-react';
+
+import { CreateNote } from '@/app/(protected)/notes/create';
+import { LoadingNote, Note } from '@/app/(protected)/notes/note';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/client';
-import { CreateNote } from './create';
-import LoadingNote from './loading-note';
-import { Note } from './note';
 
 export default function Page() {
   const supabase = createClient();
@@ -43,7 +44,7 @@ export default function Page() {
       .map((note) => <Note key={note.id} note={note} />);
 
   return (
-    <div className='lg:w-5xl mt-12 w-full max-w-5xl'>
+    <div className={cn('mt-12 max-w-5xl', !notes?.length ? 'w-full' : '')}>
       <div className='flex w-full items-center gap-8'>
         <CreateNote />
         <Badge className='max-h-[24px]'>⭐️ {points?.length}</Badge>
@@ -52,7 +53,8 @@ export default function Page() {
         {isLoading ? renderLoadingNotes() : renderNotes()}
         {!isLoading && notes?.length === 0 && (
           <div>
-            <ChevronUp className='h-8 w-8 animate-bounce' /> Get started by creating a note 😊
+            <ChevronUp className='h-8 w-8 animate-bounce' /> Get started by
+            creating a note 😊
           </div>
         )}
       </div>

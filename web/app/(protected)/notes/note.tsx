@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -14,6 +15,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/client';
+
+export function LoadingNote() {
+  return (
+    <Card className='h-[188px] w-[320px] animate-pulse bg-slate-300'></Card>
+  );
+}
 
 export const Note = ({ note }: { note: any }) => {
   const supabase = createClient();
