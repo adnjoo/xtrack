@@ -4,14 +4,9 @@ export default function Header() {
       <h1 className='sr-only'>XTrack</h1>
       <p className='mx-auto max-w-xl text-center text-3xl !leading-tight lg:text-4xl'>
         The fastest way to GSD with{' '}
-        <a
-          href='https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs'
-          target='_blank'
-          className='font-bold hover:underline'
-          rel='noreferrer'
-        >
+        <span className='inline-block bg-gradient-to-r from-slate-700 via-gray-800 to-black bg-clip-text font-bold text-transparent'>
           Xtrack
-        </a>{' '}
+        </span>
       </p>
       <div className='my-8 w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent p-[1px]' />
     </div>
