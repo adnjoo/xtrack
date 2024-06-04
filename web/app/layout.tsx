@@ -1,5 +1,6 @@
 import { Varela_Round } from 'next/font/google';
 
+import Footer from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           <main className='flex min-h-screen flex-col items-center'>
             {children}
           </main>
+          <Footer />
         </body>
       </html>
     </ReactQueryClientProvider>
