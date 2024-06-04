@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { CreateNote } from '@/app/(protected)/notes/create';
 import { LoadingNote, Note } from '@/app/(protected)/notes/note';
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/client';
 
 export default function Page() {
@@ -55,7 +54,7 @@ export default function Page() {
       .map((note) => <Note key={note.id} note={note} />);
 
   return (
-    <div className={cn('mt-12 max-w-5xl', !notes?.length ? 'w-full' : '')}>
+    <div className='mt-12 w-full max-w-5xl px-4'>
       <div className='flex w-full items-center gap-8'>
         <CreateNote />
         <Badge className='max-h-[24px]'>⭐️ {points}</Badge>
