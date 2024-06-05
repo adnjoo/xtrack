@@ -23,7 +23,7 @@ const navigation = {
 export default function Footer() {
   return (
     <footer className='bg-gray-900 flex w-full justify-center' aria-labelledby='footer-heading'>
-      <div className='max-w-5xl'>
+      <div className='max-w-7xl w-full'>
         <h2 id='footer-heading' className='sr-only'>
           Footer
         </h2>
