@@ -59,7 +59,7 @@ export default function Page() {
       .map((note) => <Note key={note.id} note={note} />);
 
   return (
-    <div className='mt-12 w-full max-w-5xl px-4'>
+    <div className='mt-12 w-full px-6 lg:px-8'>
       {!isAuth && <div>You need to be authenticated to see this page</div>}
       {isAuth && (
         <>
