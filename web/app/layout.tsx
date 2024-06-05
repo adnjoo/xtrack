@@ -31,7 +31,7 @@ export default function RootLayout({
       <html lang='en' className={varela.className}>
         <body className='bg-background text-foreground'>
           <Navbar />
-          <main className='flex min-h-screen flex-col items-center'>
+          <main className='mt-[50px] flex min-h-screen flex-col items-center'>
             {children}
           </main>
           <Footer />
