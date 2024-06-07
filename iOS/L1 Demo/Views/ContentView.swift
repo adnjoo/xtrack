@@ -13,22 +13,18 @@ struct ContentView: View {
             Color(.black).ignoresSafeArea()
             
             VStack {
-                Text("L1 Demo")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
+                TitleText(text: "L1 Demo")
+
                 Image("surf")
                     .resizable()
                     .cornerRadius(10)
                     .aspectRatio(contentMode: .fit)
                     .padding(.all)
-                Text("Surf and turf")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
+                TitleText(text: "Surf and turf")
+
             }
-                
-            }
+            
+        }
     }
 }
 

@@ -8,17 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		8D70456A2C12F8270018DF78 /* L1_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7045692C12F8270018DF78 /* L1_DemoApp.swift */; };
-		8D70456C2C12F8270018DF78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D70456B2C12F8270018DF78 /* ContentView.swift */; };
 		8D70456E2C12F8280018DF78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D70456D2C12F8280018DF78 /* Assets.xcassets */; };
 		8D7045712C12F8280018DF78 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7045702C12F8280018DF78 /* Preview Assets.xcassets */; };
+		8DB9DFDF2C1303A500308C9F /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB9DFDE2C1303A500308C9F /* Auth */; };
+		8DB9DFE12C1303A500308C9F /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB9DFE02C1303A500308C9F /* Functions */; };
+		8DB9DFE32C1303A500308C9F /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB9DFE22C1303A500308C9F /* PostgREST */; };
+		8DB9DFE52C1303A500308C9F /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB9DFE42C1303A500308C9F /* Realtime */; };
+		8DB9DFE72C1303A500308C9F /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB9DFE62C1303A500308C9F /* Storage */; };
+		8DB9DFEA2C13056200308C9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB9DFE92C13056200308C9F /* TextView.swift */; };
+		8DB9DFEC2C1306DD00308C9F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB9DFEB2C1306DD00308C9F /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8D7045662C12F8270018DF78 /* L1 Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "L1 Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7045692C12F8270018DF78 /* L1_DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1_DemoApp.swift; sourceTree = "<group>"; };
-		8D70456B2C12F8270018DF78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8D70456D2C12F8280018DF78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D7045702C12F8280018DF78 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8DB9DFE92C13056200308C9F /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextView.swift; path = "../xtrack/iOS/L1 Demo/Views/TextView.swift"; sourceTree = "<group>"; };
+		8DB9DFEB2C1306DD00308C9F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +33,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB9DFE32C1303A500308C9F /* PostgREST in Frameworks */,
+				8DB9DFE12C1303A500308C9F /* Functions in Frameworks */,
+				8DB9DFDF2C1303A500308C9F /* Auth in Frameworks */,
+				8DB9DFE72C1303A500308C9F /* Storage in Frameworks */,
+				8DB9DFE52C1303A500308C9F /* Realtime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +49,7 @@
 			children = (
 				8D7045682C12F8270018DF78 /* L1 Demo */,
 				8D7045672C12F8270018DF78 /* Products */,
+				8DB9DFDC2C13036200308C9F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,8 +64,8 @@
 		8D7045682C12F8270018DF78 /* L1 Demo */ = {
 			isa = PBXGroup;
 			children = (
+				8DB9DFE82C13053B00308C9F /* Views */,
 				8D7045692C12F8270018DF78 /* L1_DemoApp.swift */,
-				8D70456B2C12F8270018DF78 /* ContentView.swift */,
 				8D70456D2C12F8280018DF78 /* Assets.xcassets */,
 				8D70456F2C12F8280018DF78 /* Preview Content */,
 			);
@@ -65,6 +78,23 @@
 				8D7045702C12F8280018DF78 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8DB9DFDC2C13036200308C9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DB9DFE82C13053B00308C9F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8DB9DFE92C13056200308C9F /* TextView.swift */,
+				8DB9DFEB2C1306DD00308C9F /* ContentView.swift */,
+			);
+			name = Views;
+			path = ../../../Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +113,13 @@
 			dependencies = (
 			);
 			name = "L1 Demo";
+			packageProductDependencies = (
+				8DB9DFDE2C1303A500308C9F /* Auth */,
+				8DB9DFE02C1303A500308C9F /* Functions */,
+				8DB9DFE22C1303A500308C9F /* PostgREST */,
+				8DB9DFE42C1303A500308C9F /* Realtime */,
+				8DB9DFE62C1303A500308C9F /* Storage */,
+			);
 			productName = "L1 Demo";
 			productReference = 8D7045662C12F8270018DF78 /* L1 Demo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +148,9 @@
 				Base,
 			);
 			mainGroup = 8D70455D2C12F8270018DF78;
+			packageReferences = (
+				8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			productRefGroup = 8D7045672C12F8270018DF78 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D70456C2C12F8270018DF78 /* ContentView.swift in Sources */,
+				8DB9DFEA2C13056200308C9F /* TextView.swift in Sources */,
+				8DB9DFEC2C1306DD00308C9F /* ContentView.swift in Sources */,
 				8D70456A2C12F8270018DF78 /* L1_DemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +385,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DB9DFDE2C1303A500308C9F /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		8DB9DFE02C1303A500308C9F /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		8DB9DFE22C1303A500308C9F /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		8DB9DFE42C1303A500308C9F /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		8DB9DFE62C1303A500308C9F /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8D70455E2C12F8270018DF78 /* Project object */;
 }
