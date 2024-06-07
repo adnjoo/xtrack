@@ -13,7 +13,10 @@ struct ContentView: View {
             Color(.black).ignoresSafeArea()
             
             VStack {
-                
+                Text("L1 Demo")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.white)
                 Image("surf")
                     .resizable()
                     .cornerRadius(10)
