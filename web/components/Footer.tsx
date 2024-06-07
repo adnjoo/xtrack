@@ -32,7 +32,7 @@ export default function Footer() {
             <div className='space-y-8 text-gray-300'>
               🫠 Xtrack
               <p className='text-sm leading-6 text-gray-300'>
-                Streamlining your tasks so you can GSD faster.
+                Streamlining your tasks so you can GTD faster.
               </p>
               <div className='flex space-x-6'>
                 {navigation.social.map((item) => (
