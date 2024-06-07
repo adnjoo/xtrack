@@ -9,7 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Image("surf")
+        ZStack {
+            Color(.black).ignoresSafeArea()
+            
+            VStack {
+                
+                Image("surf")
+                    .resizable()
+                    .cornerRadius(10)
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.all)
+                Text("Surf and turf")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.white)
+            }
+                
+            }
     }
 }
 
