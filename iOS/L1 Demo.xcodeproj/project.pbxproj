@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D1AA5152C13F8B700DEC1BB /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AA5142C13F8B700DEC1BB /* TextView.swift */; };
 		8D1AA5172C13F8D700DEC1BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AA5162C13F8D700DEC1BB /* ContentView.swift */; };
+		8D1AA51A2C14099F00DEC1BB /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AA5192C14099F00DEC1BB /* Supabase.swift */; };
 		8D70456A2C12F8270018DF78 /* L1_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7045692C12F8270018DF78 /* L1_DemoApp.swift */; };
 		8D70456E2C12F8280018DF78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D70456D2C12F8280018DF78 /* Assets.xcassets */; };
 		8D7045712C12F8280018DF78 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7045702C12F8280018DF78 /* Preview Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		8D1AA5142C13F8B700DEC1BB /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextView.swift; path = "L1 Demo/Views/TextView.swift"; sourceTree = SOURCE_ROOT; };
 		8D1AA5162C13F8D700DEC1BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "L1 Demo/Views/ContentView.swift"; sourceTree = SOURCE_ROOT; };
+		8D1AA5192C14099F00DEC1BB /* Supabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
 		8D7045662C12F8270018DF78 /* L1 Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "L1 Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D7045692C12F8270018DF78 /* L1_DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L1_DemoApp.swift; sourceTree = "<group>"; };
 		8D70456D2C12F8280018DF78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		8D1AA5182C14066000DEC1BB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8D1AA5192C14099F00DEC1BB /* Supabase.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D70456A2C12F8270018DF78 /* L1_DemoApp.swift in Sources */,
+				8D1AA51A2C14099F00DEC1BB /* Supabase.swift in Sources */,
 				8D1AA5152C13F8B700DEC1BB /* TextView.swift in Sources */,
 				8D1AA5172C13F8D700DEC1BB /* ContentView.swift in Sources */,
 			);
