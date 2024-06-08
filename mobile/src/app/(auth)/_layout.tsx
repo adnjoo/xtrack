@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name='notes'
+        name='index'
         options={{
           title: 'Notes',
           tabBarIcon: ({ color }) => (
