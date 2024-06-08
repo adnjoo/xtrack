@@ -18,21 +18,54 @@ export const Note = ({ note }: { note: any }) => {
     queryKey: ['notes'],
   });
   const handleTrashClick = () => {
-    Alert.alert('Delete Note', 'Are you sure you want to delete this note?', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {
-        text: 'Delete',
-        onPress: () => deleteNote(note.id),
-        style: 'destructive',
-      },
-    ]);
+    if (note.done) {
+      Alert.alert(
+        'Delete Note',
+        'Are you sure you want to delete this note and get a point?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Delete',
+            onPress: () => deleteNote(),
+            style: 'destructive',
+          },
+        ]
+      );
+    } else {
+      Alert.alert('Delete Note', 'Are you sure you want to delete this note?', [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => deleteNote(),
+          style: 'destructive',
+        },
+      ]);
+    }
   };
-  const deleteNote = async (noteId: string) => {
+  const deleteNote = async () => {
     try {
-      const { error } = await supabase.from('notes').delete().eq('id', noteId);
+      const points = await supabase
+        .from('points')
+        .select()
+        .eq('user_id', note.user_id);
+      if (points.data && points.data.length > 0) {
+        await supabase
+          .from('points')
+          .update({ points: points.data[0].points + 1 })
+          .eq('user_id', note.user_id);
+      } else {
+        await supabase
+          .from('points')
+          .insert({ user_id: note.user_id, points: 1 });
+      }
+
+      const { error } = await supabase.from('notes').delete().eq('id', note.id);
 
       if (error) {
         Alert.alert('Error', error.message);
@@ -82,7 +115,7 @@ export const Note = ({ note }: { note: any }) => {
       </CardContent>
       <Button
         className='absolute right-2 top-2 bg-transparent'
-        onPress={handleTrashClick}
+        onPress={() => handleTrashClick(note.done)}
       >
         <Trash color='red' />
       </Button>
