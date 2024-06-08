@@ -1,8 +1,8 @@
-import { Text } from '@rneui/base';
 import { Input } from '@rneui/themed';
 import { Session } from '@supabase/supabase-js';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 
 import { Button } from '@/src/components/ui/button';
 import { supabase } from '@/src/lib/supabase';
@@ -13,6 +13,9 @@ export default function Account() {
   const [website, setWebsite] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [session, setSession] = useState<Session | null>(null);
+  const { refetch } = useQuery({
+    queryKey: ['name'],
+  });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -55,6 +58,7 @@ export default function Account() {
       }
     } finally {
       setLoading(false);
+      refetch();
     }
   }
 
@@ -109,13 +113,13 @@ export default function Account() {
           }
           disabled={loading}
         >
-          <Text style={{ color: 'white' }}>
+          <Text className='text-white'>
             {loading ? 'Loading ...' : 'Update'}
           </Text>
         </Button>
 
         <Button onPress={() => supabase.auth.signOut()}>
-          <Text style={{ color: 'white' }}>Sign out</Text>
+          <Text className='text-white'>Sign out</Text>
         </Button>
       </View>
     </View>

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 
 import '@/global.css';
+import { ReactQueryClientProvider } from '@/src/app/context/RQProvider';
 import { SessionProvider } from '@/src/app/context/SessionProvider';
 import { NAV_THEME } from '@/src/lib/constants';
 import { useColorScheme } from '@/src/lib/useColorScheme';
@@ -60,16 +61,18 @@ export default function RootLayout() {
   }
 
   return (
-    <SessionProvider>
-      <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-        <Stack>
-          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-          <Stack.Screen
-            name='(public)/login'
-            options={{ headerShown: false }}
-          />
-        </Stack>
-      </ThemeProvider>
-    </SessionProvider>
+    <ReactQueryClientProvider>
+      <SessionProvider>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <Stack>
+            <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+            <Stack.Screen
+              name='(public)/login'
+              options={{ headerShown: false }}
+            />
+          </Stack>
+        </ThemeProvider>
+      </SessionProvider>
+    </ReactQueryClientProvider>
   );
 }
