@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
+import "../global.css"
 
 export default function Layout() {
   return (
