@@ -44,10 +44,28 @@ export const Note = ({ note }: { note: any }) => {
     }
   };
 
+  const markDone = async (noteId: string, done: boolean = true) => {
+    try {
+      const { error } = await supabase
+        .from('notes')
+        .update({ done, done_date: new Date() })
+        .eq('id', noteId);
+      if (error) {
+        Alert.alert('Error', error.message);
+      }
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      refetchNotes();
+    }
+  };
+
   return (
     <Card key={note.id} className='my-1'>
       <CardHeader>
-        <CardTitle>{note.title}</CardTitle>
+        <CardTitle className={note.done ? 'line-through' : ''}>
+          {note.title}
+        </CardTitle>
         <CardDescription>
           {new Date(note.updated_at).toLocaleString('en-US', {
             year: 'numeric',
@@ -57,7 +75,10 @@ export const Note = ({ note }: { note: any }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Checkbox checked={note.done} onCheckedChange={() => {}} />
+        <Checkbox
+          checked={note.done}
+          onCheckedChange={() => markDone(note.id, !note.done)}
+        />
       </CardContent>
       <Button
         className='absolute right-2 top-2 bg-transparent'
