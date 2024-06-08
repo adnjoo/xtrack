@@ -1,9 +1,10 @@
 import { Text } from '@rneui/base';
-import { Button, Input } from '@rneui/themed';
+import { Input } from '@rneui/themed';
 import { Session } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, View } from 'react-native';
 
+import { Button } from '@/src/components/ui/button';
 import { supabase } from '@/src/lib/supabase';
 
 export default function Account() {
@@ -92,58 +93,31 @@ export default function Account() {
     }
   }
 
-  if (!session?.user) {
-    return (
-      <View className='mt-10 p-3'>
-        <Text>Not signed in.</Text>
-      </View>
-    );
-  }
-
   return (
     <View className='mt-10 p-3'>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label='Email' value={session?.user?.email} disabled />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label='Username'
-          value={username || ''}
-          onChangeText={(text) => setUsername(text)}
-        />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label='Website'
-          value={website || ''}
-          onChangeText={(text) => setWebsite(text)}
-        />
-      </View>
+      <Input label='Email' value={session?.user?.email} disabled />
+      <Input
+        label='Username'
+        value={username || ''}
+        onChangeText={(text) => setUsername(text)}
+      />
 
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+      <View className='mx-4 gap-4'>
         <Button
-          title={loading ? 'Loading ...' : 'Update'}
           onPress={() =>
             updateProfile({ username, website, avatar_url: avatarUrl })
           }
           disabled={loading}
-        />
-      </View>
+        >
+          <Text style={{ color: 'white' }}>
+            {loading ? 'Loading ...' : 'Update'}
+          </Text>
+        </Button>
 
-      <View style={styles.verticallySpaced}>
-        <Button title='Sign Out' onPress={() => supabase.auth.signOut()} />
+        <Button onPress={() => supabase.auth.signOut()}>
+          <Text style={{ color: 'white' }}>Sign out</Text>
+        </Button>
       </View>
     </View>
   );
 }
-
-export const styles = StyleSheet.create({
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-});
