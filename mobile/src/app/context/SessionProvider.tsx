@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext, useContext } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/src/lib/supabase';
 import { Session } from '@supabase/supabase-js';
 import { router, useSegments } from 'expo-router';
 

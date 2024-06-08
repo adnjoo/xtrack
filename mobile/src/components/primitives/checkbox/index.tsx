@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GestureResponderEvent, Pressable, View } from 'react-native';
-import * as Slot from '~/components/primitives/slot';
-import type { ComponentPropsWithAsChild, PressableRef, SlottablePressableProps } from '~/components/primitives/types';
+import * as Slot from '@/src/components/primitives/slot';
+import type { ComponentPropsWithAsChild, PressableRef, SlottablePressableProps } from '@/src/components/primitives/types';
 import type { CheckboxIndicator, CheckboxRootProps } from './types';
 
 interface RootContext extends CheckboxRootProps {

@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import { SplashScreen, Stack } from 'expo-router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
 
 import '@/global.css';
-import { SessionProvider } from '@/app/context/SessionProvider';
+import { SessionProvider } from '@/src/app/context/SessionProvider';
+import { NAV_THEME } from '@/src/lib/constants';
+import { useColorScheme } from '@/src/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -63,8 +63,11 @@ export default function RootLayout() {
     <SessionProvider>
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
         <Stack>
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(public)/login" options={{ headerShown: false }} />
+          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+          <Stack.Screen
+            name='(public)/login'
+            options={{ headerShown: false }}
+          />
         </Stack>
       </ThemeProvider>
     </SessionProvider>

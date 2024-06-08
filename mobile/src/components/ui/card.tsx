@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { TextClassContext } from '~/components/ui/text';
-import { TextRef, ViewRef } from '~/components/primitives/types';
-import { cn } from '~/lib/utils';
+import { TextClassContext } from '@/src/components/ui/text';
+import { TextRef, ViewRef } from '@/src/components/primitives/types';
+import { cn } from '@/src/lib/utils';
 
 const Card = React.forwardRef<ViewRef, React.ComponentPropsWithoutRef<typeof View>>(
   ({ className, ...props }, ref) => (
