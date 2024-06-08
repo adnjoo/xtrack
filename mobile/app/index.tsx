@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import Auth from "@/components/auth";
-import { View, Alert, Text } from "react-native";
-import { Session } from "@supabase/supabase-js";
-import { styles } from "./account";
+import { Session } from '@supabase/supabase-js';
+import { useEffect, useState } from 'react';
+import { Alert, Text, View } from 'react-native';
+
+import Auth from '@/components/auth';
+import { supabase } from '@/lib/supabase';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -18,9 +18,9 @@ export default function App() {
   async function getNotes() {
     try {
       const { data, error } = await supabase
-        .from("notes")
-        .select("*")
-        .eq("user_id", session?.user.id);
+        .from('notes')
+        .select('*')
+        .eq('user_id', session?.user.id);
 
       setNotes(data);
     } catch (error) {
@@ -43,10 +43,12 @@ export default function App() {
   return (
     <>
       <View>{!session && !session?.user ? <Auth /> : null}</View>
-      <View style={styles.verticallySpaced}>
+      <View>
         {notes.map((note) => (
           <View key={note.id}>
-            <Text>{note.title}</Text>
+            <Text className='text-3xl text-red-500 underline'>
+              {note.title}
+            </Text>
           </View>
         ))}
       </View>
