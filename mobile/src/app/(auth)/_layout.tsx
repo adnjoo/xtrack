@@ -5,11 +5,11 @@ export default function Layout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name='index'
+        name='notes'
         options={{
-          title: 'Home',
+          title: 'Notes',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name='home' color={color} />
+            <FontAwesome size={28} name='sticky-note' color={color} />
           ),
         }}
       />
