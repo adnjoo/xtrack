@@ -45,8 +45,8 @@ export default function App() {
       <View>{!session && !session?.user ? <Auth /> : null}</View>
       <View style={styles.verticallySpaced}>
         {notes.map((note) => (
-          <View key={note.id} className='text-3xl underline'>
-            <Text className='underline text-red'>{note.title}</Text>
+          <View key={note.id}>
+            <Text className='underline text-3xl text-red-500'>{note.title}</Text>
           </View>
         ))}
       </View>

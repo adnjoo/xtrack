@@ -93,14 +93,14 @@ export default function Account() {
 
   if (!session?.user) {
     return (
-      <View style={styles.container}>
+      <View className='mt-10 p-3'>
         <Text>Not signed in.</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View className='mt-10 p-3'>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input label="Email" value={session?.user?.email} disabled />
       </View>
@@ -138,10 +138,6 @@ export default function Account() {
 }
 
 export const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
   verticallySpaced: {
     paddingTop: 4,
     paddingBottom: 4,
