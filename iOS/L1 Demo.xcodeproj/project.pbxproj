@@ -10,6 +10,7 @@
 		8D1AA5152C13F8B700DEC1BB /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AA5142C13F8B700DEC1BB /* TextView.swift */; };
 		8D1AA5172C13F8D700DEC1BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AA5162C13F8D700DEC1BB /* ContentView.swift */; };
 		8D1AA51A2C14099F00DEC1BB /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1AA5192C14099F00DEC1BB /* Supabase.swift */; };
+		8D1AA51C2C140D6D00DEC1BB /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8D1AA51B2C140D6D00DEC1BB /* Supabase */; };
 		8D70456A2C12F8270018DF78 /* L1_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7045692C12F8270018DF78 /* L1_DemoApp.swift */; };
 		8D70456E2C12F8280018DF78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D70456D2C12F8280018DF78 /* Assets.xcassets */; };
 		8D7045712C12F8280018DF78 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7045702C12F8280018DF78 /* Preview Assets.xcassets */; };
@@ -37,6 +38,7 @@
 			files = (
 				8DB9DFE32C1303A500308C9F /* PostgREST in Frameworks */,
 				8DB9DFE12C1303A500308C9F /* Functions in Frameworks */,
+				8D1AA51C2C140D6D00DEC1BB /* Supabase in Frameworks */,
 				8DB9DFDF2C1303A500308C9F /* Auth in Frameworks */,
 				8DB9DFE72C1303A500308C9F /* Storage in Frameworks */,
 				8DB9DFE52C1303A500308C9F /* Realtime in Frameworks */,
@@ -129,6 +131,7 @@
 				8DB9DFE22C1303A500308C9F /* PostgREST */,
 				8DB9DFE42C1303A500308C9F /* Realtime */,
 				8DB9DFE62C1303A500308C9F /* Storage */,
+				8D1AA51B2C140D6D00DEC1BB /* Supabase */,
 			);
 			productName = "L1 Demo";
 			productReference = 8D7045662C12F8270018DF78 /* L1 Demo.app */;
@@ -409,6 +412,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8D1AA51B2C140D6D00DEC1BB /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
 		8DB9DFDE2C1303A500308C9F /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8DB9DFDD2C1303A500308C9F /* XCRemoteSwiftPackageReference "supabase-swift" */;
