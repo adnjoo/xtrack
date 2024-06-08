@@ -3,6 +3,7 @@ Productivity App 🚀
 🥞
 
 - Next 14
+- Expo
 - Shadcn
 - Supabase
 
