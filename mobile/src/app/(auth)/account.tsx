@@ -1,37 +1,25 @@
 import { Input } from '@rneui/themed';
-import { Session } from '@supabase/supabase-js';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 
+import { useSession } from '@/src/app/context/SessionProvider';
 import { Button } from '@/src/components/ui/button';
 import { supabase } from '@/src/lib/supabase';
 
 export default function Account() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
-  const [website, setWebsite] = useState('');
-  const [avatarUrl, setAvatarUrl] = useState('');
-  const [session, setSession] = useState<Session | null>(null);
-  const { refetch } = useQuery({
+  const session = useSession();
+  const { refetch: refetchName } = useQuery({
     queryKey: ['name'],
   });
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (session) {
-      getProfile();
-    }
-  }, [session]);
+  const { data: profile } = useQuery({
+    queryKey: ['profile'],
+    queryFn: () => getProfile(),
+    enabled: !!session,
+  });
 
   async function getProfile() {
     try {
@@ -49,8 +37,7 @@ export default function Account() {
 
       if (data) {
         setUsername(data.username);
-        setWebsite(data.website);
-        setAvatarUrl(data.avatar_url);
+        return data;
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -58,19 +45,10 @@ export default function Account() {
       }
     } finally {
       setLoading(false);
-      refetch();
     }
   }
 
-  async function updateProfile({
-    username,
-    website,
-    avatar_url,
-  }: {
-    username: string;
-    website: string;
-    avatar_url: string;
-  }) {
+  async function updateProfile({ username }: { username: string }) {
     try {
       setLoading(true);
       if (!session?.user) throw new Error('No user on the session!');
@@ -78,8 +56,6 @@ export default function Account() {
       const updates = {
         id: session?.user.id,
         username,
-        website,
-        avatar_url,
         updated_at: new Date(),
       };
 
@@ -94,6 +70,7 @@ export default function Account() {
       }
     } finally {
       setLoading(false);
+      refetchName();
     }
   }
 
@@ -107,12 +84,7 @@ export default function Account() {
       />
 
       <View className='mx-4 gap-4'>
-        <Button
-          onPress={() =>
-            updateProfile({ username, website, avatar_url: avatarUrl })
-          }
-          disabled={loading}
-        >
+        <Button onPress={() => updateProfile({ username })} disabled={loading}>
           <Text className='text-white'>
             {loading ? 'Loading ...' : 'Update'}
           </Text>

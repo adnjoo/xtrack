@@ -24,37 +24,36 @@ const fetchName = async (userId: string) => {
   return data.username;
 };
 
+const getNotes = async (userId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from('notes')
+      .select('*')
+      .eq('user_id', userId);
+
+    if (error) throw error;
+
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      Alert.alert(error.message);
+    }
+  }
+};
+
 export default function App() {
   const session = useSession();
-  const [notes, setNotes] = useState([]);
   const { data: name } = useQuery({
     queryKey: ['name'],
     queryFn: () => fetchName(session?.user?.id as string),
     enabled: !!session,
   });
 
-  useEffect(() => {
-    if (session) {
-      getNotes();
-    }
-  }, [session]);
-
-  async function getNotes() {
-    try {
-      const { data, error } = await supabase
-        .from('notes')
-        .select('*')
-        .eq('user_id', session?.user?.id);
-
-      if (error) throw error;
-
-      setNotes(data);
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message);
-      }
-    }
-  }
+  const { data: notes } = useQuery({
+    queryKey: ['notes'],
+    queryFn: () => getNotes(session?.user?.id as string),
+    enabled: !!session,
+  });
 
   return (
     <View className='p-3'>
