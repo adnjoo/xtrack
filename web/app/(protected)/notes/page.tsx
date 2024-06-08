@@ -5,7 +5,7 @@ import { ChevronUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { CreateNote } from '@/app/(protected)/notes/create';
-import { LoadingNote, Note } from '@/app/(protected)/notes/note';
+import { LoadingNote, Note } from '@/components/note';
 import { Badge } from '@/components/ui/badge';
 import { createClient } from '@/utils/supabase/client';
 

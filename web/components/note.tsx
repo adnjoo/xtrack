@@ -16,6 +16,8 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/client';
 
+import { Checkbox } from './ui/checkbox';
+
 export function LoadingNote() {
   return (
     <Card className='h-[188px] w-[320px] animate-pulse bg-slate-300'></Card>
@@ -105,23 +107,24 @@ export const Note = ({ note }: { note: any }) => {
               className='text-black'
             />
           ) : (
-            <div className='flex flex-col'>
-              <span
-                className={cn(
-                  'cursor-pointer text-xl',
-                  isDone && 'line-through'
-                )}
-                onClick={handleToggleDone}
-              >
-                {note.title}
-              </span>
-              <span className='mt-1 text-xs'>
-                {new Date(note.updated_at).toLocaleString('fr-CH', {
-                  year: '2-digit',
-                  month: '2-digit',
-                  day: '2-digit',
-                })}
-              </span>
+            <div className='flex flex-row justify-between w-full'>
+              <div className='flex flex-col'>
+                <span className={cn('text-xl', isDone && 'line-through')}>
+                  {note.title}
+                </span>
+                <span className='mt-1 text-xs'>
+                  {new Date(note.updated_at).toLocaleString('fr-CH', {
+                    year: '2-digit',
+                    month: '2-digit',
+                    day: '2-digit',
+                  })}
+                </span>
+              </div>
+              <Checkbox
+                checked={isDone}
+                onCheckedChange={handleToggleDone}
+                className='ml-auto'
+              />
             </div>
           )}
         </CardTitle>
