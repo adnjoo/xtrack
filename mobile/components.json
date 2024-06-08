@@ -1,7 +1,7 @@
 {
   "platforms": "native-only",
   "aliases": {
-    "components": "~/src/components",
-    "lib": "~/src/lib"
+    "components": "@/src/components",
+    "lib": "@/src/lib"
   }
 }
