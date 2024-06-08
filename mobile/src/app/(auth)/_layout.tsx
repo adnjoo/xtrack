@@ -7,9 +7,9 @@ export default function Layout() {
       <Tabs.Screen
         name='index'
         options={{
-          title: 'Home',
+          title: 'Notes',
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name='home' color={color} />
+            <FontAwesome size={28} name='sticky-note' color={color} />
           ),
         }}
       />
