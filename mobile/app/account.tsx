@@ -5,34 +5,28 @@ import { Button, Input } from "@rneui/themed";
 import { Session } from "@supabase/supabase-js";
 import { Text } from "@rneui/base";
 
-export default function Account({ session }: { session: Session }) {
+export default function Account() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [website, setWebsite] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
   useEffect(() => {
     if (session) {
       getProfile();
-      getNotes();
     }
   }, [session]);
-
-  async function getNotes() {
-    try {
-      const { data, error } = await supabase
-        .from("notes")
-        .select("*")
-        .eq("user_id", session?.user.id);
-
-      setNotes(data);
-    } catch (error) {
-      if (error instanceof Error) {
-        Alert.alert(error.message);
-      }
-    }
-  }
 
   async function getProfile() {
     try {
@@ -97,6 +91,14 @@ export default function Account({ session }: { session: Session }) {
     }
   }
 
+  if (!session?.user) {
+    return (
+      <View style={styles.container}>
+        <Text>Not signed in.</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
@@ -131,18 +133,11 @@ export default function Account({ session }: { session: Session }) {
         <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
       </View>
 
-      <View style={styles.verticallySpaced}>
-        {notes.map((note) => (
-          <View key={note.id}>
-            <Text>{note.title}</Text>
-          </View>
-        ))}
-      </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     marginTop: 40,
     padding: 12,
