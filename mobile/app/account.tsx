@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
-import { StyleSheet, View, Alert } from "react-native";
-import { Button, Input } from "@rneui/themed";
-import { Session } from "@supabase/supabase-js";
-import { Text } from "@rneui/base";
+import { Text } from '@rneui/base';
+import { Button, Input } from '@rneui/themed';
+import { Session } from '@supabase/supabase-js';
+import { useEffect, useState } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
+
+import { supabase } from '@/lib/supabase';
 
 export default function Account() {
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState("");
-  const [website, setWebsite] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [username, setUsername] = useState('');
+  const [website, setWebsite] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('');
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
@@ -31,12 +32,12 @@ export default function Account() {
   async function getProfile() {
     try {
       setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
+      if (!session?.user) throw new Error('No user on the session!');
 
       const { data, error, status } = await supabase
-        .from("profiles")
+        .from('profiles')
         .select(`username, website, avatar_url`)
-        .eq("id", session?.user.id)
+        .eq('id', session?.user.id)
         .single();
       if (error && status !== 406) {
         throw error;
@@ -67,7 +68,7 @@ export default function Account() {
   }) {
     try {
       setLoading(true);
-      if (!session?.user) throw new Error("No user on the session!");
+      if (!session?.user) throw new Error('No user on the session!');
 
       const updates = {
         id: session?.user.id,
@@ -77,7 +78,7 @@ export default function Account() {
         updated_at: new Date(),
       };
 
-      const { error } = await supabase.from("profiles").upsert(updates);
+      const { error } = await supabase.from('profiles').upsert(updates);
 
       if (error) {
         throw error;
@@ -102,26 +103,26 @@ export default function Account() {
   return (
     <View className='mt-10 p-3'>
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input label="Email" value={session?.user?.email} disabled />
+        <Input label='Email' value={session?.user?.email} disabled />
       </View>
       <View style={styles.verticallySpaced}>
         <Input
-          label="Username"
-          value={username || ""}
+          label='Username'
+          value={username || ''}
           onChangeText={(text) => setUsername(text)}
         />
       </View>
       <View style={styles.verticallySpaced}>
         <Input
-          label="Website"
-          value={website || ""}
+          label='Website'
+          value={website || ''}
           onChangeText={(text) => setWebsite(text)}
         />
       </View>
 
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
-          title={loading ? "Loading ..." : "Update"}
+          title={loading ? 'Loading ...' : 'Update'}
           onPress={() =>
             updateProfile({ username, website, avatar_url: avatarUrl })
           }
@@ -130,9 +131,8 @@ export default function Account() {
       </View>
 
       <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+        <Button title='Sign Out' onPress={() => supabase.auth.signOut()} />
       </View>
-
     </View>
   );
 }
@@ -141,7 +141,7 @@ export const styles = StyleSheet.create({
   verticallySpaced: {
     paddingTop: 4,
     paddingBottom: 4,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
   },
   mt20: {
     marginTop: 20,
