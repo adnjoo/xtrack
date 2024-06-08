@@ -93,8 +93,7 @@
 				8D1AA5142C13F8B700DEC1BB /* TextView.swift */,
 				8D1AA5162C13F8D700DEC1BB /* ContentView.swift */,
 			);
-			name = Views;
-			path = ../../../Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
