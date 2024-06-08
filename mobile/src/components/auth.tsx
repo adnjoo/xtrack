@@ -1,7 +1,8 @@
-import { Button, Input } from '@rneui/themed';
+import { Input } from '@rneui/themed';
 import React, { useState } from 'react';
-import { Alert, AppState, StyleSheet, View } from 'react-native';
+import { Alert, AppState, Text, View } from 'react-native';
 
+import { Button } from '@/src/components/ui/button';
 import { supabase } from '@/src/lib/supabase';
 
 // Tells Supabase Auth to continuously refresh the session automatically if
@@ -49,18 +50,18 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
+    <View className='mt-10 p-3'>
+      <View className='mt-5 py-1'>
         <Input
           label='Email'
           leftIcon={{ type: 'font-awesome', name: 'envelope' }}
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder='email@address.com'
-          autoCapitalize={'none'}
+          autoCapitalize='none'
         />
       </View>
-      <View style={styles.verticallySpaced}>
+      <View className='py-1'>
         <Input
           label='Password'
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
@@ -68,38 +69,19 @@ export default function Auth() {
           value={password}
           secureTextEntry={true}
           placeholder='Password'
-          autoCapitalize={'none'}
+          autoCapitalize='none'
         />
       </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button
-          title='Sign in'
-          disabled={loading}
-          onPress={() => signInWithEmail()}
-        />
+      <View className='mt-5 py-1'>
+        <Button disabled={loading} onPress={() => signInWithEmail()}>
+          <Text className='text-white'>Sign in</Text>
+        </Button>
       </View>
-      <View style={styles.verticallySpaced}>
-        <Button
-          title='Sign up'
-          disabled={loading}
-          onPress={() => signUpWithEmail()}
-        />
+      <View className='py-1'>
+        <Button disabled={loading} onPress={() => signUpWithEmail()}>
+          <Text className='text-white'>Sign up</Text>
+        </Button>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-});
