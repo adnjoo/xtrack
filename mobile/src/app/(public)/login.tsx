@@ -51,6 +51,9 @@ export default function Auth() {
 
   return (
     <View className='mt-24 p-3'>
+      <Text className='mx-2 mb-10 text-xl font-bold'>
+        Login to see your notes
+      </Text>
       <View className='mt-5 py-1'>
         <Input
           label='Email'
@@ -60,8 +63,6 @@ export default function Auth() {
           placeholder='email@address.com'
           autoCapitalize='none'
         />
-      </View>
-      <View className='py-1'>
         <Input
           label='Password'
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
