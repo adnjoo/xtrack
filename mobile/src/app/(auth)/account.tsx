@@ -4,7 +4,7 @@ import { Session } from '@supabase/supabase-js';
 import { useEffect, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/src/lib/supabase';
 
 export default function Account() {
   const [loading, setLoading] = useState(true);

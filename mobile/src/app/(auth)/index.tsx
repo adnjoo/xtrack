@@ -4,15 +4,13 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from '~/components/ui/card';
-import { Checkbox } from '~/components/ui/checkbox';
+} from '@/src/components/ui/card';
+import { Checkbox } from '@/src/components/ui/checkbox';
 
-import Auth from '@/components/auth';
-import { supabase } from '@/lib/supabase';
-import { useSession } from '@/app/context/SessionProvider';
+import { supabase } from '@/src/lib/supabase';
+import { useSession } from '@/src/app/context/SessionProvider';
 
 export default function App() {
   const session = useSession();
@@ -30,6 +28,8 @@ export default function App() {
         .from('notes')
         .select('*')
         .eq('user_id', session?.user?.id);
+
+      if (error) throw error;
 
       setNotes(data);
     } catch (error) {
