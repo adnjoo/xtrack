@@ -22,16 +22,16 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className='bg-gray-900 flex w-full justify-center' aria-labelledby='footer-heading'>
+    <footer className='flex w-full justify-center' aria-labelledby='footer-heading'>
       <div className='max-w-7xl w-full'>
         <h2 id='footer-heading' className='sr-only'>
           Footer
         </h2>
         <div className='mx-auto max-w-7xl px-6 pb-8 pt-8 sm:pt-12 lg:px-8'>
           <div className='lg:grid lg:grid-cols-3 xl:gap-8'>
-            <div className='space-y-8 text-gray-300'>
+            <div className='space-y-8 '>
               🫠 Xtrack
-              <p className='text-sm leading-6 text-gray-300'>
+              <p className='text-sm leading-6'>
                 Streamlining your tasks so you can GTD faster.
               </p>
               <div className='flex space-x-6'>
@@ -39,7 +39,7 @@ export default function Footer() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className='text-gray-500 hover:text-gray-400'
+                    className='text-black-500'
                     target='_blank'
                   >
                     <span className='sr-only'>{item.name}</span>
@@ -49,7 +49,7 @@ export default function Footer() {
               </div>
             </div>
             <div>
-              <h3 className='mt-4 text-sm font-semibold leading-6 text-white lg:mt-0'>
+              <h3 className='mt-4 text-sm font-semibold leading-6 text-black lg:mt-0'>
                 Product
               </h3>
               <ul role='list' className='mt-6 space-y-4'>
@@ -57,7 +57,7 @@ export default function Footer() {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className='text-sm leading-6 text-gray-300 hover:text-white'
+                      className='text-sm leading-6 hover:underline'
                     >
                       {item.name}
                     </Link>
@@ -67,7 +67,7 @@ export default function Footer() {
             </div>
           </div>
           <div className='mt-6 border-t border-white/10 pt-8 sm:mt-20 lg:mt-12'>
-            <p className='text-xs leading-5 text-gray-400'>
+            <p className='text-xs leading-5'>
               &copy; {new Date().getFullYear()} Xtrack. All rights reserved.
             </p>
           </div>
