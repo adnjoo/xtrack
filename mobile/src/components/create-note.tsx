@@ -42,11 +42,11 @@ const AddNoteDialog = () => {
   return (
     <Dialog open={isAddingNote}>
       <DialogTrigger asChild>
-        <Button variant='outline' onPress={() => setIsAddingNote(true)}>
+        <Button variant='outline' size={'sm'} onPress={() => setIsAddingNote(true)}>
           <CirclePlus size={24} />
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className='m-4' handleClose={() => setIsAddingNote(false)}>
         <DialogHeader>
           <DialogTitle>Add Note</DialogTitle>
           <DialogDescription>Enter your note content below:</DialogDescription>

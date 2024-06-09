@@ -7,6 +7,7 @@ import { useSession } from '@/src/app/context/SessionProvider';
 import AddNoteDialog from '@/src/components/create-note';
 import { Note } from '@/src/components/note';
 import { Badge } from '@/src/components/ui/badge';
+import { cn } from '@/src/lib/utils';
 
 export default function App() {
   const session = useSession();
@@ -31,18 +32,18 @@ export default function App() {
 
   return (
     <>
-      <View className='p-3'>
+      <View className={cn('p-3', notes?.length > 3 ? 'pb-[120px]' : '')}>
         <View className='mb-6 border-b border-gray-500'>
           {name && <Text className='my-4 text-xl font-bold'>👋, {name}</Text>}
           <Badge className='my-2 w-[64px] py-2'>
             <Text className='text-white'>⭐️ {points}</Text>
           </Badge>
         </View>
-        <ScrollView className=''>
+        <ScrollView className='h-full'>
           {notes?.map((note: any) => <Note key={note.id} note={note} />)}
         </ScrollView>
       </View>
-      <View className='absolute bottom-4 right-4 z-50'>
+      <View className='absolute bottom-1 right-4 z-50'>
         <AddNoteDialog />
       </View>
     </>
