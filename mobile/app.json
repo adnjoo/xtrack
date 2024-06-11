@@ -2,7 +2,7 @@
   "expo": {
     "name": "xtracking",
     "slug": "xtracking",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scheme": "your-app-scheme",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -13,8 +13,9 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.adnjoo.xtracking"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.adnjoo.xtracking",
+      "buildNumber": "1.0.1"
     },
     "android": {
       "adaptiveIcon": {
