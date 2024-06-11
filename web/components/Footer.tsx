@@ -6,6 +6,7 @@ const navigation = {
     { name: 'Notes', href: '/notes' },
     { name: 'Login', href: '/login' },
   ],
+  company: [{ name: 'Privacy', href: '/privacy' }],
   social: [
     {
       name: 'X',
@@ -22,8 +23,11 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className='flex w-full justify-center' aria-labelledby='footer-heading'>
-      <div className='max-w-7xl w-full'>
+    <footer
+      className='flex w-full justify-center'
+      aria-labelledby='footer-heading'
+    >
+      <div className='w-full max-w-7xl'>
         <h2 id='footer-heading' className='sr-only'>
           Footer
         </h2>
@@ -48,12 +52,31 @@ export default function Footer() {
                 ))}
               </div>
             </div>
+
             <div>
               <h3 className='mt-4 text-sm font-semibold leading-6 text-black lg:mt-0'>
                 Product
               </h3>
               <ul role='list' className='mt-6 space-y-4'>
                 {navigation.product.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className='text-sm leading-6 hover:underline'
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className='mt-4 text-sm font-semibold leading-6 text-black lg:mt-0'>
+                Company
+              </h3>
+              <ul role='list' className='mt-6 space-y-4'>
+                {navigation.company.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
