@@ -3,7 +3,6 @@ Productivity App 🚀
 🥞
 
 - Next
-- Expo Router
 - Shadcn
 - Supabase
 
