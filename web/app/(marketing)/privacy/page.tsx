@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+const CONTACT_EMAIL = 'hello@xtrack.ing';
+
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className='mx-auto p-6'>
@@ -102,8 +104,7 @@ const PrivacyPolicy: React.FC = () => {
             <p>
               You have the right to access, correct, update, or delete your
               personal information. You can do so by logging into your account
-              or by contacting us at [Contact Email]. We will respond to your
-              request within a reasonable timeframe.
+              and visiting the "Account Settings" section of the app.
             </p>
           </section>
           <section>
@@ -122,11 +123,11 @@ const PrivacyPolicy: React.FC = () => {
             <h2 className='text-xl font-semibold'>8. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please
-              contact us at:
+              contact us at: 
             </p>
             <address>
               <p>
-                <strong>Email:</strong> hello@xtrack.ing
+                <strong>Email:</strong> {CONTACT_EMAIL}
               </p>
             </address>
             <p>
