@@ -1,83 +1,19 @@
-'use client';
+import { createClient } from '@/utils/supabase/server';
 
-import { useQuery } from '@tanstack/react-query';
-import { ChevronUp } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { NotesBody } from './NotesBody';
 
-import { CreateNote } from '@/app/(protected)/notes/create';
-import { LoadingNote, Note } from '@/components/note';
-import { Badge } from '@/components/ui/badge';
-import { createClient } from '@/utils/supabase/client';
-
-export default function Page() {
-  const [isAuth, setIsAuth] = useState(false);
+export default async function Page() {
   const supabase = createClient();
 
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  const fetchNotesAndPoints = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (user) {
-      setIsAuth(true);
-    }
-
-    const { data: notes } = await supabase
-      .from('notes')
-      .select()
-      .eq('user_id', user?.id);
-
-    const { data: pointsData } = await supabase
-      .from('points')
-      .select()
-      .eq('user_id', user?.id);
-
-    const points = pointsData?.[0]?.points || 0;
-
-    return { notes, points };
-  };
-
   const {
-    data: { notes = [], points = [] } = {},
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ['notes'],
-    queryFn: fetchNotesAndPoints,
-  });
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const renderLoadingNotes = () =>
-    Array.from({ length: 6 }).map((_, i) => <LoadingNote key={i} />);
+  if (!user) {
+    return (
+      <div className='mt-12'>You need to be logged in to view this page</div>
+    );
+  }
 
-  const renderNotes = () =>
-    notes
-      ?.sort((a, b) => (a.done === b.done ? 0 : a.done ? 1 : -1))
-      .map((note) => <Note key={note.id} note={note} />);
-
-  return (
-    <div className='mt-12 w-full px-6 lg:px-8'>
-      {!isAuth && <div>You need to be authenticated to see this page</div>}
-      {isAuth && (
-        <>
-          <div className='flex w-full items-center gap-8'>
-            <CreateNote />
-            <Badge className='max-h-[24px]'>⭐️ {points}</Badge>
-          </div>
-          <div className='my-6 grid grid-cols-1 gap-4 sm:gap-8 md:grid-cols-2 lg:grid-cols-3'>
-            {isLoading ? renderLoadingNotes() : renderNotes()}
-            {!isLoading && notes?.length === 0 && (
-              <div>
-                <ChevronUp className='h-8 w-8 animate-bounce' /> Get started by
-                creating a note 😊
-              </div>
-            )}
-          </div>
-        </>
-      )}
-    </div>
-  );
+  return <NotesBody user={user} />;
 }
