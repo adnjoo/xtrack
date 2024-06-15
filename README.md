@@ -2,7 +2,7 @@ Productivity App 🚀
 
 🥞
 
-- Next
+- Next 14
 - Shadcn
 - Supabase
 
