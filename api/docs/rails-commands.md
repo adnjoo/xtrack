@@ -6,3 +6,7 @@ rails c
 ```
 rails db:create
 ```
+**Run**
+```
+rails s -p 3001
+```
