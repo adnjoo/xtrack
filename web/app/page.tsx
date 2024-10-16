@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import Login from '@/components/Login';
 
 export default async function Index() {
   return (
@@ -6,6 +7,7 @@ export default async function Index() {
       <div className='mt-8 flex max-w-4xl flex-1 flex-col gap-20 px-3 opacity-0 animate-in md:mt-16'>
         <Header />
       </div>
+      <Login />
     </div>
   );
 }
