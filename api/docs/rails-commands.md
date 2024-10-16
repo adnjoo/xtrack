@@ -10,3 +10,8 @@ rails db:create
 ```
 rails s -p 3001
 ```
+
+**Stats**
+```
+rake app:stats
+```
