@@ -10,4 +10,9 @@ class Users::SessionsController < Devise::SessionsController
   def respond_to_on_destroy
     head :no_content
   end
+
+  # Override the `set_flash_message!` method to avoid flash usage in API
+  def set_flash_message!(*args)
+    # No-op to disable flash messages
+  end
 end
