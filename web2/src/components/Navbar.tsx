@@ -1,9 +1,30 @@
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { APP_NAME } from "@/lib/constants"
+'use client';
+
+import { useEffect, useState } from "react";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { APP_NAME } from "@/lib/constants";
+import { API_URL } from "@/app/(auth)/login/page";
 
 export default function Component() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Fetch current user from the Rails API
+    fetch(`${API_URL}/show_current_user`, {
+      method: 'GET',
+      credentials: 'include' // Include session cookie in request
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.email) {
+        setUser(data);
+      }
+    })
+    .catch(err => console.error('Not logged in'));
+  }, []);
+
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
       <Sheet>
@@ -22,9 +43,15 @@ export default function Component() {
             <Link href="/" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
               Home
             </Link>
-            <Link href="/login" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Login
-            </Link>
+            {user ? (
+              <span className="flex w-full items-center py-2 text-lg font-semibold">
+                Hey, {user.email}!
+              </span>
+            ) : (
+              <Link href="/login" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+                Login
+              </Link>
+            )}
           </div>
         </SheetContent>
       </Sheet>
@@ -33,16 +60,22 @@ export default function Component() {
         <span className="sr-only">Acme Inc</span>
       </Link>
       <nav className="ml-auto hidden lg:flex gap-6">
-        <Link
-          href="/login"
-          className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
-          prefetch={false}
-        >
-          Login
-        </Link>
+        {user ? (
+          <span className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium">
+            Hey, {user.email}!
+          </span>
+        ) : (
+          <Link
+            href="/login"
+            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50"
+            prefetch={false}
+          >
+            Login
+          </Link>
+        )}
       </nav>
     </header>
-  )
+  );
 }
 
 function MenuIcon(props) {
@@ -63,9 +96,8 @@ function MenuIcon(props) {
       <line x1="4" x2="20" y1="6" y2="6" />
       <line x1="4" x2="20" y1="18" y2="18" />
     </svg>
-  )
+  );
 }
-
 
 function MountainIcon(props) {
   return (
@@ -83,5 +115,5 @@ function MountainIcon(props) {
     >
       <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
     </svg>
-  )
+  );
 }

@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  # Devise scope for custom routes like current_user
+  devise_scope :user do
+    get 'show_current_user', to: 'users/sessions#show_current_user'
+  end
+  
   namespace :api do
     get 'hello', to: 'hello#index'
 
