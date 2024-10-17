@@ -22,7 +22,7 @@ default: &default
 
 development:
   <<: *default
-  database: xtrack_api_development
+  database: xtrack_api_dev
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: xtrack_api_production
+  database: xtrack_api_prod
   username: xtrack_api
   password: <%= ENV["XTRACK_API_DATABASE_PASSWORD"] %>
