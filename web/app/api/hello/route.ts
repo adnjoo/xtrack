@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { API_URL } from '@/components/Login';
 
+// This is a dynamic route
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: Request) {
   const response = await fetch(`${API_URL}/api/hello`);
   
