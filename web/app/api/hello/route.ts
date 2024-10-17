@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
-import { API_URL } from '@/components/Login';
 
 // This is a dynamic route
 export const dynamic = 'force-dynamic'
 
 export async function GET(request: Request) {
-  const response = await fetch(`${API_URL}/api/hello`);
+  const response = await fetch(`${process.env.API_URL}/api/hello`);
   
   if (!response.ok) {
     return NextResponse.json({ error: 'Failed to fetch data from Rails API' }, { status: response.status });
