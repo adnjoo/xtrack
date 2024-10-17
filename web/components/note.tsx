@@ -47,7 +47,7 @@ export const Note = ({ note }: { note: any }) => {
           .from('notes').update({archived: true}).eq('id', id);
     }
     if (!note.done) {
-      if (!window.confirm('Are you sure you want to delete this note?')) {
+      if (window.confirm('Are you sure you want to delete this note?')) {
         await supabase.from('notes').delete().eq('id', id);
       }
     }
