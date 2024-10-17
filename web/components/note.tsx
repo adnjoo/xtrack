@@ -43,27 +43,14 @@ export const Note = ({ note }: { note: any }) => {
       ) {
         return;
       }
-      const points = await supabase
-        .from('points')
-        .select()
-        .eq('user_id', note.user_id);
-      if (points.data && points.data.length > 0) {
         await supabase
-          .from('points')
-          .update({ points: points.data[0].points + 1 })
-          .eq('user_id', note.user_id);
-      } else {
-        await supabase
-          .from('points')
-          .insert({ user_id: note.user_id, points: 1 });
-      }
+          .from('notes').update({archived: true}).eq('id', id);
     }
     if (!note.done) {
       if (!window.confirm('Are you sure you want to delete this note?')) {
-        return;
+        await supabase.from('notes').delete().eq('id', id);
       }
     }
-    await supabase.from('notes').delete().eq('id', id);
     refetch();
   };
 

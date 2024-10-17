@@ -20,7 +20,7 @@ export function NotesBody({ user }: { user: any }) {
     const { data: notes } = await supabase
       .from('notes')
       .select()
-      .eq('user_id', user?.id);
+      .eq('user_id', user?.id).neq('archived', true);
 
     const { data: pointsData } = await supabase
       .from('points')
