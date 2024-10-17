@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_16_214157) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_17_022151) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "notes", force: :cascade do |t|
+    t.text "title"
+    t.boolean "done", default: false
+    t.datetime "done_date", precision: nil
+    t.bigint "user_id", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.integer "points"
+    t.integer "week"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["user_id"], name: "index_points_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,4 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_16_214157) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "notes", "users"
+  add_foreign_key "points", "users"
 end

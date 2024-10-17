@@ -1,7 +1,3 @@
-**Console**
-```
-rails c
-```
 **Create database**
 ```
 rails db:create
@@ -10,7 +6,14 @@ rails db:create
 ```
 rails s -p 3001
 ```
-
+**Console**
+```
+rails c
+```
+**Check environment (console)**
+```
+Rails.env
+```
 **Stats**
 ```
 rake app:stats
