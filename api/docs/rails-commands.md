@@ -24,3 +24,7 @@ rails db:create
 rails db:migrate
 rails db:drop
 ```
+**Check routes**
+```
+rails routes | grep users
+```
