@@ -2,9 +2,7 @@
 
 import axios from 'axios';
 import { useState } from 'react';
-
-// Access the API URL from environment variables
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { API_URL } from './Login';
 
 // Register user function
 export const registerUser = async (email: string, password: string, passwordConfirmation: string) => {

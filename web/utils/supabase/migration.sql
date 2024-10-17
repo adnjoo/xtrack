@@ -5,12 +5,6 @@ CREATE TABLE notes (
     title TEXT,
     done BOOLEAN DEFAULT FALSE,
     done_date TIMESTAMP WITH TIME ZONE,
-    user_id uuid REFERENCES auth.users ON DELETE CASCADE,
-);
-
-create table points (
-    id SERIAL PRIMARY KEY,
-    points INTEGER,
-    week INTEGER,
+    archived BOOLEAN DEFAULT FALSE, -- Soft delete flag for archiving
     user_id uuid REFERENCES auth.users ON DELETE CASCADE
 );
