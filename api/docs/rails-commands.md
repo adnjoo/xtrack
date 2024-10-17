@@ -18,3 +18,9 @@ Rails.env
 ```
 rake app:stats
 ```
+**DB Commands**
+```
+rails db:create
+rails db:migrate
+rails db:drop
+```
