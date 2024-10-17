@@ -17,17 +17,14 @@ export function NotesBody({ user }: { user: any }) {
   }, []);
 
   const fetchNotesAndPoints = async () => {
-    const { data: notes } = await supabase
+    let { data: notes } = await supabase
       .from('notes')
       .select()
-      .eq('user_id', user?.id);
+      .eq('user_id', user?.id)
 
-    const { data: pointsData } = await supabase
-      .from('points')
-      .select()
-      .eq('user_id', user?.id);
+    const points = notes?.filter((note) => note.archived).length;
 
-    const points = pointsData?.[0]?.points || 0;
+    notes = notes?.filter((note) => !note.archived) as any;
 
     return { notes, points };
   };
