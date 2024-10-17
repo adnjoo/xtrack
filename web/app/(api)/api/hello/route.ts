@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { API_URL } from '@/components/Login';
 
-export async function GET() {
+export async function GET(request: Request) {
   const response = await fetch(`${API_URL}/api/hello`);
   
   if (!response.ok) {
