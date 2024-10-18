@@ -53,7 +53,7 @@ export default function Login({
   };
 
   return (
-    <div className='grid min-h-screen place-items-center'>
+    <div className='grid mt-16'>
       <div className='w-full max-w-md border-2 border-black p-8'>
         <Link
           href='/'
