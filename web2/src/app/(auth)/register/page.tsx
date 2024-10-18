@@ -59,17 +59,21 @@ export default function Register() {
   };
 
   return (
-    <Card className='mx-auto max-w-sm animate-in'>
+    <Card className='mx-auto max-w-sm animate-in border-4 border-black shadow-lg bg-white'>
       <CardHeader className='space-y-1'>
-        <CardTitle className='text-2xl font-bold'>Register</CardTitle>
-        <CardDescription>
-          Enter your details to create a new account
+        <CardTitle className='text-4xl font-extrabold text-black'>
+          REGISTER
+        </CardTitle>
+        <CardDescription className='text-lg font-bold text-black'>
+          CREATE AN ACCOUNT
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleRegister} className='space-y-4'>
+        <form onSubmit={handleRegister} className='space-y-6'>
           <div className='space-y-2'>
-            <Label htmlFor='email'>Email</Label>
+            <Label htmlFor='email' className='text-lg font-bold text-black'>
+              EMAIL
+            </Label>
             <Input
               id='email'
               type='email'
@@ -77,35 +81,48 @@ export default function Register() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className='bg-gray-100 border-2 border-black p-4 text-lg font-bold text-black focus:outline-none'
             />
           </div>
           <div className='space-y-2'>
-            <Label htmlFor='password'>Password</Label>
+            <Label htmlFor='password' className='text-lg font-bold text-black'>
+              PASSWORD
+            </Label>
             <Input
               id='password'
               type='password'
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className='bg-gray-100 border-2 border-black p-4 text-lg font-bold text-black focus:outline-none'
             />
           </div>
           <div className='space-y-2'>
-            <Label htmlFor='passwordConfirmation'>Confirm Password</Label>
+            <Label
+              htmlFor='passwordConfirmation'
+              className='text-lg font-bold text-black'
+            >
+              CONFIRM PASSWORD
+            </Label>
             <Input
               id='passwordConfirmation'
               type='password'
               required
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
+              className='bg-gray-100 border-2 border-black p-4 text-lg font-bold text-black focus:outline-none'
             />
           </div>
-          {error && <p className='text-red-500'>{error}</p>}
-          <Button type='submit' className='w-full'>
-            Register
+          {error && <p className='text-lg text-red-500 font-bold'>{error}</p>}
+          <Button
+            type='submit'
+            className='w-full bg-black text-white font-bold p-4 border-2 border-black hover:bg-gray-800 shadow-neo-brutal'
+          >
+            REGISTER
           </Button>
           <Link href='/login'>
-            <Button className='mt-4 w-full' variant='outline'>
-              Already have an account?
+            <Button className='mt-4 w-full bg-white text-black font-bold p-4 border-2 border-black hover:bg-gray-100 shadow-neo-brutal'>
+              ALREADY HAVE AN ACCOUNT?
             </Button>
           </Link>
         </form>

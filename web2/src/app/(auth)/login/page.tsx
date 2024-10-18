@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +49,7 @@ export default function Login() {
 
       console.log('Logged in user:', response.data);
       // Redirect or perform any action after successful login
+      router.push('/');
     } catch (err) {
       setError('Login failed. Please check your credentials.');
       console.error('Login error:', err);
@@ -54,17 +57,21 @@ export default function Login() {
   };
 
   return (
-    <Card className='mx-auto max-w-sm animate-in'>
-      <CardHeader className='space-y-1'>
-        <CardTitle className='text-2xl font-bold'>Login</CardTitle>
-        <CardDescription>
+    <Card className='mx-auto max-w-sm border-2 border-black bg-white shadow-[8px_8px_0_0_#000] rounded-none p-6'>
+      <CardHeader className='space-y-2'>
+        <CardTitle className='text-3xl font-extrabold text-black'>
+          Login
+        </CardTitle>
+        <CardDescription className='text-lg text-black'>
           Enter your email and password to login to your account
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleLogin} className='space-y-4'>
+      <CardContent className='mt-4'>
+        <form onSubmit={handleLogin} className='space-y-6'>
           <div className='space-y-2'>
-            <Label htmlFor='email'>Email</Label>
+            <Label htmlFor='email' className='font-bold text-black'>
+              Email
+            </Label>
             <Input
               id='email'
               type='email'
@@ -72,24 +79,28 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className='border-2 border-black rounded-none bg-white text-black'
             />
           </div>
           <div className='space-y-2'>
-            <Label htmlFor='password'>Password</Label>
+            <Label htmlFor='password' className='font-bold text-black'>
+              Password
+            </Label>
             <Input
               id='password'
               type='password'
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className='border-2 border-black rounded-none bg-white text-black'
             />
           </div>
           {error && <p className='text-red-500'>{error}</p>}
-          <Button type='submit' className='w-full'>
+          <Button type='submit' className='w-full bg-black text-white rounded-none shadow-[4px_4px_0_0_#000] hover:shadow-none'>
             Login
           </Button>
           <Link href='/register'>
-            <Button className='mt-4 w-full' variant='outline'>
+            <Button className='mt-4 w-full border-black text-black bg-white border-2 rounded-none shadow-[4px_4px_0_0_#000] hover:bg-gray-100'>
               Need an account?
             </Button>
           </Link>
