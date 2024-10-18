@@ -2,9 +2,8 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import { SubmitButton } from '@/app/login/submit-button';
 import { createClient } from '@/utils/supabase/server';
-
-import { SubmitButton } from './submit-button';
 
 export default function Login({
   searchParams,
@@ -51,72 +50,82 @@ export default function Login({
     }
 
     return redirect('/notes');
-    // return redirect('/login?message=Check email to continue sign in process');
   };
 
   return (
-    <div className='flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md'>
-      <Link
-        href='/'
-        className='bg-btn-background hover:bg-btn-background-hover group mt-12 flex items-center rounded-md py-2 text-sm text-foreground no-underline'
-      >
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='24'
-          height='24'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          className='mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1'
+    <div className='grid min-h-screen place-items-center'>
+      <div className='w-full max-w-md border-2 border-black p-8'>
+        <Link
+          href='/'
+          className='mb-8 flex items-center space-x-2 text-black no-underline hover:underline'
         >
-          <polyline points='15 18 9 12 15 6' />
-        </svg>{' '}
-        Back
-      </Link>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <polyline points='15 18 9 12 15 6' />
+          </svg>
+          <span>Back</span>
+        </Link>
 
-      <form className='mt-12 flex w-full flex-1 flex-col gap-2 text-foreground animate-in'>
-        <label className='text-md' htmlFor='email'>
-          Email
-        </label>
-        <input
-          className='mb-6 rounded-md border bg-inherit px-4 py-2'
-          name='email'
-          placeholder='you@example.com'
-          required
-        />
-        <label className='text-md' htmlFor='password'>
-          Password
-        </label>
-        <input
-          className='mb-6 rounded-md border bg-inherit px-4 py-2'
-          type='password'
-          name='password'
-          placeholder='••••••••'
-          required
-        />
-        <SubmitButton
-          formAction={signIn}
-          className='mb-2 rounded-md bg-green-700 px-4 py-2 text-foreground'
-          pendingText='Signing In...'
-        >
-          Sign In
-        </SubmitButton>
-        <SubmitButton
-          formAction={signUp}
-          className='mb-2 rounded-md border border-foreground/20 px-4 py-2 text-foreground'
-          pendingText='Signing Up...'
-        >
-          Sign Up
-        </SubmitButton>
-        {searchParams?.message && (
-          <p className='mt-4 bg-foreground/10 p-4 text-center text-foreground'>
-            {searchParams.message}
-          </p>
-        )}
-      </form>
+        <form className='space-y-6'>
+          <label
+            htmlFor='email'
+            className='block text-sm font-bold uppercase tracking-wider'
+          >
+            Email
+          </label>
+          <input
+            className='block w-full border border-black bg-white px-4 py-2 placeholder-black'
+            name='email'
+            placeholder='you@example.com'
+            required
+          />
+
+          <label
+            htmlFor='password'
+            className='block text-sm font-bold uppercase tracking-wider'
+          >
+            Password
+          </label>
+          <input
+            className='block w-full border border-black bg-white px-4 py-2 placeholder-black'
+            type='password'
+            name='password'
+            placeholder='••••••••'
+            required
+          />
+
+          <SubmitButton
+            formAction={signIn}
+            className='block w-full border border-black bg-white px-4 py-2 text-black hover:bg-black hover:text-white'
+            pendingText='Signing In...'
+          >
+            Sign In
+          </SubmitButton>
+
+          <SubmitButton
+            formAction={signUp}
+            className='block w-full border border-black bg-white px-4 py-2 text-black hover:bg-black hover:text-white'
+            pendingText='Signing Up...'
+          >
+            Sign Up
+          </SubmitButton>
+
+          {searchParams?.message && (
+            <p className='mt-4 border border-black p-4 text-center'>
+              {searchParams.message}
+            </p>
+          )}
+        </form>
+      </div>
     </div>
   );
 }

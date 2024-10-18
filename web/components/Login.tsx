@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { API_URL } from '@/lib/constants';
 
 export const loginUser = async (email: string, password: string) => {
   const response = await axios.post(
