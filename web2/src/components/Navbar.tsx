@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { API_URL } from '@/app/(auth)/login/page';
 import { MenuIcon, MountainIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { API_URL } from '@/lib/constants';
 import { APP_NAME } from '@/lib/constants';
 
 export default function Component() {

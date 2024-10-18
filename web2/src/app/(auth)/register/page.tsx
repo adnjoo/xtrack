@@ -2,10 +2,9 @@
 
 import axios from 'axios';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
-import { API_URL } from '@/app/(auth)/login/page';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -16,6 +15,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { API_URL } from '@/lib/constants';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -101,7 +101,10 @@ export default function Register() {
             />
           </div>
           <div className='space-y-2'>
-            <Label htmlFor='passwordConfirmation' className='font-bold text-black'>
+            <Label
+              htmlFor='passwordConfirmation'
+              className='font-bold text-black'
+            >
               Confirm Password
             </Label>
             <Input
