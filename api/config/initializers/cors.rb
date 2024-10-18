@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://www.xtrack.ing/', 'http://localhost:3000' # Your Next.js frontend URL
+    origins 'https://www.xtrack.ing', 'http://localhost:3000' # Your Next.js frontend URL
 
     resource '*',
       headers: :any,
