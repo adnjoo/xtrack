@@ -98,7 +98,7 @@ export default function Component() {
       <nav className='ml-auto hidden gap-6 lg:flex'>
         {user ? (
           <>
-            <span className='group inline-flex h-9 w-max items-center justify-center rounded-md border-2 border-black px-4 py-2 text-sm font-extrabold text-white'>
+            <span className='group inline-flex h-9 w-max items-center justify-center rounded-md border-2 border-black px-4 py-2 text-sm font-extrabold'>
               Hey, {user.email}!
             </span>
             <Button
