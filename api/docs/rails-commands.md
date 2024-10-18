@@ -32,3 +32,7 @@ rails routes | grep users
 ```
 rails s -e production
 ```
+**Make secret**
+```
+rails secret
+```
