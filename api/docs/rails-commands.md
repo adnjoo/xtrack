@@ -28,3 +28,7 @@ rails db:drop
 ```
 rails routes | grep users
 ```
+**Run server in e.g. prod**
+```
+rails s -e production
+```
