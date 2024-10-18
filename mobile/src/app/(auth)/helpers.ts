@@ -18,7 +18,8 @@ const getNotes = async (userId: string) => {
     const { data, error } = await supabase
       .from('notes')
       .select('*')
-      .eq('user_id', userId);
+      .eq('user_id', userId)
+      .neq('archived', true);
 
     if (error) throw error;
 
