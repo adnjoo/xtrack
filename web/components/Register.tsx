@@ -2,25 +2,34 @@
 
 import axios from 'axios';
 import { useState } from 'react';
-import { API_URL } from './Login';
+
+import { API_URL } from '@/lib/constants';
 
 // Register user function
-export const registerUser = async (email: string, password: string, passwordConfirmation: string) => {
-    const response = await axios.post(`${API_URL}/users`, {
+export const registerUser = async (
+  email: string,
+  password: string,
+  passwordConfirmation: string
+) => {
+  const response = await axios.post(
+    `${API_URL}/users`,
+    {
       user: {
         email,
         password,
-        password_confirmation: passwordConfirmation
+        password_confirmation: passwordConfirmation,
       },
-    }, {
+    },
+    {
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'  // Ensure that JSON is requested
+        Accept: 'application/json', // Ensure that JSON is requested
       },
-      withCredentials: true
-    });
-    
-    return response.data;
+      withCredentials: true,
+    }
+  );
+
+  return response.data;
 };
 
 const Register = () => {
@@ -40,10 +49,25 @@ const Register = () => {
 
   return (
     <form onSubmit={handleRegister}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      <input type="password" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} placeholder="Confirm Password" />
-      <button type="submit">Register</button>
+      <input
+        type='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder='Email'
+      />
+      <input
+        type='password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder='Password'
+      />
+      <input
+        type='password'
+        value={passwordConfirmation}
+        onChange={(e) => setPasswordConfirmation(e.target.value)}
+        placeholder='Confirm Password'
+      />
+      <button type='submit'>Register</button>
     </form>
   );
 };
