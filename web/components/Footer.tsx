@@ -1,6 +1,7 @@
 import { GithubIcon, TwitterIcon } from 'lucide-react';
 import Link from 'next/link';
 
+import { Button } from '@/components/ui/button';
 import { APP_NAME } from '@/lib/constants';
 
 const navigation = {
@@ -42,18 +43,20 @@ export default function Footer() {
               </p>
               <div className='flex space-x-6'>
                 {navigation.social.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className='hover:underline'
-                    target='_blank'
-                  >
-                    <span className='sr-only'>{item.name}</span>
-                    <item.icon
-                      className='h-8 w-8 border-2 border-black p-1'
-                      aria-hidden='true'
-                    />
-                  </Link>
+                  <Button asChild>
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className='hover:underline !p-3'
+                      target='_blank'
+                    >
+                      <span className='sr-only'>{item.name}</span>
+                      <item.icon
+                        className='h-8 w-8'
+                        aria-hidden='true'
+                      />
+                    </Link>
+                  </Button>
                 ))}
               </div>
             </div>
