@@ -59,32 +59,21 @@ export const Note = ({ note }: { note: any }) => {
 
   const deleteNote = async () => {
     try {
-      if (note.done) {
-        const points = await supabase
-          .from('points')
-          .select()
-          .eq('user_id', note.user_id);
-        if (points.data && points.data.length > 0) {
-          await supabase
-            .from('points')
-            .update({ points: points.data[0].points + 1 })
-            .eq('user_id', note.user_id);
-        } else {
-          await supabase
-            .from('points')
-            .insert({ user_id: note.user_id, points: 1 });
-        }
-      }
-      const { error } = await supabase.from('notes').delete().eq('id', note.id);
-
+      // Set the note's archived field to true instead of deleting the note
+      const { error } = await supabase
+        .from('notes')
+        .update({ archived: true })
+        .eq('id', note.id);
+  
       if (error) throw error;
     } catch (error: any) {
       Alert.alert('Error', error.message);
     } finally {
-      refetchNotes();
-      refetchPoints();
+      refetchNotes(); // Refetch notes after the update
+      refetchPoints(); // Assuming you still want to refetch points for other functionality
     }
   };
+  
 
   const markDone = async (noteId: string, done: boolean = true) => {
     try {
