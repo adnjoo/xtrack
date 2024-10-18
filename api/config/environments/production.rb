@@ -6,6 +6,7 @@ Rails.application.configure do
   # allow drewapp.com and www.drewapp.com
   config.hosts << "drewapp.com"
   config.hosts << "www.drewapp.com"
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
