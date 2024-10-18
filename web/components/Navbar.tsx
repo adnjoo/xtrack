@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import AuthButton from '@/components/AuthButton';
+import { Button } from '@/components/ui/button';
 import { createClient } from '@/utils/supabase/server';
 
 export const Navbar = async () => {
@@ -19,14 +20,14 @@ export const Navbar = async () => {
 
         <div className='flex items-center gap-4'>
           {user ? (
-            <>
+            <Button asChild>
               <Link
                 href='/notes'
                 className='group inline-flex h-9 w-max items-center justify-center rounded-md border-2 border-black px-4 py-2 text-sm font-extrabold'
               >
                 Notes
               </Link>
-            </>
+            </Button>
           ) : null}
           <AuthButton />
         </div>
