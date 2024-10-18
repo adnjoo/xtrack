@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Devise with custom controllers for registrations/sessions
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   }
 
+  # Devise scope for custom routes like current_user
+  devise_scope :user do
+    get 'show_current_user', to: 'users/sessions#show_current_user'
+  end
+  
   namespace :api do
     get 'hello', to: 'hello#index'
 
