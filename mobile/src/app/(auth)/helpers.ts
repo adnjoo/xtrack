@@ -33,12 +33,12 @@ const getNotes = async (userId: string) => {
 
 const getPoints = async (userId: string) => {
   const { data, error } = await supabase
-    .from('points')
+    .from('notes')
     .select()
-    .eq('user_id', userId);
+    .eq('user_id', userId)
+    .eq('archived', true);
 
-  const points = data?.[0]?.points || 0;
-  return points;
+  return data?.length || 0;
 };
 
 const addNote = async (userId: string, content: string) => {
