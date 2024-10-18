@@ -57,7 +57,7 @@ export default function Login() {
   };
 
   return (
-    <Card className='mx-auto max-w-sm border-2 border-black bg-white shadow-[8px_8px_0_0_#000] rounded-none p-6'>
+    <Card className='mx-auto max-w-sm rounded-none border-2 border-black bg-white p-6 shadow-[8px_8px_0_0_#000] animate-in'>
       <CardHeader className='space-y-2'>
         <CardTitle className='text-3xl font-extrabold text-black'>
           Login
@@ -79,7 +79,7 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='border-2 border-black rounded-none bg-white text-black'
+              className='rounded-none border-2 border-black bg-white text-black'
             />
           </div>
           <div className='space-y-2'>
@@ -92,15 +92,21 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className='border-2 border-black rounded-none bg-white text-black'
+              className='rounded-none border-2 border-black bg-white text-black'
             />
           </div>
           {error && <p className='text-red-500'>{error}</p>}
-          <Button type='submit' className='w-full bg-black text-white rounded-none shadow-[4px_4px_0_0_#000] hover:shadow-none'>
+          <Button
+            type='submit'
+            className='w-full rounded-none shadow-[4px_4px_0_0_#000] hover:shadow-none'
+          >
             Login
           </Button>
           <Link href='/register'>
-            <Button className='mt-4 w-full border-black text-black bg-white border-2 rounded-none shadow-[4px_4px_0_0_#000] hover:bg-gray-100'>
+            <Button
+              className='mt-4 w-full rounded-none border-2 shadow-[4px_4px_0_0_#000] hover:bg-gray-100'
+              variant='secondary'
+            >
               Need an account?
             </Button>
           </Link>

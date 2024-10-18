@@ -3,6 +3,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { API_URL } from '@/app/(auth)/login/page';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,6 +54,7 @@ export default function Register() {
 
       console.log('Registered user:', response.data);
       // Redirect or perform any action after successful registration
+      router.push('/');
     } catch (err) {
       setError('Registration failed. Please try again.');
       console.error('Registration error:', err);
@@ -59,20 +62,20 @@ export default function Register() {
   };
 
   return (
-    <Card className='mx-auto max-w-sm animate-in border-4 border-black shadow-lg bg-white'>
-      <CardHeader className='space-y-1'>
-        <CardTitle className='text-4xl font-extrabold text-black'>
-          REGISTER
+    <Card className='mx-auto max-w-sm rounded-none border-2 border-black bg-white p-6 shadow-[8px_8px_0_0_#000] animate-in'>
+      <CardHeader className='space-y-2'>
+        <CardTitle className='text-3xl font-extrabold text-black'>
+          Register
         </CardTitle>
-        <CardDescription className='text-lg font-bold text-black'>
-          CREATE AN ACCOUNT
+        <CardDescription className='text-lg text-black'>
+          Create your account to get started
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className='mt-4'>
         <form onSubmit={handleRegister} className='space-y-6'>
           <div className='space-y-2'>
-            <Label htmlFor='email' className='text-lg font-bold text-black'>
-              EMAIL
+            <Label htmlFor='email' className='font-bold text-black'>
+              Email
             </Label>
             <Input
               id='email'
@@ -81,12 +84,12 @@ export default function Register() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='bg-gray-100 border-2 border-black p-4 text-lg font-bold text-black focus:outline-none'
+              className='rounded-none border-2 border-black bg-white text-black'
             />
           </div>
           <div className='space-y-2'>
-            <Label htmlFor='password' className='text-lg font-bold text-black'>
-              PASSWORD
+            <Label htmlFor='password' className='font-bold text-black'>
+              Password
             </Label>
             <Input
               id='password'
@@ -94,15 +97,12 @@ export default function Register() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className='bg-gray-100 border-2 border-black p-4 text-lg font-bold text-black focus:outline-none'
+              className='rounded-none border-2 border-black bg-white text-black'
             />
           </div>
           <div className='space-y-2'>
-            <Label
-              htmlFor='passwordConfirmation'
-              className='text-lg font-bold text-black'
-            >
-              CONFIRM PASSWORD
+            <Label htmlFor='passwordConfirmation' className='font-bold text-black'>
+              Confirm Password
             </Label>
             <Input
               id='passwordConfirmation'
@@ -110,19 +110,22 @@ export default function Register() {
               required
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
-              className='bg-gray-100 border-2 border-black p-4 text-lg font-bold text-black focus:outline-none'
+              className='rounded-none border-2 border-black bg-white text-black'
             />
           </div>
-          {error && <p className='text-lg text-red-500 font-bold'>{error}</p>}
+          {error && <p className='text-red-500'>{error}</p>}
           <Button
             type='submit'
-            className='w-full bg-black text-white font-bold p-4 border-2 border-black hover:bg-gray-800 shadow-neo-brutal'
+            className='w-full rounded-none shadow-[4px_4px_0_0_#000] hover:shadow-none'
           >
-            REGISTER
+            Register
           </Button>
           <Link href='/login'>
-            <Button className='mt-4 w-full bg-white text-black font-bold p-4 border-2 border-black hover:bg-gray-100 shadow-neo-brutal'>
-              ALREADY HAVE AN ACCOUNT?
+            <Button
+              className='mt-4 w-full rounded-none border-2 shadow-[4px_4px_0_0_#000] hover:bg-gray-100'
+              variant='secondary'
+            >
+              Already Have an Account?
             </Button>
           </Link>
         </form>

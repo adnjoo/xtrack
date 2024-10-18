@@ -39,7 +39,7 @@ export default function Component() {
   };
 
   return (
-    <header className='shadow-neo-brutal flex h-20 w-full items-center border-b-4 border-black bg-white px-4 md:px-6'>
+    <header className='shadow-neo-brutal mb-4 flex h-20 w-full items-center border-b-4 border-black bg-white px-4 md:px-6'>
       <Sheet>
         <SheetTrigger asChild>
           <Button
