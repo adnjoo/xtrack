@@ -26,41 +26,31 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer
-      className='flex w-full justify-center border-t-4 border-black bg-white text-black'
-      aria-labelledby='footer-heading'
-    >
+    <footer className='flex w-full justify-center border-t-4 border-black bg-white text-black'>
       <div className='w-full max-w-7xl'>
-        <h2 id='footer-heading' className='sr-only'>
-          Footer
-        </h2>
+        <h2 className='sr-only'>Footer</h2>
         <div className='mx-auto max-w-7xl px-6 pb-8 pt-8 sm:pt-12 lg:px-8'>
           <div className='lg:grid lg:grid-cols-3 xl:gap-8'>
-            <div className='space-y-4 '>
+            <div className='space-y-4'>
               <span className='text-3xl font-bold uppercase'>🫠 Xtrack</span>
               <p className='text-lg font-semibold leading-6'>
                 Streamlining your tasks so you can GTD faster.
               </p>
               <div className='flex space-x-6'>
                 {navigation.social.map((item) => (
-                  <Button asChild>
+                  <Button asChild key={item.name}>
                     <Link
-                      key={item.name}
                       href={item.href}
                       className='hover:underline !p-3'
                       target='_blank'
                     >
                       <span className='sr-only'>{item.name}</span>
-                      <item.icon
-                        className='h-8 w-8'
-                        aria-hidden='true'
-                      />
+                      <item.icon className='h-8 w-8' aria-hidden='true' />
                     </Link>
                   </Button>
                 ))}
               </div>
             </div>
-
             <div>
               <h3 className='mt-4 border-b-4 border-black text-xl font-bold uppercase leading-6 lg:mt-0'>
                 Product
@@ -78,7 +68,6 @@ export default function Footer() {
                 ))}
               </ul>
             </div>
-
             <div>
               <h3 className='mt-4 border-b-4 border-black text-xl font-bold uppercase leading-6 lg:mt-0'>
                 Company
