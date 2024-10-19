@@ -9,7 +9,7 @@ const navigation = {
     { name: 'Notes', href: '/notes' },
     { name: 'Login', href: '/login' },
   ],
-  company: [{ name: 'Privacy', href: '/privacy', }, { name: 'Blog', href: '/blog', }],
+  company: [{ name: 'Privacy', href: '/privacy' }],
   social: [
     {
       name: 'X',
@@ -37,7 +37,7 @@ export default function Footer() {
         <div className='mx-auto max-w-7xl px-6 pb-8 pt-8 sm:pt-12 lg:px-8'>
           <div className='lg:grid lg:grid-cols-3 xl:gap-8'>
             <div className='space-y-4 '>
-              <span className='text-3xl font-bold'>🫠 {APP_NAME}</span>
+              <span className='text-3xl font-bold uppercase'>🫠 Xtrack</span>
               <p className='text-lg font-semibold leading-6'>
                 Streamlining your tasks so you can GTD faster.
               </p>
