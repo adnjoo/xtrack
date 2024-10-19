@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { createClient } from '@/utils/supabase/client';
+import { getSupabaseClient } from '@/utils/supabase/client';
 
 import { Checkbox } from './ui/checkbox';
 
@@ -25,7 +25,7 @@ export function LoadingNote() {
 }
 
 export const Note = ({ note }: { note: any }) => {
-  const supabase = createClient();
+  const supabase = getSupabaseClient();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(note.title);
   const [isDone, setIsDone] = useState(note.done);

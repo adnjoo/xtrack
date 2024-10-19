@@ -1,37 +1,43 @@
       21 ./middleware.ts
       18 ./app/test/page.tsx
-     145 ./app/(marketing)/privacy/page.tsx
-       3 ./app/(marketing)/blog/page.tsx
-      65 ./app/(protected)/notes/create.tsx
-      82 ./app/(protected)/notes2/page.tsx
-      26 ./app/(protected)/protected/page.tsx
+     140 ./app/(marketing)/privacy/page.tsx
+       7 ./app/(marketing)/blog/page.tsx
+      66 ./app/(protected)/notes/NotesBody.tsx
+      63 ./app/(protected)/notes/create.tsx
+      16 ./app/(protected)/notes/page.tsx
+      21 ./app/(protected)/protected/page.tsx
+      26 ./app/hooks/useAuthUser.ts
       42 ./app/layout.tsx
+      20 ./app/api/auth/callback/route.ts
+      14 ./app/api/hello/route.ts
       11 ./app/page.tsx
-      20 ./app/(api)/auth/callback/route.ts
-      12 ./app/(api)/api/hello/route.ts
-      91 ./app/globals.css
+     108 ./app/globals.css
       20 ./app/login/submit-button.tsx
-     122 ./app/login/page.tsx
+     131 ./app/login/page.tsx
        4 ./next.config.js
       78 ./utils/supabase/middleware.ts
-       7 ./utils/supabase/client.ts
+      14 ./utils/supabase/client.ts
       36 ./utils/supabase/server.ts
        5 ./next-env.d.ts
       79 ./tailwind.config.ts
-      86 ./components/ui/card.tsx
+      83 ./components/ui/card.tsx
      122 ./components/ui/dialog.tsx
       36 ./components/ui/badge.tsx
       56 ./components/ui/button.tsx
       30 ./components/ui/checkbox.tsx
       25 ./components/ui/input.tsx
-      31 ./components/Navbar.tsx
-     160 ./components/note.tsx
+      38 ./components/Navbar.tsx
+     147 ./components/note.tsx
       26 ./components/ReactQueryClientProvider.tsx
       62 ./components/Login.tsx
       38 ./components/AuthButton.tsx
-      53 ./components/Register.tsx
-     101 ./components/Footer.tsx
-      14 ./components/Header.tsx
+      75 ./components/Register.tsx
+     109 ./components/Footer.tsx
+      20 ./components/icons/MenuIcon.tsx
+      18 ./components/icons/MountainIcon.tsx
+       2 ./components/icons/index.ts
+      17 ./components/Header.tsx
        6 ./lib/utils.ts
+       5 ./lib/constants.ts
        6 ./postcss.config.js
-    1739 total
+    1861 total
