@@ -131,7 +131,7 @@ export const Navbar = () => {
 
       <div className='ml-auto flex items-center lg:ml-4'>
         {user ? (
-          <Button onClick={signOut}>logout</Button>
+          <Button onClick={signOut}>Logout</Button>
         ) : (
           <Button asChild>
             <Link
