@@ -15,7 +15,7 @@ import {
   Input,
 } from '@/components/ui';
 import { cn } from '@/lib/utils';
-import { getSupabaseClient } from '@/utils/supabase/client';
+import { createClient } from '@/utils/supabase/client';
 
 export function LoadingNote() {
   return (
@@ -24,7 +24,7 @@ export function LoadingNote() {
 }
 
 export const Note = ({ note }: { note: any }) => {
-  const supabase = getSupabaseClient();
+  const supabase = createClient();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(note.title);
   const [isDone, setIsDone] = useState(note.done);

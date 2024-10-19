@@ -1,7 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CONTACT_EMAIL } from '@/lib/constants';
+import React from 'react';
 
-export default function PrivacyPolicy() {
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+const CONTACT_EMAIL = 'hello@xtrack.ing';
+
+const PrivacyPolicy: React.FC = () => {
   return (
     <div className='mx-auto p-6'>
       <Card className='shadow-md'>
@@ -120,7 +123,7 @@ export default function PrivacyPolicy() {
             <h2 className='text-xl font-semibold'>8. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please
-              contact us at:
+              contact us at: 
             </p>
             <address>
               <p>
@@ -137,4 +140,6 @@ export default function PrivacyPolicy() {
       </Card>
     </div>
   );
-}
+};
+
+export default PrivacyPolicy;

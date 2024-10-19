@@ -1,10 +1,13 @@
-'use client';
+import { createClient } from '@/utils/supabase/server';
 
 import { NotesBody } from './NotesBody';
-import { useAuthUser } from '@/app/hooks/useAuthUser';
 
-export default function Page() {
-  const { user } = useAuthUser();
+export default async function Page() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     return (
