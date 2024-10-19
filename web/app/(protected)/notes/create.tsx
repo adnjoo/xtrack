@@ -3,6 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { useAuthUser } from '@/app/hooks/useAuthUser';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -17,6 +18,7 @@ import { getSupabaseClient } from '@/utils/supabase/client';
 
 export const CreateNote = () => {
   const supabase = getSupabaseClient();
+  const { user } = useAuthUser();
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { refetch } = useQuery({
@@ -24,10 +26,6 @@ export const CreateNote = () => {
   });
 
   const handleCreateNote = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
     await supabase
       .from('notes')
       .insert({ title: newNoteTitle, done: false, user_id: user?.id });
