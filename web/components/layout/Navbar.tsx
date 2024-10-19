@@ -1,6 +1,9 @@
-import Link from 'next/link';
+'use client';
 
-import AuthButton from '@/components/auth/AuthButton';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import { MenuIcon, MountainIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,17 +13,52 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { APP_NAME } from '@/lib/constants';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/utils/supabase/client';
 
-export const Navbar = async () => {
+export const Navbar = () => {
   const supabase = createClient();
+  const [user, setUser] = useState<any>(null);
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    fetchUser();
+  }, []);
+
+  const [isVisible, setIsVisible] = useState(true);
+  let lastScrollY = 0;
+
+  const handleScroll = () => {
+    if (typeof window !== 'undefined') {
+      const currentScrollY = window.scrollY;
+      setIsVisible(lastScrollY > currentScrollY || currentScrollY < 300);
+      lastScrollY = currentScrollY;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    redirect('/login');
+  };
 
   return (
-    <header className='shadow-neo-brutal fixed left-0 top-0 z-50 flex h-20 w-full shrink-0 items-center border-b-4 border-black bg-white px-4 md:px-6'>
+    <header
+      className={`shadow-neo-brutal fixed left-0 top-0 z-50 flex h-20 w-full shrink-0 items-center border-b-4 border-black bg-white px-4 transition-transform md:px-6 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <Sheet>
         <SheetTrigger asChild>
           <Button variant='outline' size='icon' className='lg:hidden'>
@@ -43,7 +81,7 @@ export const Navbar = async () => {
                 Home
               </Link>
             </SheetClose>
-            {user ? (
+            {/* {user ? (
               <SheetClose asChild>
                 <Link
                   href='/notes'
@@ -53,7 +91,7 @@ export const Navbar = async () => {
                   Notes
                 </Link>
               </SheetClose>
-            ) : null}
+            ) : null} */}
             <SheetClose asChild>
               <Link
                 href='/blog'
@@ -92,7 +130,18 @@ export const Navbar = async () => {
       </nav>
 
       <div className='ml-auto flex items-center lg:ml-4'>
-        <AuthButton />
+        {user ? (
+          <Button onClick={signOut}>logout</Button>
+        ) : (
+          <Button asChild>
+            <Link
+              href='/login'
+              className='bg-btn-background hover:bg-btn-background-hover flex rounded-md px-4 py-2 no-underline'
+            >
+              Login
+            </Link>
+          </Button>
+        )}
       </div>
     </header>
   );
