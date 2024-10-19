@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import AuthButton from '@/components/AuthButton';
+import AuthButton from '@/components/auth/AuthButton';
 import { Button } from '@/components/ui/button';
 import { APP_NAME } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/server';

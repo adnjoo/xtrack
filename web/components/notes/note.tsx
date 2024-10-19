@@ -3,20 +3,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
 import {
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+  Checkbox,
+  Input,
+} from '@/components/ui';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/utils/supabase/client';
-
-import { Checkbox } from './ui/checkbox';
 
 export function LoadingNote() {
   return (
@@ -43,8 +42,7 @@ export const Note = ({ note }: { note: any }) => {
       ) {
         return;
       }
-        await supabase
-          .from('notes').update({archived: true}).eq('id', id);
+      await supabase.from('notes').update({ archived: true }).eq('id', id);
     }
     if (!note.done) {
       if (window.confirm('Are you sure you want to delete this note?')) {
@@ -94,7 +92,7 @@ export const Note = ({ note }: { note: any }) => {
               className='text-black'
             />
           ) : (
-            <div className='flex flex-row justify-between w-full'>
+            <div className='flex w-full flex-row justify-between'>
               <div className='flex flex-col'>
                 <span className={cn('text-xl', isDone && 'line-through')}>
                   {note.title}

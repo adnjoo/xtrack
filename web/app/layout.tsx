@@ -1,7 +1,7 @@
 import { Varela_Round } from 'next/font/google';
 
-import Footer from '@/components/Footer';
-import { Navbar } from '@/components/Navbar';
+import Footer from '@/components/layout/Footer';
+import { Navbar } from '@/components/layout/Navbar';
 import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
 
 import './globals.css';
