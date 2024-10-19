@@ -7,10 +7,10 @@ import { useEffect } from 'react';
 import { CreateNote } from '@/app/(protected)/notes/create';
 import { LoadingNote, Note } from '@/components/note';
 import { Badge } from '@/components/ui/badge';
-import { createClient } from '@/utils/supabase/client';
+import { getSupabaseClient } from '@/utils/supabase/client';
 
 export function NotesBody({ user }: { user: any }) {
-  const supabase = createClient();
+  const supabase = getSupabaseClient();
 
   useEffect(() => {
     refetch();

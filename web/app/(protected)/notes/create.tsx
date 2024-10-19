@@ -13,10 +13,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { createClient } from '@/utils/supabase/client';
+import { getSupabaseClient } from '@/utils/supabase/client';
 
 export const CreateNote = () => {
-  const supabase = createClient();
+  const supabase = getSupabaseClient();
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { refetch } = useQuery({
