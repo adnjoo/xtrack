@@ -3,7 +3,7 @@ import { createClient } from '@/utils/supabase/server';
 import { NotesBody } from './NotesBody';
 
 export default async function Page() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

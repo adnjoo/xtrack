@@ -4,11 +4,7 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
 
-export default function Login({
-  searchParams,
-}: {
-  searchParams: { message: string };
-}) {
+export default function Login() {
   const supabase = createClient();
 
   // Google OAuth login handler
@@ -55,12 +51,6 @@ export default function Login({
           <GoogleIcon className='h-6 w-6' />
           <span>Sign In with Google</span>
         </button>
-
-        {searchParams?.message && (
-          <p className='mt-4 border border-black p-4 text-center'>
-            {searchParams.message}
-          </p>
-        )}
       </div>
     </div>
   );
