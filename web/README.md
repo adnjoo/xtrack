@@ -2,7 +2,7 @@ productivity
 
 🥞
 
-- Next 14.x
+- Next 15.x
 - React Query 5.4x
 
 .env

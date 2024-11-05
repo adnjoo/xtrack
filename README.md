@@ -2,7 +2,7 @@ Productivity App 🚀
 
 🥞
 
-- Next 14.x
+- Next 15.x
 - Expo Router 51.x
 - Shadcn
 - Supabase 2.x
