@@ -13,7 +13,7 @@ import { APP_NAME } from '@/lib/constants';
 import { createClient } from '@/utils/supabase/server';
 
 export const Navbar = async () => {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
