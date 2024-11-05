@@ -13,6 +13,7 @@ export default function Login({
 
   // Google OAuth login handler
   const handleGoogleLogin = async () => {
+    console.log(window.location.origin);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
