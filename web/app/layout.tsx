@@ -1,8 +1,9 @@
+import { Analytics } from '@vercel/analytics/react';
 import { Varela_Round } from 'next/font/google';
 
+import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
 import Footer from '@/components/layout/Footer';
 import { Navbar } from '@/components/layout/Navbar';
-import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
 
 import './globals.css';
 
@@ -31,11 +32,12 @@ export default function RootLayout({
       <html lang='en' className={varela.className}>
         <body className='bg-background text-foreground'>
           <Navbar />
-          <main className='mt-[50px] flex min-h-screen flex-col items-center max-w-7xl mx-auto'>
+          <main className='mx-auto mt-[50px] flex min-h-screen max-w-7xl flex-col items-center'>
             {children}
           </main>
           <Footer />
         </body>
+        <Analytics />
       </html>
     </ReactQueryClientProvider>
   );
