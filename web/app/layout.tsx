@@ -36,8 +36,8 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <Analytics />
         </body>
-        <Analytics />
       </html>
     </ReactQueryClientProvider>
   );
